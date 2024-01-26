@@ -1,0 +1,67 @@
+
+/*INDEX*/
+.contenedor {
+    background-image: url(../images/fondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0; 
+    height: 70%;
+    font-family: 'Roboto', sans-serif;
+ }
+
+ .contenedorinicio {
+   background-image: url(../images/fondo.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+  
+}
+body{
+   min-height: 100%;
+   font-family: 'Roboto', sans-serif;
+
+}
+ .contenedorinicio::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    
+    
+    }
+
+ @media(max-width: 991px){
+    .sidebar{
+        background-color: rgba(255, 255, 255, 0.15) ;
+        backdrop-filter: blur(10px);
+    }
+    
+ }
+
+ .navbar-nav .nav-link {
+    font-size: 1.3rem; 
+  }
+
+  /*LOGIN*/
+
+  .bodylogin {
+   background-image: url(images/fondo.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+ 
+}
+
+.formulario {
+ background: rgba(0, 0, 0, 0.1);
+ box-shadow: 0 0 30px rgb(0, 0, 0, 0.568);
+ padding: 40px;
+}
+
+.ingresar {
+   box-shadow: 0 0 30px rgb(0, 0, 0, 0.568);
+}
