@@ -26,25 +26,50 @@
         
             echo "index";
         }
+        
         public function addoferta(){
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $insert['nif']= $_POST['nif'];  
-                $insert['tipo_oferta']= $_POST['tipo_oferta'];  
-                $insert['fecha_inicio']= $_POST['fecha_inicio'];  
-                $insert['fecha_fin']= $_POST['fecha_fin'];  
-                $insert['condiciones']= $_POST['condiciones'];  
-                $insert['fecha_publicacion']= $_POST['fecha_publicacion'];  
-                $insert['tipo']= $_POST['tipo'];  
-                $insert['id_entidad']= $_POST['id_entidad'];  
+            // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            //     $insert['nif']= $_POST['nif'];  
+            //     $insert['tipo_oferta']= $_POST['tipo_oferta'];  
+            //     $insert['fecha_inicio']= $_POST['fecha_inicio'];  
+            //     $insert['fecha_fin']= $_POST['fecha_fin'];  
+            //     $insert['condiciones']= $_POST['condiciones'];  
+            //     $insert['fecha_publicacion']= $_POST['fecha_publicacion'];  
+            //     $insert['tipo']= $_POST['tipo'];  
+            //     $insert['id_entidad']= $_POST['id_entidad'];  
 
-                print_r($insert);
+            //     print_r($insert);
 
-                $a=$this->oferta->añadiroferta($insert);
-                $this->oferta->añadirinmueble();
+            //     $a=$this->oferta->añadiroferta($insert);
+            //     $this->oferta->añadirinmueble();
+            // }else{
+            //     $this->vista('ofertas/insertarofertas', $this->datos);
+            // }  
+
+            if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publicarOfertaInmueble'])){
+                $inmueble['oferta'] = $db->lastInsertId();
+                $inmueble['tipoInmueble'] = $_POST['tipoInmueble'];
+                $inmueble['tipoVivienda'] = $_POST['tipoVivienda'];
+                $inmueble['nombre'] = $_POST['nombre'];
+                $inmueble['descripcion'] = $_POST["descripcion"];
+                $inmueble['precio'] = $_POST["precio"];
+                $inmueble['ubicacion'] = $_POST["calle"].','.$_POST["numero"];
+                $inmueble['puerta'] = $_POST["puerta"];
+                $inmueble['localidad'] = $_POST["localidad"];
+                $inmueble['metrosCuadrados'] = $_POST["metrosCuadrados"];
+                $inmueble['caracteristicas'] = implode(',', $_POST['caracteristicas']);
+                if (isset($_POST['estado'])) {
+                    $inmueble['estado'] = $_POST['estado'];
+                }
+                if (isset($_POST['equipamiento'])) {
+                    $inmueble['equipamiento'] = $_POST['equipamiento'];
+                }
+                $this->inmueble->insertarInmueble($inmueble);
+                
+                
             }else{
                 $this->vista('ofertas/insertarofertas', $this->datos);
-            }  
-
+            }
         }
 
         public function listar(){

@@ -19,6 +19,12 @@
             if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])) {
                 redirecionar(RUTA_URL.'/');
             }
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (isset($_POST["miBoton"])) {
+                    $this->usuario->marcarvistastodasnotificaciones($datos);
+                }
+            }
             
         }
 
@@ -28,9 +34,12 @@
             $this->vista('ofertas/ofertas');
 
         }
-
+        public function todosvistos(){
+            $this->vista('usuario/perfil', $this->datos); 
+            
+        }
         public function perfil(){
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Actualizarformulario"])) {
                 $cambios['nif']=$_SESSION['usuarioSesion']['NIF'];
                 $cambios['nombre']=$_POST['nombre'];
                 $cambios['apellidio']=$_POST['apellido'];

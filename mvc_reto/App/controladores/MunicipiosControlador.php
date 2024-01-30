@@ -25,7 +25,28 @@
         }
 
         public function añadirMunicipios(){
-            
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                if (isset($_POST['tipoInmueble'])) {
+                    $municipio['tipoInmueble'] = $_POST['tipoInmueble'];
+                }
+                if (isset($_POST['tipoVivienda'])) {
+                    $municipio['tipoVivienda'] = $_POST['tipoVivienda'];
+                }
+                $municipio['nombre'] = $_POST["nombre"];
+                $municipio['descripcion'] = $_POST["descripcion"];
+                $municipio['precio'] = $_POST["precio"];
+                $municipio['ubicacion'] = $_POST["calle"].','.$_POST["numero"].','.$_POST["puerta"];
+                $municipio['localidad'] = $_POST["localidad"];
+                $municipio['metrosCuadrados'] = $_POST["metrosCuadrados"];
+                $municipio['caracteristicas'] = implode(',', $_POST['caracteristicas']);
+                if (isset($_POST['estado'])) {
+                    $municipio['estado'] = $_POST['estado'];
+                }
+                if (isset($_POST['equipamiento'])) {
+                    $municipio['equipamiento'] = $_POST['equipamiento'];
+                }
+
+            }
         }
         
         
