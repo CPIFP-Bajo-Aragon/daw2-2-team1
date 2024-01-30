@@ -7,21 +7,22 @@
             $this->db = new Base;
         }
 
-        public function editarperfil($cambios){
+        public function editarperfil($cambios) {
             $nif = $cambios['nif'];
             $nombre = $cambios['nombre'];
-            $apellido = $cambios['apellido'];
-            $correo = $cambios['email'];
-            print_r($cambios);
-
-            $this->db->query("UPDATE `USUARIO` SET `nombre`=':nombre',`apellido`=':apelldio',`correo`=':correo' WHERE `NIF`=  :nif ");
-            $this->db->bind(':nif', $nif);
+            $apellido = $cambios['apellidio']; // Corregí el error de tipeo en 'apellido'
+            $correo = $cambios['email']; // Corregí el error de tipeo en 'email'
+        
+            $this->db->query("UPDATE `USUARIO` SET `nombre` = :nombre, `apellido` = :apellido, `correo` = :correo WHERE `NIF` = :nif");
+        
             $this->db->bind(':nombre', $nombre);
             $this->db->bind(':apellido', $apellido);
             $this->db->bind(':correo', $correo);
+            $this->db->bind(':nif', $nif);
+            
             $this->db->execute();
-            return $cambios;
         }
+        
 
         public function addusuarios($datos){
             $nif = $datos['nif'];
@@ -76,5 +77,52 @@
             $mensajes = $this->db->registros();
             return $mensajes;
         }
+
+        public function listaruserchat($datos){
+            $nif = $datos['nif'];
+            
+
+            $this->db->query("SELECT U.*
+                                FROM USUARIO U
+                                WHERE U.NIF IN (
+                                    SELECT DISTINCT NIF_chatear
+                                    FROM CHATEAR
+                                    WHERE NIF = :nif1
+                                
+                                    UNION
+                                
+                                    SELECT DISTINCT NIF
+                                    FROM CHATEAR
+                                    WHERE NIF_chatear = :nif2
+                                )
+                                AND U.NIF NOT IN (
+                                    SELECT DISTINCT NIF
+                                    FROM ADMINISTRADOR
+                                )
+                                ");
+
+            $this->db->bind(':nif1', $nif);
+            $this->db->bind(':nif2', $nif);
+
+            $registros = $this->db->registros();
+            
+
+            return $registros;
+
+        }
       
+        public function listarnotificaciones($datos){
+            $nif = $datos['nif'];
+            
+
+            $this->db->query("SELECT * FROM `NOTIFICACION`
+                                            where    `NIF`=:nif;");
+
+            $this->db->bind(':nif', $nif);
+
+            $registros = $this->db->registros();
+            
+
+            return $registros;
+        }
     }
