@@ -332,7 +332,7 @@ class SMTP
      *
      * @return bool
      */
-    public function connect($host, $port = null, $timeout = 30, $options = [])
+    public function connect($host, $port = 587, $timeout = 30, $options = [])
     {
         //Clear errors to avoid confusion
         $this->setError('');
