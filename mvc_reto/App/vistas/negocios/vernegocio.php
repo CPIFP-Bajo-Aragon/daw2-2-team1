@@ -1,6 +1,7 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
 
 
     <div class="row">
@@ -20,8 +21,8 @@
                 
                 <div class="card-body">
                     
-                    <button><a href="" class="nav-link active" aria-current="page" >Contactar</a></button>
-                    <button><a href="" class="nav-link active" aria-current="page" >Comentar</a></button>
+                    <a href="<?php echo RUTA_URL ?>/UserControlador/chat/<?php echo $negocio->NIF; ?>" class="btn btn-success">Contactar</a>  
+                    <a href="<?php echo RUTA_URL ?>/NegocioControlador/comentar/<?php echo $negocio->codigo_negocio; ?>"><button class="btn btn-primary">Comentar</button></a>
                     <button>Ver Mas</button>
                 </div>
             </div>

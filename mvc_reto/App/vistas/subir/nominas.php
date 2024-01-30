@@ -1,6 +1,7 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
     <div class="container mt-4">
         <h2 class="mb-4">Subir Archivos</h2>
         <form method="post" enctype="multipart/form-data">
@@ -14,14 +15,16 @@
         <h2 class="mt-4">Archivos en la Carpeta</h2>
         <ul class="list-unstyled">
             <?php
-            $carpeta_destino = 'archivos/nomina';
+            $carpeta_destino = 'archivos/nomina/';
             $archivos = scandir($carpeta_destino);
-
+            
             foreach ($archivos as $archivo) {
-                if ($archivo != '.' && $archivo != '..') {
-                    echo "<li><a href='$carpeta_destino$archivo' download class='text-dark'>$archivo</a></li>";
+                if ($archivo != '.' && $archivo != '..' && strpos($archivo, $_SESSION['usuarioSesion']['NIF'].'_') === 0) {
+                    $nombreSinPrefijo = str_replace($_SESSION['usuarioSesion']['NIF'].'_', '', $archivo);
+                    echo "<li><a href=/DocumentosControlador/descargarNominas/$archivo download='$nombreSinPrefijo' class='text-dark'>$nombreSinPrefijo</a></li>";
                 }
             }
+            
             ?>
         </ul>
 

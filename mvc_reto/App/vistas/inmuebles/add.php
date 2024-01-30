@@ -1,6 +1,7 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
 
  <!-- Navegación de píldoras para los pasos del formulario -->
   <ul class="nav nav-pills mb-4" id="pills-tab">

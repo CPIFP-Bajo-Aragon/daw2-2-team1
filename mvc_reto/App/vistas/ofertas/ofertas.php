@@ -1,6 +1,7 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
 <div class="container-fluid">
     <div class="row">
 
@@ -9,6 +10,16 @@
             <h3 class="mt-3 mb-3">Filtros</h3>
             
             <!-- Filtro de Selección -->
+
+            <div class="mb-3">
+                <label for="municipio" class="form-label">Localidad</label>
+                <select class="form-select" id="municipio">
+                    <?php foreach ($this->datos['municipioslistar'] as $municipio){ ?>
+                    <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre ?></option>    
+                    <?php }?>
+                </select>
+            </div>
+            
             <div class="mb-3">
                 <label for="tipoInmueble" class="form-label">Tipo de Inmueble</label>
                 <select class="form-select" id="tipoInmueble">
@@ -56,7 +67,37 @@
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="https://via.placeholder.com/600x400" alt="Imagen del anuncio" class="img-fluid">
+                        <div id="myCarousel" class="carousel slide" >
+                                <div class="carousel-inner">
+                                        <?php
+                                            $primerRegistro = true;
+                                            $id_oferta=$oferta->id_oferta;
+                                            $img=imagenes($id_oferta);
+                                            if (!empty($img)) {
+                                                foreach ($img as $img) {
+                                        ?>
+                                                <div class="carousel-item <?php echo ($primerRegistro) ? 'active' : ''; ?>">
+                                                    <img src="<?php echo RUTA_URL ?>../images/oferta_<?php echo $id_oferta ?>/<?php echo $img ?>" class="d-block  w-100 img-fluid" alt="Imagen">   
+                                                </div>
+                                        <?php
+                                                $primerRegistro = false;
+                                                }
+                                            }else {
+                                                echo "No hay imágenes disponibles para esta oferta.";
+                                            }
+                                        ?>
+                                        
+                                        
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Anterior</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Siguiente</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -67,9 +108,9 @@
                                 <p class="card-text">Fecha de Publicación: <?php echo $oferta->fecha_publicacion; ?></p>
                             </div>
                             <div class="card-body">
-                                <button class="btn btn-primary">Comentar</button>
+                                <a href="<?php echo RUTA_URL ?>/InmuebleControlador/comentar/<?php echo $oferta->id_oferta; ?>"><button class="btn btn-primary">Comentar</button></a>
                                 <a href="<?php echo RUTA_URL ?>/UserControlador/chat/<?php echo $oferta->NIF; ?>" class="btn btn-success">Contactar</a>  
-                                <button class="btn btn-info">Ver Más</button>
+                                <a href="<?php echo RUTA_URL ?>/OfertasControlador/verMas/<?php echo $oferta->id_oferta; ?>" class="btn btn-info">Ver mas</a>  
                             </div>
                         </div>
                     </div>

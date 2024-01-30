@@ -1,6 +1,7 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
 
 
     <div class="row">
@@ -20,8 +21,8 @@
                     </div>
                 
                 <div class="card-body">
-                    <button><a href="<?php echo RUTA_URL ?>/OfertasControlador/editoferta/<?php echo $oferta->id_oferta; ?>" class="nav-link active" aria-current="page" >Editar</a></button>
-                    <button>Eliminar</button>
+                <a href="<?php echo RUTA_URL ?>/OfertasControlador/editoferta/<?php echo $oferta->id_oferta; ?>" class="nav-link active col-1" aria-current="page" ><button>Editar</button></a>
+                <a href="<?php echo RUTA_URL ?>/OfertasControlador/eliminaroferta/<?php echo $oferta->id_oferta; ?>" class="nav-link active col-1" aria-current="page" ><button>Eliminar</button></a>
                     <button>Ver Mas</button>
                 </div>
             </div>

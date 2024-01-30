@@ -1,9 +1,10 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
 
+
  <!-- Navegación de píldoras para los pasos del formulario -->
-    <ul class="nav nav-pills mb-4" id="pills-tab">
+    <ul class="nav nav-pills mb-4 mt-5" id="pills-tab">
             <li class="nav-item">
                 <a class="nav-link active" href="#paso1" aria-current="page" data-toggle="pill" onclick="mostrarPaso('#paso1')">Paso 1</a>
             </li>
@@ -33,13 +34,13 @@
                     </div>
                     <h4 class="mt-5">Tipo de inmueble</h4>
                     <div class="form-check">
-                          <input class="form-check-input" type="radio" name="tipoInmueble" id="local">
+                          <input class="form-check-input" type="radio" name="tipoInmueble" id="local" value="Local">
                           <label class="form-check-label" for="tipoInmueble">
                           Local
                           </label>
                     </div>
                     <div class="form-check">
-                          <input class="form-check-input" type="radio" name="tipoInmueble" id="vivienda">
+                          <input class="form-check-input" type="radio" name="tipoInmueble" id="vivienda" value="Vivienda">
                           <label class="form-check-label" for="tipoInmueble">
                           Vivienda
                           </label>
@@ -47,13 +48,13 @@
   
                     <h4 class="mt-5">Tipo de vivienda</h4>
                     <div class="form-check">
-                          <input class="form-check-input" type="radio" name="tipoVivienda" id="casa">
+                          <input class="form-check-input" type="radio" name="tipoVivienda" id="casa" value="Casa">
                           <label class="form-check-label" for="tipoVivienda">
                           Casa
                           </label>
                     </div>
                     <div class="form-check">
-                          <input class="form-check-input" type="radio" name="tipoVivienda" id="piso">
+                          <input class="form-check-input" type="radio" name="tipoVivienda" id="piso" value="Piso">
                           <label class="form-check-label" for="tipoVivienda">
                           Piso
                           </label>
@@ -77,7 +78,6 @@
                         <h4>Precio </h4>
                         <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
                         <span class="input-group-text">€</span>
-                        <span class="input-group-text">0.00</span>
                     </div>
 
                     <h4 class="mt-5">Ubicación</h4>
@@ -102,13 +102,13 @@
 
                     <div class="form-check">
                         <h4 class="mt-5">Estado</h4>
-                        <input class="form-check-input" type="radio" name="estado" id="obraNueva">
+                        <input class="form-check-input" type="radio" name="estado" id="obraNueva" value="Obra nueva">
                         <label class="form-check-label" for="estado">
                         Obra nueva
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="estado" id="reformar">
+                        <input class="form-check-input" type="radio" name="estado" id="reformar" value="Para reformar">
                         <label class="form-check-label" for="estado">
                         Para reformar
                         </label>
@@ -122,57 +122,65 @@
 
                     <h4 class="mt-5">Equipamiento</h4>
                     <div class="form-check">
-                          <input class="form-check-input" type="radio" name="equipamiento" id="amueblado">
+                          <input class="form-check-input" type="radio" name="equipamiento" id="amueblado" value="Amueblado">
                           <label class="form-check-label" for="equipamiento">
                           Amueblado
                           </label>
                     </div>
                     <div class="form-check">
-                          <input class="form-check-input" type="radio" name="equipamiento" id="sinAmueblar">
+                          <input class="form-check-input" type="radio" name="equipamiento" id="sinAmueblar" value="Sin amueblar">
                           <label class="form-check-label" for="equipamiento">
                           Sin amueblar
                           </label>
                     </div>
 
-                    <div class="form-group mt-5">
+                    <div class="form-group mt-5 mb-3">
                         <h4>Características</h4>
                         <div class="form-check">
-                            <input type="checkbox" id="aireAcondicionado" class="form-check-input">
+                            <input type="checkbox" id="aireAcondicionado" class="form-check-input" name="caracteristicas[]" value="Aire acondicionado">
                             <label class="form-check-label" for="aireAcondicionado">Aire acondicionado</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" id="jardin" class="form-check-input">
+                            <input type="checkbox" id="jardin" class="form-check-input" name="caracteristicas[]" value="Jardín">
                             <label class="form-check-label" for="jardin">Jardín</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" id="piscina" class="form-check-input">
+                            <input type="checkbox" id="piscina" class="form-check-input" name="caracteristicas[]" value="Piscina">
                             <label class="form-check-label" for="piscina">Piscina</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" id="terraza" class="form-check-input">
+                            <input type="checkbox" id="terraza" class="form-check-input" name="caracteristicas[]" value="Terraza">
                             <label class="form-check-label" for="terraza">Terraza</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" id="garaje" class="form-check-input">
+                            <input type="checkbox" id="garaje" class="form-check-input" name="caracteristicas[]" value="Garaje">
                             <label class="form-check-label" for="garaje">Garaje</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" id="trastero" class="form-check-input">
+                            <input type="checkbox" id="trastero" class="form-check-input" name="caracteristicas[]" value="Trastero">
                             <label class="form-check-label" for="trastero">Trastero</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" id="electrodomesticos" class="form-check-input">
+                            <input type="checkbox" id="ascensor" class="form-check-input" name="caracteristicas[]" value="Ascensor">
+                            <label class="form-check-label" for="ascensor">Ascensor</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="electrodomesticos" class="form-check-input" name="caracteristicas[]" value="Electrodomésticos">
                             <label class="form-check-label" for="electrodomesticos">Electrodomésticos</label>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="tab-pane fade" id="paso3">
-                <h1 class="mb-4">Paso 4: Subir imágenes</h1>
+                <h1 class="">Paso 4: Subir imágenes</h1>
                 <form method="post">
                     <div class="mb-3">
                         <label for="formFileMultiple" class="form-label">Sube aquí las imágenes de tu inmueble</label>
                         <input class="form-control" type="file" id="formFileMultiple" multiple>
+                    </div>
+                    <div class="mt-5">
+                        <input type="hidden" name="nif" value="<?php echo $_SESSION['usuarioSesion']['NIF']?>">
+                        <button class="btn btn-primary" type="submit" value="publicarOfertaInmueble" name="publicarOfertaInmueble">Publicar oferta</button>
                     </div>
                 </form>
             </div>
