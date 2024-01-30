@@ -1,11 +1,11 @@
 <?php
-    cabecera();
+    cabecera($datos);
 ?>
 
         <div class="container content">
             <div class="row justify-content-center pt-5 mt-5">
                 <div class="col-md-6 col-sm-8 col-xl-4 col-lg-4 formulario rounded-3">
-                    <form action="" method="POST">
+                    <form action="" method="POST" >
                       
 
                     <div class="form-group mx-sm-4 pb-3">

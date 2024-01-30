@@ -5,9 +5,9 @@
 
 
     <h2>Añadir de Usuario</h2>
-    <form method="post">
+    <form method="post" onsubmit="return ValidateCrearUsuario()">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nom" name="nombre" required><br>
+        <input type="text" id="nombre" name="nombre" required><br>
 
         <label for="apellido">Apellido:</label>
         <input type="text" id="apellido" name="apellido" required><br>

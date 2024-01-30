@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="nif" value="<?php echo $_SESSION['usuarioSesion']['NIF']?>">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" name="Actualizarformulario" class="btn btn-primary">Guardar</button>
             </form>
         </div>
     </div>

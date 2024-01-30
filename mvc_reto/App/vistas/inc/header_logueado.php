@@ -58,13 +58,16 @@
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                        <form method="post" action="">
+                                            <button type="submit" name="miBoton">aaaa</button>
+                                        </form>
                                             <?php
                                                   if (!empty($datos['noti'])) {
                                                     
                                                     foreach ($datos['noti'] as $notificacion) {
                                             ?>
                                                          
-                                                         <a class="dropdown-item" href=""><?php echo($notificacion->tipo) ?></a>
+                                                        <a class="dropdown-item" href=""><?php echo($notificacion->tipo) ?></a>
                                             <?php
                                                     }
                                                 } else {
