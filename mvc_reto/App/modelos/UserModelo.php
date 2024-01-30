@@ -125,4 +125,17 @@
 
             return $registros;
         }
+
+        public function marcarvistastodasnotificaciones($datos){
+            $nif = $datos['nif'];
+            
+
+            $this->db->query("UPDATE `NOTIFICACION` SET `leido`=1 WHERE `NIF`=:nif;");
+
+            $this->db->bind(':nif', $nif);
+
+            $this->db->execute();
+            
+
+        }
     }

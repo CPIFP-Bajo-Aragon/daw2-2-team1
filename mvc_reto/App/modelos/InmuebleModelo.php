@@ -26,27 +26,30 @@
         }
 
 
-        public function añadirinmueble(){
+        public function insertarInmueble($inmueble){
             echo "añadir inmueble sin negocio";
 
-            $this->db->query("INSERT INTO `INMUEBLE`(`id_oferta`, `codigo_inmueble`, `metros_cuadrados`, `distribucion`, `fotos`, `direccion`, `precio`, `ubicacion`, `tipo_alquiler`, `planta`, `equipamiento`, `estado`, `id_municipio`) 
-                                        VALUES (:idOferta, :codInmueble, :mCuadrados, :distribucion, :fotos, :direccion, :precio, :ubicacion, :tipoAlquiler, :planta, :equipamiento, :estado, :idMunicipio)");
+            // $this->db->query("INSERT INTO `INMUEBLE`(`id_oferta`, `codigo_inmueble`, `metros_cuadrados`, `distribucion`, `fotos`, `direccion`, `precio`, `ubicacion`, `tipo_alquiler`, `planta`, `equipamiento`, `estado`, `id_municipio`) 
+            //                             VALUES (:idOferta, :codInmueble, :mCuadrados, :distribucion, :fotos, :direccion, :precio, :ubicacion, :tipoAlquiler, :planta, :equipamiento, :estado, :idMunicipio)");
 
-            $this->db->bind(':idOferta', $nuevoComentario['puntuacion']);
-            $this->db->bind(':codInmueble', $nuevoComentario['comentario']);
-            $this->db->bind(':mCuadrados', $nuevoComentario['fecha']);
-            $this->db->bind(':distribucion', $nuevoComentario['nif']);
-            $this->db->bind(':fotos', $nuevoComentario['codigo_inmueble']);
-            $this->db->bind(':direccion', $nuevoComentario['puntuacion']);
-            $this->db->bind(':precio', $nuevoComentario['comentario']);
-            $this->db->bind(':ubicacion', $nuevoComentario['fecha']);
-            $this->db->bind(':tipoAlquiler', $nuevoComentario['nif']);
-            $this->db->bind(':planta', $nuevoComentario['codigo_inmueble']);
-            $this->db->bind(':equipamiento', $nuevoComentario['puntuacion']);
-            $this->db->bind(':estado', $nuevoComentario['comentario']);
-            $this->db->bind(':idMunicipio', $nuevoComentario['fecha']);
+            $this->db->query("INSERT INTO `INMUEBLE`(`metros_cuadrados`, `direccion`, `precio`, `ubicacion`, `planta`, `equipamiento`, `estado`) 
+                                        VALUES (:idOferta, :mCuadrados, :direccion, :precio, :puerta, :equipamiento, :estado)");
+
+            $this->db->bind(':idOferta', $inmueble['oferta']);
+            //$this->db->bind(':codInmueble', $inmueble['comentario']);
+            $this->db->bind(':mCuadrados', $inmueble['metrosCuadrados']);
+            //$this->db->bind(':distribucion', $inmueble['distribucion']);
+            //$this->db->bind(':fotos', $inmueble['fotos']);
+            $this->db->bind(':direccion', $inmueble['ubicacion']);
+            $this->db->bind(':precio', $inmueble['precio']);
+            //$this->db->bind(':tipoAlquiler', $inmueble['tipoAlquiler']);
+            $this->db->bind(':puerta', $inmueble['puerta']);
+            $this->db->bind(':equipamiento', $inmueble['equipamiento']);
+            $this->db->bind(':estado', $inmueble['estado']);
+            //$this->db->bind(':idMunicipio', $inmueble['idMunicipio']);
 
             $this->db->execute();
+            echo "Inserción exitosa";
         }
 
 
