@@ -4,7 +4,10 @@
     require_once "helpers/funciones.php";
 
     require_once "helpers/Mailer.php";
+    require_once 'librerias/externas/PHPMailer.php';
+    require_once 'librerias/externas/SMTP.php';
 
+    
     
     require_once "librerias/Base.php";
     require_once "librerias/Controlador.php";
