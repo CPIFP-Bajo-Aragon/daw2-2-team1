@@ -18,7 +18,9 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $u=$_POST['usuario'];
                 $c=$_POST['contra'];
+
                 $this->iniciosesion($u, $c);
+
             }else{
                 if (isset($_SESSION["usuarioSesion"]) && !empty($_SESSION["usuarioSesion"])) {
                     // La variable de sesión está declarada y no está vacía
@@ -71,7 +73,7 @@
                 $usuarios["admin"]=1;
 
                 // Hacer algo si no es admin
-                redirecionar(RUTA_URL.'/ofertasControlador/listar');
+               redirecionar(RUTA_URL.'/ofertasControlador/listar');
                 
             }
             if(isset($usuarios) && !empty($usuarios)){
@@ -102,10 +104,11 @@
                     $nuevoUsuario['correo']=$_POST['correo'];
                     $nuevoUsuario['contrasena']=$_POST['contrasena'];
                     //$this->sesion->crearUserModelo($nuevoUsuario);
-                    if ($this->sesion->crearUserModelo($nuevoUsuario)) {
-                        Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
-                    }
-                    header("Location: /LoginControlador/sesion");
+                    $this->sesion->crearUserModelo($nuevoUsuario);
+                    echo"aaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                    Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
+                    
+                    // header("Location: /LoginControlador/sesion");
             }else{
                 $this->vista("registrar/registrar");
             }  
