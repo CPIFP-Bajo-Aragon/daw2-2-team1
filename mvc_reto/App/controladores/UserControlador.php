@@ -7,6 +7,18 @@
         public function __construct(){
             session_start();
             $this->usuario = $this->modelo('UserModelo');
+
+            $this->admin = $this->modelo('AdminModelo');
+            $this->datos['admin'] = $this->admin->ListarAdmins();
+            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+
+            $this->datos['chats'] = $this->usuario->listaruserchat($datos);
+            
+            $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
+            
+            if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])) {
+                redirecionar(RUTA_URL.'/');
+            }
             
         }
 
@@ -21,17 +33,35 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $cambios['nif']=$_SESSION['usuarioSesion']['NIF'];
                 $cambios['nombre']=$_POST['nombre'];
-                $cambios['apellido']=$_POST['apellido'];
+                $cambios['apellidio']=$_POST['apellido'];
                 $cambios['email']=$_POST['email'];
-                $cambios['telefono']=$_POST['telefono'];
-                $cambios['direccion']=$_POST['direccion'];
-                $cambios['date']=$_POST['date'];
-                $this->datos['usuarioSesion'] = $this->usuario->editarperfil($cambios);
-                $this->vista('usuario/perfil', $this->datos['usuarioSesion']); 
+
+                // Procesar y mover la imagen si se ha seleccionado
+                if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+                    $nombreArchivo = 'Perfil.jpg';
+                    $rutaDestino = $_SERVER['DOCUMENT_ROOT'] . '/public/images/perfil_' . $_SESSION['usuarioSesion']['NIF'] . '/' . $nombreArchivo;
+        
+                    // Eliminar la imagen antigua si existe
+                    if (file_exists($rutaDestino)) {
+                        unlink($rutaDestino);
+                    }
+        
+                    // Mover el archivo al directorio de destino
+                    move_uploaded_file($_FILES['foto']['tmp_name'], $rutaDestino);
+        
+                    // Actualizar el nombre de la imagen en la sesión y en la base de datos si es necesario
+                    $_SESSION['usuarioSesion']['foto'] = '/images/perfil_' . $_SESSION['usuarioSesion']['NIF'] . '/' . $nombreArchivo;
+                    $cambios['foto'] = '/images/perfil_' . $_SESSION['usuarioSesion']['NIF'] . '/' . $nombreArchivo;
+                }
+                $this->usuario->editarperfil($cambios);
+                $_SESSION['usuarioSesion']['nombre'] = $cambios['nombre'];
+                $_SESSION['usuarioSesion']['apellido'] = $cambios['apellidio'];
+                $_SESSION['usuarioSesion']['correo'] = $cambios['email'];
+                $this->vista('usuario/perfil', $_SESSION['usuarioSesion']); 
+
             
             }else{
-                $this->datos['usuarioSesion'] = $_SESSION['usuarioSesion'];
-                $this->vista('usuario/perfil', $this->datos['usuarioSesion']); 
+                $this->vista('usuario/perfil', $this->datos); 
             } 
 
         }
@@ -56,7 +86,7 @@
 
         public function ver(){
             $this->datos['usuariolistar'] = $this->usuario->listar();
-            $this->vista('usuario/listar', $this->datos['usuariolistar']); 
+            $this->vista('usuario/listar', $this->datos); 
         }
 
         public function chat($receptor=0){
@@ -67,8 +97,10 @@
                 //print_r($datos);
                 $this->usuario->enviarmensaje($datos);   
             }
-            $this->mensajes = $this->usuario->listarmensaje($datos);   
+            $this->datos['mensajes'] = $this->usuario->listarmensaje($datos);   
             //print_r($this->mensajes);
-            $this->vista('usuario/chat', $this->mensajes); 
+            $this->vista('usuario/chat', $this->datos); 
         }
+
+       
     }
