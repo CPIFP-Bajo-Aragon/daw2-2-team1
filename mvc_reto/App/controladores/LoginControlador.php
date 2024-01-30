@@ -8,6 +8,7 @@
             session_start();
             $this->sesion = $this->modelo('LoginModelo');
             
+            
         }
         public function index(){
             echo "index";
@@ -94,13 +95,16 @@
         public function registro(){
     
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
                     $nuevoUsuario['nif']=$_POST['nif'];
                     $nuevoUsuario['nombre']=$_POST['nombre'];
                     $nuevoUsuario['apellido']=$_POST['apellido'];
                     $nuevoUsuario['correo']=$_POST['correo'];
                     $nuevoUsuario['contrasena']=$_POST['contrasena'];
-                    $this->sesion->crearUserModelo($nuevoUsuario);
-                    
+                    //$this->sesion->crearUserModelo($nuevoUsuario);
+                    if ($this->sesion->crearUserModelo($nuevoUsuario)) {
+                        Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
+                    }
                     header("Location: /LoginControlador/sesion");
             }else{
                 $this->vista("registrar/registrar");
