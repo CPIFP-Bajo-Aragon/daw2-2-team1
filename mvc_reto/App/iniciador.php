@@ -2,6 +2,9 @@
     //Cargamo librerias
     require_once "config/configurar.php";
     require_once "helpers/funciones.php";
+
+    require_once "helpers/mailer.php";
+
     
     require_once "librerias/Base.php";
     require_once "librerias/Controlador.php";
