@@ -105,10 +105,10 @@
                     $nuevoUsuario['contrasena']=$_POST['contrasena'];
                     //$this->sesion->crearUserModelo($nuevoUsuario);
                     $this->sesion->crearUserModelo($nuevoUsuario);
-                    echo"aaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                    header("Location: /LoginControlador/sesion");
                     Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
                     
-                    // header("Location: /LoginControlador/sesion");
+                    
             }else{
                 $this->vista("registrar/registrar");
             }  
