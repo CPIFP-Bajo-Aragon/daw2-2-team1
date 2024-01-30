@@ -28,7 +28,9 @@
         public function vistaApi($datos){
             header('Access-Control-Allow-Origin: *');
             header('Content-Type: application/json');
-            echo json_encode($datos);
+            $json_data = json_encode($datos);
+            echo $json_data;
+            return $json_data;
             exit(); 
 
         }
