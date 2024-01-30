@@ -15,10 +15,11 @@
                 <a class="nav-link" href="#paso3" data-toggle="pill" onclick="mostrarPaso('#paso3')">Paso 4</a>
             </li>
     </ul>
+    <form method="post">
+
         <div class="tab-content">
             <div class="tab-pane fade show active" id="paso1">
                 <h1 class="mb-4">Paso 1: Datos de la oferta</h1>
-                <form method="post">
                     <div class="form-check">
                         <h4>Tipo de oferta</h4>
                         <input class="form-check-input" type="radio" name="tipoOferta" id="flexRadioDefault1">
@@ -59,42 +60,40 @@
                           Piso
                           </label>
                     </div>
-                </form>
             </div>
             <div class="tab-pane fade" id="paso2">
                 <h1 class="mb-4">Paso 2: Datos del inmueble</h1>
-                <form method="post">
                     <!--Tipo de local-->
                     <div class="form-group mt-5">
                         <h4>Nombre</h4>
-                        <input type="text" id="ubicacion" class="form-control" placeholder="Nombre">
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
                     </div>
                     <div class="form-floating mt-5">
                         <h4>Descripción</h4>
-                        <textarea class="form-control" placeholder="Otros..." id="descripcion"></textarea>
+                        <textarea class="form-control" name="descripcion" placeholder="Otros..." id="descripcion"></textarea>
                     </div>
                       
                     <div class="input-group mt-5 ">
                         <h4>Precio </h4>
-                        <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                        <input type="text" class="form-control" name="precio">
                         <span class="input-group-text">€</span>
                     </div>
 
                     <h4 class="mt-5">Ubicación</h4>
                     <div class="form-group">
                         <label for="calle">Calle</label>
-                        <input type="text" id="calle" class="form-control" placeholder="p.e: Pza.España">
+                        <input type="text" id="calle" name="calle" class="form-control" placeholder="p.e: Pza.España">
                     </div>
                     <div class="form-group">
-                        <label for="ubicacion">Número</label>
-                        <input type="text" id="ubicacion" class="form-control" placeholder="p.e: nº1">
+                        <label for="numero">Número</label>
+                        <input type="text" id="ubicacion" name="numero" class="form-control" placeholder="p.e: nº1">
                     </div>
                     <div class="form-group">
-                        <label for="ubicacion">Puerta</label>
-                        <input type="text" id="ubicacion" class="form-control" placeholder="p.e: 2ºB">
+                        <label for="puerta">Puerta</label>
+                        <input type="text" id="puerta" name="puerta" class="form-control" placeholder="p.e: 2ºB">
                     </div>
                     <div class="form-group">
-                        <label for="ubicacion">Localidad</label>
+                        <label for="localidad">Localidad</label>
                         <select name="localidad" id="localidad" class="form-control">
                             <option value="null">Seleccionar localidad</option>
                         </select>
@@ -116,7 +115,7 @@
                     <!--Equipamiento, metros cuadrados y distribucion-->
                     <div class="input-group mt-5 ">
                         <h4>Metros cuadrados </h4>
-                        <input type="text" class="form-control">
+                        <input type="text" name="metrosCuadrados" class="form-control">
                         <span class="input-group-text">m²</span>
                     </div>
 
@@ -169,11 +168,9 @@
                             <label class="form-check-label" for="electrodomesticos">Electrodomésticos</label>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="tab-pane fade" id="paso3">
                 <h1 class="">Paso 4: Subir imágenes</h1>
-                <form method="post">
                     <div class="mb-3">
                         <label for="formFileMultiple" class="form-label">Sube aquí las imágenes de tu inmueble</label>
                         <input class="form-control" type="file" id="formFileMultiple" multiple>
@@ -182,9 +179,10 @@
                         <input type="hidden" name="nif" value="<?php echo $_SESSION['usuarioSesion']['NIF']?>">
                         <button class="btn btn-primary" type="submit" value="publicarOfertaInmueble" name="publicarOfertaInmueble">Publicar oferta</button>
                     </div>
-                </form>
             </div>
         </div>
+    </form>
+
         <script>
             function mostrarPaso(target) {
                 // Oculta todos los tabs
