@@ -1,6 +1,7 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
 
 
     <h2>Añadir de Usuario</h2>

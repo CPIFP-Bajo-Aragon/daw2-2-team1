@@ -1,9 +1,10 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
 <div class="container mt-4">
         <h2>Formulario de Inserción</h2>
-        <form method="post" action="">
+        <form method="post">
             <div class="mb-3">
                 <label for="nombre_entidad" class="form-label">Nombre de la Entidad</label>
                 <input type="text" class="form-control" id="nombre_entidad" name="nombre_entidad" required>

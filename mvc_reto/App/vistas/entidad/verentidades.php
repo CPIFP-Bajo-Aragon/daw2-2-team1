@@ -1,10 +1,9 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
 
 <?php
-
-    foreach ($this->ent as $entidad) {
+    foreach ($this->datos['ent'] as $entidad) {
     ?>
         <div class="card mt-4">
             <div class="card-header">

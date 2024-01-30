@@ -1,16 +1,17 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
 
 
     <h2>Formulario para Insertar en NEGOCIO</h2>
     
     <form method="post" >
         <div class="form-group">
-            <label for="id_oferta">ID de Oferta:</label>
-            <select name="" id="">
-            <?php foreach ($this->datos['ofertaslistar'] as $oferta):?>
-                    <option value="<?php echo $oferta->id_oferta;?>"><?php echo $oferta->id_oferta; ?></option>
+            <label for="id_oferta">Local:</label>
+            <select name="codigo_inmueble" id="">
+            <?php foreach ($this->datos['localeslistar'] as $local):?>
+                    <option value="<?php echo $local->codigo_inmueble;?>"><?php echo $local->titulo; ?></option>
              <?php endforeach; ?>
             </select>
         </div>

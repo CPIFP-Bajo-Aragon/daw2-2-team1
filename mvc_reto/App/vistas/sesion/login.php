@@ -1,6 +1,5 @@
-<?php
-    cabecera();
-?>
+<?php require_once RUTA_APP.'/vistas/inc/header_no_logueado.php'?> 
+
     <div class="contenedor d-flex flex-column vh-100">
 
     <?php require_once RUTA_APP.'/vistas/inc/header_no_logueado.php'?> 

@@ -1,6 +1,7 @@
 <?php
-    cabecera();
+    cabecera($this->datos);
 ?>
+
 <div class="container mt-4">
             <a href="<?php echo RUTA_URL ?>/DocumentosControlador/nominas" class="text-decoration-none">
                 <div class="p-3 bg-light border rounded">
