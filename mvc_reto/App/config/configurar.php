@@ -18,8 +18,8 @@
     define('NOMBRE_SITIO', 'CRUD MVC - DAW2 Alcañiz');
  
     define('DB_HOST', 'localhost');
-    define('DB_USUARIO', 'team0');
-    define('DB_PASSWORD', 'team0');
+    define('DB_USUARIO', 'eduardo');
+    define('DB_PASSWORD', 'edu');
     define('DB_NOMBRE', 'negocios_alquileres');
     
     //Tamaño paginacion.
