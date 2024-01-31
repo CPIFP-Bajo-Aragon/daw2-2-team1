@@ -22,7 +22,7 @@
 
 
     <main class="" style=""  >
-        <section class="w-100 vh-100 d-flex flex-column justify-content-center align-items-center text-white fs-1 position-absolute">
+        <section class="w-100  d-flex flex-column justify-content-center align-items-center text-white fs-1 position-absolute">
           <h1 style="font-size: 80px;">RENUEVA TU ENTORNO</h1>
           <h1 style="font-size: 60px;">EMPRENDE TU DESTINO</h1>
           <div>

@@ -246,91 +246,15 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             var cardBodyButtons = document.createElement('div');
             cardBodyButtons.className = 'card-body';
 
+            var comentLink = document.createElement('a');
+            comentLink.href = '<?= RUTA_URL ?>/InmuebleControlador/comentar/' + oferta.codigo_inmueble; 
             var commentButton = document.createElement('button');
             commentButton.className = 'btn btn-primary';
             commentButton.id = 'comentar';
             commentButton.textContent = 'Comentar';
+            comentLink.appendChild(commentButton);
 
-            
-            // Obtener el contenedor de la modal
-            var modalContainer = document.getElementById('myModal');
-
-            // Añadir evento de clic al botón
-                commentButton.addEventListener('click', function() {
-                     // Mostrar la modal
-                            modalContainer.style.display = 'block';
-
-                        // Crear el formulario
-                        var formulario = document.createElement('div');
-                        formulario.className = 'container mt-4 bg-light';
-
-                        var titulo = document.createElement('h2');
-                        titulo.className = 'mb-4';
-                        titulo.textContent = 'Formulario de Valoración de Inmueble';
-
-                        var form = document.createElement('form');
-                        form.method = 'post';
-                        form.action = '';
-
-                        // Crear los elementos del formulario
-                        var puntuacionLabel = document.createElement('label');
-                        puntuacionLabel.textContent = 'Puntuación';
-                        puntuacionLabel.setAttribute('for', 'puntuacion');
-
-                        var puntuacionInput = document.createElement('input');
-                        puntuacionInput.type = 'number';
-                        puntuacionInput.className = 'form-control';
-                        puntuacionInput.id = 'puntuacion';
-                        puntuacionInput.name = 'puntuacion';
-                        puntuacionInput.required = true;
-
-                        // Repetir el proceso para otros elementos del formulario
-
-                        var comentarioLabel = document.createElement('label');
-                        comentarioLabel.textContent = 'Comentario';
-                        comentarioLabel.setAttribute('for', 'comentario');
-
-                        var comentarioTextarea = document.createElement('textarea');
-                        comentarioTextarea.className = 'form-control';
-                        comentarioTextarea.id = 'comentario';
-                        comentarioTextarea.name = 'comentario';
-                        comentarioTextarea.rows = '4';
-                        comentarioTextarea.required = true;
-
-                        var nifinput = document.createElement('input');
-                        nifinput.type = 'hidden';
-                        nifinput.className = 'form-control';
-                        nifinput.id = 'nif';
-                        nifinput.name = 'nif';
-                        nifinput.value = <?php echo ($_SESSION['usuarioSesion']['NIF']) ?>;
-
-                        var idinmueble = document.createElement('input');
-                        idinmueble.type = 'hidden';
-                        idinmueble.className = 'form-control';
-                        idinmueble.id = 'nif';
-                        idinmueble.name = 'nif';
-                        idinmueble.value = codigo_inmueble;
-
-                        var enviarButton = document.createElement('button');
-                        enviarButton.type = 'submit';
-                        enviarButton.className = 'btn btn-primary';
-                        enviarButton.textContent = 'Enviar Valoración';
-
-                        // Agregar los elementos al formulario
-                        form.appendChild(puntuacionLabel);
-                        form.appendChild(puntuacionInput);
-                        form.appendChild(comentarioLabel);
-                        form.appendChild(comentarioTextarea);
-                        form.appendChild(nifinput);
-                        form.appendChild(idinmueble);
-                        form.appendChild(enviarButton);
-
-                        // Agregar el formulario a la modal
-                        formulario.appendChild(titulo);
-                        formulario.appendChild(form);
-                        modalContainer.appendChild(formulario);
-                });
-                
+                          
 
 
             var chatLink = document.createElement('a');
@@ -347,7 +271,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             verMasButton.textContent = 'Ver mas';
             verMasLink.appendChild(verMasButton);
 
-            cardBodyButtons.appendChild(commentButton);
+            cardBodyButtons.appendChild(comentLink);
             cardBodyButtons.appendChild(chatLink);
             cardBodyButtons.appendChild(verMasLink);
 
