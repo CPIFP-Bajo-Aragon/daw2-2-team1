@@ -17,28 +17,3 @@ function cabecera($datos){
     }
 }
 
-function imagenes($nif){
-    $ruta = 'images/oferta_' . $nif;
-    
-
-    // Verificar si la ruta existe
-    if (is_dir($ruta)) {
-        // Obtener la lista de archivos en el directorio
-        $archivos = scandir($ruta);
-
-        // Filtrar los archivos para excluir los directorios "." y ".."
-        $archivos = array_diff($archivos, array('..', '.'));
-
-        // Crear un array para almacenar los nombres de los archivos
-        $nombresArchivos = array();
-
-        // Recorrer la lista de archivos y almacenar los nombres en el array
-        foreach ($archivos as $archivo) {
-            $nombresArchivos[] = $archivo;
-        }
-
-        // Imprimir o usar el array según sea necesario
-        return $nombresArchivos;
-    }
-    
-}
