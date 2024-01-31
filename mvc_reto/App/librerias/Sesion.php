@@ -8,6 +8,7 @@ class Sesion {
 
         session_regenerate_id();
         $_SESSION["usuarioSesion"] = $usuarioSesion;
+        
     }
 
     public static function sesionCreada(&$datos = []) {
