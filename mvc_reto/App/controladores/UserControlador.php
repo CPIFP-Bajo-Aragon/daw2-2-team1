@@ -21,7 +21,7 @@
             }
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if (isset($_POST["miBoton"])) {
+                if (isset($_POST["marcarnotificacionesleido"])) {
                     $this->usuario->marcarvistastodasnotificaciones($datos);
                 }
             }
@@ -85,12 +85,13 @@
                 //$cambios['direccion']=$_POST['direccion'];
                 //$cambios['date']=$_POST['date'];
                 $cambios['contrasena']=$_POST['contrasena'];
+
+
+
                 $this->usuario->addusuarios($cambios);
     
             }
                 $this->vista('usuario/add'); 
-            
-
         }
 
         public function ver(){

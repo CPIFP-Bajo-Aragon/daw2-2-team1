@@ -18,6 +18,11 @@
             if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"]) || $_SESSION["usuarioSesion"]["admin"]==0) {
                 redirecionar(RUTA_URL.'/');
             }
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (isset($_POST["marcarnotificacionesleido"])) {
+                    $this->usuario->marcarvistastodasnotificaciones($datos);
+                }
+            }
         }
         public function index(){
         }
@@ -38,7 +43,7 @@
             $this->datos['inmueble'] = $this->inmueble->crearComentarioInmueble($nuevoComentario);  
                 redirecionar("/ofertasControlador/listar");
         }else{
-           
+            $this->datos['inmueble']['codigo_inmueble'] = $id_oferta;
             $this->vista('inmuebles/valoracion', $this->datos);
         }  
 

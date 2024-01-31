@@ -105,6 +105,18 @@
                     $nuevoUsuario['contrasena']=$_POST['contrasena'];
                     //$this->sesion->crearUserModelo($nuevoUsuario);
                     $this->sesion->crearUserModelo($nuevoUsuario);
+                    $rutaDeseada = $_SERVER['DOCUMENT_ROOT'] . '/public/images/perfil_';
+                    $nombreCarpeta = $rutaDeseada .  $nuevoUsuario['nif'];
+
+                    if (!file_exists($nombreCarpeta)) {
+                        if (mkdir($nombreCarpeta, 0777, true)) {
+                            echo "La carpeta \"$nombreCarpeta\" ha sido creada exitosamente.";
+                        } else {
+                            echo "Error al intentar crear la carpeta \"$nombreCarpeta\".";
+                        }
+                    } else {
+                        echo "La carpeta \"$nombreCarpeta\" ya existe.";
+                    }
                     header("Location: /LoginControlador/sesion");
                     Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
                     
