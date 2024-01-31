@@ -21,7 +21,7 @@
         </div>
 
         <div class="mb-3">
-            <input type="hidden" class="form-control" id="codigo_inmueble" name="codigo_inmueble" value=" <?php  echo $this->datos['inmueble'][0]->codigo_inmueble;?>" >
+            <input type="hidden" class="form-control" id="codigo_inmueble" name="codigo_inmueble" value=" <?php  echo $this->datos['inmueble']['codigo_inmueble'];?>" >
         </div>
 
         <button type="submit" class="btn btn-primary">Enviar Valoración</button>
@@ -31,3 +31,5 @@
 <?php 
     require_once RUTA_APP.'/vistas/inc/footer.php'
 ?>
+</body>
+</html>

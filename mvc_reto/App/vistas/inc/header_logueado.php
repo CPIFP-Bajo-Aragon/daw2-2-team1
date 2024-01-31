@@ -59,7 +59,7 @@
 
                                         <div class="dropdown-menu" aria-labelledby="userDropdown">
                                         <form method="post" action="">
-                                            <button type="submit" name="miBoton">aaaa</button>
+                                            <button type="submit" name="marcarnotificacionesleido">aaaa</button>
                                         </form>
                                             <?php
                                                   if (!empty($datos['noti'])) {
