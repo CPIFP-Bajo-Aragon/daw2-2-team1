@@ -21,5 +21,4 @@
     <script src="<?php echo RUTA_URL ?>/js/main.js"></script>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
-</body>
-</html>
+

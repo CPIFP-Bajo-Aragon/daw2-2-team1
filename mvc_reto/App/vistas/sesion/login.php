@@ -1,10 +1,6 @@
 <?php require_once RUTA_APP.'/vistas/inc/header_no_logueado.php'?> 
 
     <div class="contenedor d-flex flex-column vh-100">
-
-    <?php require_once RUTA_APP.'/vistas/inc/header_no_logueado.php'?> 
-
-
        <div class="container content  flex-grow-1">
     <div class="row justify-content-center pt-5 mt-5 ">
         <div class="col-md-6 col-sm-8 col-xl-4 col-lg-4 formulario rounded-3">
@@ -47,4 +43,5 @@
 
         <?php require_once RUTA_APP.'/vistas/inc/footer.php'?> 
 
-
+        </body>
+</html>

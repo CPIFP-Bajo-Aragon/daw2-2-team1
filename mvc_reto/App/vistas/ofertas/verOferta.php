@@ -1,10 +1,6 @@
 <?php
     cabecera($this->datos);
-    $ubicaciones_php = [
-        ['coord' => ['lat' => -34.5956145, 'lng' => -58.4431949], 'tipo' => 'casa', 'info' => 'Información de la Casa'],
-        ['coord' => ['lat' => 15.783471, 'lng' => -90.230759], 'tipo' => 'predeterminado', 'info' => 'Información Predeterminada'],
-        // Agrega más ubicaciones según sea necesario
-    ];
+    $ubicaciones_php = ['coord' => ['lat' =>  $this->datos['inmueble']->latitud, 'lng' => $this->datos['inmueble']->longitud], 'tipo' => $this->datos['inmueble']->tipo, 'info' => $this->datos['inmueble']->descripcion];
 ?>
 
 
@@ -17,51 +13,48 @@
     <h1><p class="card-text"><?php echo $this->datos['inmueble']->titulo; ?></p></h1>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="/../images/fondo.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="/../images/logover.png" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-            <div class="d-flex justify-content-between">
-            <div class="fs-1 fw-bold">
-            <p class="card-text text-primary"><?php echo $this->datos['inmueble']->precio; ?>€</p>
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="/../images/fondo.jpg" alt="First slide">
             </div>
-            <div class="d-flex justify-content-between">
-    <a href="" class="text-danger fs-1 pe-5"><i class="bi bi-heart"></i></a>
-    <a href="" class="text-primary fs-1 pe-5" ><i class="bi bi-share"></i></a>
-    <a href="" class="text-warning fs-1 pe-5"><i class="bi bi-star"></i></a>
-</div>
-
-    </div>
-
-                   
-                </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="/../images/logover.png" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="..." alt="Third slide">
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="fs-1 fw-bold">
+                                <p class="card-text text-primary"><?php echo $this->datos['inmueble']->precio; ?>€</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a href="" class="text-danger fs-1 pe-5"><i class="bi bi-heart"></i></a>
+                                <a href="" class="text-primary fs-1 pe-5" ><i class="bi bi-share"></i></a>
+                                <a href="" class="text-warning fs-1 pe-5"><i class="bi bi-star"></i></a>
+                            </div>
+                        </div>                   
+                    </div>
+                </div>
+            </div>
     </div>
 
     <div class="row">
@@ -122,7 +115,9 @@
                 <div class="card-body">
                     <h1>Localizar</h1>
                     
-	<div id="map" class="vh-100 w-100-"></div>
+	                <div id="map" class="vh-100 w-100-">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,3 +156,5 @@
 <?php 
 require_once RUTA_APP.'/vistas/inc/footer.php';
 ?>
+</body>
+</html>
