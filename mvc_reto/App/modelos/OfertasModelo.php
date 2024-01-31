@@ -20,10 +20,16 @@
         }
 
         public function listarofertas($nif){
-            $this->db->query( "SELECT * FROM `OFERTA` WHERE `NIF` != :nif;");
+            $this->db->query( "SELECT * FROM `OFERTA`
+                                         inner join INMUEBLE on INMUEBLE.id_oferta = OFERTA.id_oferta 
+                                         WHERE `NIF` != :nif;");
             $this->db->bind(':nif', $nif);
             return $this->db->registros();
- 
+        }
+
+        public function listarofertasimagen(){
+            $this->db->query( "SELECT * FROM `IMAGEN`");
+            return $this->db->registros();
         }
 
         public function añadiroferta($insert){
