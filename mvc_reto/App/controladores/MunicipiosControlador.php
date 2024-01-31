@@ -17,6 +17,11 @@
             if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"]) || $_SESSION["usuarioSesion"]["admin"]==0) {
                 redirecionar(RUTA_URL.'/');
             }
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (isset($_POST["marcarnotificacionesleido"])) {
+                    $this->usuario->marcarvistastodasnotificaciones($datos);
+                }
+            }
         }
 
         public function listarMunicipios(){
