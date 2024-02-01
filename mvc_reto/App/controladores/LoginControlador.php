@@ -4,6 +4,7 @@
 
         
         private $sesion;
+        
         public function __construct(){
             session_start();
             $this->sesion = $this->modelo('LoginModelo');

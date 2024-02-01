@@ -17,7 +17,7 @@
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
             
 
-            if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"]) || $_SESSION["usuarioSesion"]["admin"]==0) {
+            if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])) {
                 redirecionar(RUTA_URL.'/');
             }
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
