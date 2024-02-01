@@ -36,8 +36,8 @@
                 <td><?php echo $inmueble->metros_cuadrados; ?></td>
                 <td><?php echo $inmueble->distribucion; ?></td>
                 <td><?php echo $inmueble->titulo; ?></td>
-                <td><?php echo $inmueble->características; ?></td>
-                <td><?php echo $inmueble->descripción; ?></td>
+                <td><?php echo $inmueble->caracteristicas; ?></td>
+                <td><?php echo $inmueble->descripcion; ?></td>
                 <td><?php echo $inmueble->fotos; ?></td>
                 <td><?php echo $inmueble->direccion; ?></td>
                 <td><?php echo $inmueble->precio; ?></td>

@@ -1,6 +1,7 @@
+
 <?php
     cabecera($this->datos);
-    $ubicaciones_php = ['coord' => ['lat' =>  $this->datos['inmueble']->latitud, 'lng' => $this->datos['inmueble']->longitud], 'tipo' => $this->datos['inmueble']->tipo, 'info' => $this->datos['inmueble']->descripcion];
+    $ubicaciones_php = ['coord' => ['lat' =>  (float)$this->datos['inmueble']->latitud, 'lng' => (float)$this->datos['inmueble']->longitud], 'tipo' => $this->datos['inmueble']->tipo, 'info' => $this->datos['inmueble']->descripcion];
 ?>
 
 
@@ -62,7 +63,7 @@
             <div class="card">
                 <div class="card-body">
                     <h1>Descripción</h1>
-                    <p class="card-text">Descripcion: <?php echo $this->datos['inmueble']->descripción; ?></p>
+                    <p class="card-text">Descripcion: <?php echo $this->datos['inmueble']->descripcion; ?></p>
 
                 </div>
             </div>
@@ -118,6 +119,9 @@
 	                <div id="map" class="vh-100 w-100-">
 
                     </div>
+                    <div id="info-panel">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,5 +160,49 @@
 <?php 
 require_once RUTA_APP.'/vistas/inc/footer.php';
 ?>
+<script>
+    iniciarMap();
+  function iniciarMap() {
+    var ubicaciones = [
+        <?php echo json_encode($ubicaciones_php);?>
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: ubicaciones[0].coord
+    });
+
+    var infoPanel = document.getElementById('info-panel');
+    var infoWindow = new google.maps.InfoWindow();
+
+    ubicaciones.forEach(function (ubicacion) {
+
+        var marker = new google.maps.Marker({
+        position: ubicacion.coord,
+        map: map,
+        icon: {
+            url: obtenerIcono(ubicacion.tipo),
+            scaledSize: new google.maps.Size(50, 50)
+        }
+        });
+
+        google.maps.event.addListener(marker, "click", function () {
+        map.setCenter(ubicacion.coord);
+        map.setZoom(12);
+        infoPanel.innerHTML = '<div>' + ubicacion.info  + '</div>';
+        });
+    });
+
+    function obtenerIcono(tipo) {
+        switch (tipo) {
+        case 'casa':
+            return '/images/iconos/casa.png';
+        // Agrega más casos según los tipos de ubicación y sus iconos
+        default:
+            return '/images/iconos/otro.png'; // Icono predeterminado si el tipo no coincide
+        }
+    }
+    }
+</script>
 </body>
 </html>
