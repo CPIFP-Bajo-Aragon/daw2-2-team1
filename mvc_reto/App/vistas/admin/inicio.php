@@ -16,7 +16,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="<?php echo RUTA_URL; ?>/adminControlador/añadirInmuebleA">
+                        <a href="<?php echo RUTA_URL; ?>/adminControlador/anadirInmuebles">
                             <i class="fas fa-plus"></i> <i class="fas fa-home"></i> Añadir Inmuebles
                         </a>
                     </div>
@@ -34,7 +34,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="<?php echo RUTA_URL; ?>/negocios/añadir">
+                        <a href="<?php echo RUTA_URL; ?>/adminControlador/anadirNegocio">
                             <i class="fas fa-plus"></i> <i class="fas fa-store"></i> Añadir Negocios
                         </a>
                     </div>
@@ -52,13 +52,32 @@
                         </a>
                     </div>
                     <div>
-                        <a href="<?php echo RUTA_URL; ?>/usuarios/añadir">
+                        <a href="<?php echo RUTA_URL; ?>/adminControlador/anadirUsuario">
                             <i class="fas fa-plus"></i> <i class="fas fa-user"></i> Añadir Usuarios
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-sm-3 mb-3 mb-sm-0">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">SERVICIOS</h5>
+                    <div>
+                        <a href="<?php echo RUTA_URL; ?>/adminControlador/listarNegocios">
+                            <i class="fas fa-search"></i> <i class="fas fa-store"></i> Ver SERVICIOS
+                        </a>
+                    </div>
+                    <div>
+                        <a href="<?php echo RUTA_URL; ?>/adminControlador/anadirNegocio">
+                            <i class="fas fa-plus"></i> <i class="fas fa-store"></i> Añadir SERVICIOS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

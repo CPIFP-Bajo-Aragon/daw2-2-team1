@@ -44,7 +44,7 @@
                                     <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/NegocioControlador/listnegocio" class="nav-link active" aria-current="page" >Negocios</a></li>
                                     <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/NegocioControlador/listnegociopropio" class="nav-link active" aria-current="page" >Mis Negocios</a></li>
                                     <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/EntidadesControlador/listarentidades" class="nav-link active" aria-current="page" >Entidades</a></li>
-                                    <li class="nav-item mx-2"> <a href="" class="nav-link active" aria-current="page" >Servicios</a></li>
+                                    <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/ServiciosControlador/listarServicios" class="nav-link active" aria-current="page" >Servicios</a></li>
                                 </ul>
 
                                 <!-- Action buttons -->

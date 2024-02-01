@@ -39,7 +39,7 @@
                             <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 lg-0">
                                 <!-- Sidebar content -->
                                 <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                                    <li class="nav-item mx-2"> <h1 class="text-light">Vienvenido al admin</h1> </li>
+                                    <li class="nav-item mx-2"> <h3 class="text-light">Has accedido como administrador</h3> </li>
                                 </ul>
 
                                 <!-- User actions -->
@@ -120,7 +120,6 @@
                                             <a class="dropdown-item" href="<?php echo RUTA_URL ?>/UserControlador/perfil">Perfil</a>
                                             <a class="dropdown-item" href="<?php echo RUTA_URL ?>/DocumentosControlador">Documentos</a>
                                             <a class="dropdown-item" href="<?php echo RUTA_URL ?>/LoginControlador/cerrar">Cerrar Sesion</a>
-                                            <a class="dropdown-item" href="#">Favoritos</a>
                                         </div>
                                     </div>
                                 </div>
