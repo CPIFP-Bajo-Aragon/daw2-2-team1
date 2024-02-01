@@ -17,7 +17,7 @@
             $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
-            if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"]) || $_SESSION["usuarioSesion"]["admin"]==0) {
+            if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])|| $_SESSION["usuarioSesion"]["admin"]==0) {
                 redirecionar(RUTA_URL.'/');
             }
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
