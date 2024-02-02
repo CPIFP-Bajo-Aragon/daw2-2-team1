@@ -116,7 +116,7 @@
                 <div class="card-body">
                     <h1>Localizar</h1>
                     
-	                <div id="map" class="vh-100 w-100-">
+	                <div id="mi_mapa" class="vh-100 w-100-">
 
                     </div>
                     <div id="info-panel">
@@ -167,42 +167,34 @@ require_once RUTA_APP.'/vistas/inc/footer.php';
         <?php echo json_encode($ubicaciones_php);?>
     ];
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: ubicaciones[0].coord
-    });
+      
 
-    var infoPanel = document.getElementById('info-panel');
-    var infoWindow = new google.maps.InfoWindow();
+      
+        // Agrega marcadores al mapa
+        ubicaciones.forEach(function (ubicacion) {
+            // Crea el mapa Leaflet
+                let map = L.map('mi_mapa').setView([ubicacion.coord.lat, ubicacion.coord.lng], 16);
 
-    ubicaciones.forEach(function (ubicacion) {
-
-        var marker = new google.maps.Marker({
-        position: ubicacion.coord,
-        map: map,
-        icon: {
-            url: obtenerIcono(ubicacion.tipo),
-            scaledSize: new google.maps.Size(50, 50)
-        }
+            // Agrega la capa de OpenStreetMap al mapa
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                
+                let marker = L.marker(ubicacion.coord).addTo(map).bindPopup(ubicacion.info);
         });
 
-        google.maps.event.addListener(marker, "click", function () {
-        map.setCenter(ubicacion.coord);
-        map.setZoom(12);
-        infoPanel.innerHTML = '<div>' + ubicacion.info  + '</div>';
-        });
-    });
+        // Escucha el evento de clic en el mapa
+        map.on('click', onMapClick);
 
-    function obtenerIcono(tipo) {
-        switch (tipo) {
-        case 'casa':
-            return '/images/iconos/casa.png';
-        // Agrega más casos según los tipos de ubicación y sus iconos
-        default:
-            return '/images/iconos/otro.png'; // Icono predeterminado si el tipo no coincide
+        // Función que se ejecuta al hacer clic en el mapa
+        function onMapClick(e) {
+        alert("Posición: " + e.latlng);
         }
     }
-    }
+   
+
+  // Llama a la función para inicializar el mapa cuando la página esté lista
+  document.addEventListener('DOMContentLoaded', iniciarMapa);
 </script>
 </body>
 </html>
