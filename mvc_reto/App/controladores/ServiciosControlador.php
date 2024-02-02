@@ -40,8 +40,14 @@
         public function listarServicios(){
            
             foreach($this->datos['municipioslistar'] as $municipio){
-                $municipio->servicios = $this->servicios->listarServicio($municipio->id_municipio);
+                $municipio->servicios = $this->servicios->listarServicio();
+
+                foreach($municipio->servicios as $servicio){
+                    $servicio->empresas = $this->servicios->listarServicioempresas($municipio->id_municipio, $servicio->id_servicio);
+                }
+
             }
+            //print_r($this->datos['municipioslistar']);
             $this->vista("servicios/listarservicios", $this->datos);
         }
     }
