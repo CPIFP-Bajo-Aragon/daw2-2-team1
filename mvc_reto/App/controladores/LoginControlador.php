@@ -69,12 +69,14 @@
 
                 // Hacer algo si es admin
                 redirecionar(RUTA_URL.'/adminControlador');
+                Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
 
             } else {
                 $usuarios["admin"]=1;
 
                 // Hacer algo si no es admin
                redirecionar(RUTA_URL.'/ofertasControlador/listar');
+               Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
                 
             }
             if(isset($usuarios) && !empty($usuarios)){
