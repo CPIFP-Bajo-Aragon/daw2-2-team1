@@ -87,7 +87,6 @@
         public function listarpropios(){
             $nif = $_SESSION['usuarioSesion']['NIF'];
             $this->datos['ofertaslistar'] = $this->oferta->listarpropiasofertas($nif);
-            
             $this->vista('ofertas/ofertaspropias', $this->datos);
         }
 
@@ -135,5 +134,20 @@
                 echo "Error: No se encontró la oferta o detalles del inmueble.";
             }
         }
+
+        public function InscripccionOferta($id_oferta = 0) {
+            $this->oferta->insertarInscripcion($id_oferta, $_SESSION['usuarioSesion']['NIF']);
+            redirecionar('/OfertasControlador/listar');
+        }
+
+        public function VerOfertaInscrito() {
+            $nif = $_SESSION['usuarioSesion']['NIF'];
+            $this->datos['ofertaslistar'] = $this->oferta->listarofertasInscritas($nif);
+            
+            $this->datos['ofertaslistarimagenes'] = $this->oferta->listarofertasimagen();
+            $this->datos['municipioslistar'] = $this->municipiosmodelo->listarMunicipio();
+            $this->vista('ofertas/ofertasinscrito', $this->datos);
+        }
         
+
     }
