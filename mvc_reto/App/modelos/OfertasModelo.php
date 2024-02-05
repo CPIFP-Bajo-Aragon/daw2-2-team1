@@ -8,7 +8,7 @@
         }
 
         public function listarpropiasofertas($nif){
-            $this->db->query( "SELECT * FROM `OFERTA` WHERE `NIF` = :nif;");
+            $this->db->query( "SELECT * FROM `OFERTA`   WHERE `NIF` = :nif;");
             $this->db->bind(':nif', $nif);
             return $this->db->registros();
         }
@@ -62,6 +62,7 @@
             $this->db->bind(':id_oferta', $id);
             return $this->db->registro();
         }
+
         public function editaroferta($insert){
 
             $this->db->query( "UPDATE `OFERTA` SET `tipo_oferta`=:tipo_oferta,`fecha_inicio`=:fecha_inicio, `fecha_fin`= :fecha_fin,`condiciones`= :condiciones, `tipo`=:tipo 
@@ -77,6 +78,7 @@
             
             $this->db->execute();
         }
+
         public function eliminaroferta($id){
 
             $this->db->query( "DELETE FROM `OFERTA` WHERE `id_oferta`=:id;");
@@ -109,5 +111,18 @@
             return $this->db->registros();
         }
         
-    
+        public function insertarInscripcion($id, $nif){
+            $this->db->query("INSERT INTO `INSCRIBIR`(`NIF`, `id_oferta`) VALUES (:nif, :id)");
+            $this->db->bind(':id', $id);
+            $this->db->bind(':nif', $nif);
+            return $this->db->execute();
+        }
+        public function listarofertasInscritas($nif){
+            $this->db->query( "SELECT * FROM `INSCRIBIR` 
+                                INNER join OFERTA on INSCRIBIR.id_oferta = OFERTA.id_oferta 
+                                inner join INMUEBLE on INMUEBLE.id_oferta = OFERTA.id_oferta  
+                                        WHERE INSCRIBIR.NIF = :nif;");
+            $this->db->bind(':nif', $nif);
+            return $this->db->registros();
+        }
     }
