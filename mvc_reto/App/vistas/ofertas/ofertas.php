@@ -18,7 +18,7 @@
                 <label for="municipio" class="form-label">Localidad</label>
                 <select class="form-select" id="municipio">
                     <?php foreach ($this->datos['municipioslistar'] as $municipio){ ?>
-                    <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre ?></option>    
+                    <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre_municipio ?></option>    
                     <?php }?>
                 </select>
             </div>
@@ -70,12 +70,7 @@
             </div>
             <!-- Puedes seguir añadiendo más tarjetas de anuncios -->
         </div>
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <!-- Aquí se insertará el formulario -->
-            </div>
-        </div>
+       
     </div>
 </div>
 
@@ -102,6 +97,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             });
             
             listarOfertas(ofertasList);
+            
     });
 
     function clearCardContainer() {
@@ -254,7 +250,13 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             commentButton.textContent = 'Comentar';
             comentLink.appendChild(commentButton);
 
-                          
+            var InsertLink = document.createElement('a');
+            InsertLink.href = '<?php echo RUTA_URL ?>/OfertasControlador/InscripccionOferta/' + oferta.codigo_inmueble; 
+            var insertButton = document.createElement('button');
+            insertButton.className = 'btn btn-info';
+            insertButton.id = 'Solicitar';
+            insertButton.textContent = 'Solicitar';
+            InsertLink.appendChild(insertButton);
 
 
             var chatLink = document.createElement('a');
@@ -271,6 +273,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             verMasButton.textContent = 'Ver mas';
             verMasLink.appendChild(verMasButton);
 
+            cardBodyButtons.appendChild(InsertLink);
             cardBodyButtons.appendChild(comentLink);
             cardBodyButtons.appendChild(chatLink);
             cardBodyButtons.appendChild(verMasLink);
@@ -287,7 +290,6 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             document.getElementById('card-container').appendChild(card);
         }
     }
-
 
 </script>
 

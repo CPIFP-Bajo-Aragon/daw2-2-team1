@@ -23,7 +23,6 @@
                 <div class="card-body">
                 <a href="<?php echo RUTA_URL ?>/OfertasControlador/editoferta/<?php echo $oferta->id_oferta; ?>" class="nav-link active col-1" aria-current="page" ><button>Editar</button></a>
                 <a href="<?php echo RUTA_URL ?>/OfertasControlador/eliminaroferta/<?php echo $oferta->id_oferta; ?>" class="nav-link active col-1" aria-current="page" ><button>Eliminar</button></a>
-                    <button>Ver Mas</button>
                 </div>
             </div>
             </div>

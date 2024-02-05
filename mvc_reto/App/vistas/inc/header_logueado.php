@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  
 
     <link rel="stylesheet" type="text/css" href="/css/estilos.css">
     <title>RevitaliZona</title>
@@ -37,12 +38,45 @@
                             </div>
 
                             <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 lg-0">
-                                <!-- Sidebar content -->
                                 <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                                    <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/OfertasControlador/listar" class="nav-link" aria-current="page" >Ofertas</a> </li>
-                                    <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/OfertasControlador/listarpropios" class="nav-link active" aria-current="page" >Mis Ofertas</a></li>
-                                    <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/NegocioControlador/listnegocio" class="nav-link active" aria-current="page" >Negocios</a></li>
-                                    <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/NegocioControlador/listnegociopropio" class="nav-link active" aria-current="page" >Mis Negocios</a></li>
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item mx-2 dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Opciones
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li class="nav-item mx-2 ">
+                                                    <a href="<?php echo RUTA_URL ?>/OfertasControlador/listar" class="nav-link text-dark" aria-current="page">
+                                                        Otras Ofertas
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item mx-2">
+                                                    <a href="<?php echo RUTA_URL ?>/OfertasControlador/listarpropios" class="nav-link active text-dark" aria-current="page">
+                                                        Mis Ofertas
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item mx-2 dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Negocios
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li class="nav-item mx-2"> 
+                                                    <a href="<?php echo RUTA_URL ?>/NegocioControlador/listnegocio" class="nav-link active text-dark" aria-current="page" >
+                                                       Otros Negocios
+                                                    </a>
+                                                </li>                                                
+                                                <li class="nav-item mx-2"> 
+                                                    <a href="<?php echo RUTA_URL ?>/NegocioControlador/listnegociopropio" class="nav-link active text-dark" aria-current="page" >
+                                                        Mis Negocios
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                     <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/EntidadesControlador/listarentidades" class="nav-link active" aria-current="page" >Entidades</a></li>
                                     <li class="nav-item mx-2"> <a href="<?php echo RUTA_URL ?>/ServiciosControlador/listarServicios" class="nav-link active" aria-current="page" >Servicios</a></li>
                                 </ul>
@@ -68,7 +102,7 @@
                                                     foreach ($datos['noti'] as $notificacion) {
                                             ?>
                                                          
-                                                        <a class="dropdown-item" href=""><?php echo($notificacion->tipo) ?></a>
+                                                        <a class="dropdown-item" onclick="openMainModalavisos('<?php echo($notificacion->tipo) ?>', '<?php echo($notificacion->contenido) ?>')" href="#"><?php echo($notificacion->tipo) ?></a>
                                             <?php
                                                     }
                                                 } else {
@@ -128,7 +162,8 @@
 
                                         <div class="dropdown-menu" aria-labelledby="userDropdown">
                                             <a class="dropdown-item" href="<?php echo RUTA_URL ?>/UserControlador/perfil">Perfil</a>
-                                            <a class="dropdown-item" href="<?php echo RUTA_URL ?>/DocumentosControlador">Documentos</a>
+                                            <a class="dropdown-item" href="#" onclick="openMainModal()">Documentos</a>
+                                            <a class="dropdown-item" href="<?php echo RUTA_URL ?>/OfertasControlador/VerOfertaInscrito">Ofertas Inscritas</a>
                                             <a class="dropdown-item" href="<?php echo RUTA_URL ?>/LoginControlador/cerrar">Cerrar Sesion</a>
                                             <a class="dropdown-item" href="#">Favoritos</a>
                                         </div>
@@ -139,3 +174,7 @@
                     </div>
                 </nav>
             </header>
+
+            <div id="mainModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   
+           </div>
