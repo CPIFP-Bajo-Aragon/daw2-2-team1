@@ -8,7 +8,7 @@
         }
 
         public function listarinmueble($id){
-            $this->db->query( "SELECT * FROM `INMUEBLE`WHERE `id_oferta` = :id");
+            $this->db->query( "SELECT * FROM `inmueble`WHERE `id_oferta` = :id");
             $this->db->bind(':id', $id);
             return $this->db->registros();
         }

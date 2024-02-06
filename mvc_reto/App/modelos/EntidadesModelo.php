@@ -8,16 +8,16 @@
         }
 
         public function listar($nif){
-            $this->db->query("SELECT * FROM `ENTIDAD`
-                                    INNER JOIN `PERTENECER`
-                                         ON `ENTIDAD`.`id_entidad` = `PERTENECER`.`id_entidad` 
-                                    WHERE PERTENECER.NIF=:nif");
+            $this->db->query("SELECT * FROM `entidad`
+                                    INNER JOIN `pertenecer`
+                                         ON `entidad`.`id_entidad` = `pertenecer`.`id_entidad` 
+                                    WHERE pertenecer.NIF=:nif");
             $this->db->bind(':nif', $nif);
             return  $this->db->registros();
         }
 
         public function crear($datos){
-            $this->db->query("INSERT INTO `ENTIDAD`(`nombre_entidad`, `sector`, `dirección`, `número_telefónico`, `correo`, `página_web`) 
+            $this->db->query("INSERT INTO `entidad`(`nombre_entidad`, `sector`, `dirección`, `número_telefónico`, `correo`, `página_web`) 
             VALUES (:nom, :sec, :dir, :num, :corr, :pag)");
 
             // Enlazar los parámetros
@@ -36,7 +36,7 @@
 
 
             // Segunda consulta de inserción en la tabla PERTENECER
-            $this->db->query("INSERT INTO `PERTENECER` (`NIF`, `id_entidad`) VALUES (:nif, :entidad)");
+            $this->db->query("INSERT INTO `pertenecer` (`NIF`, `id_entidad`) VALUES (:nif, :entidad)");
 
             // Enlazar los parámetros para la segunda consulta
             $this->db->bind(':nif', $datos['nif']);

@@ -51,7 +51,7 @@
             $nif = $datos['nif'];
             $receptor = $datos['receptor'];
             $mensaje = $datos['mensaje'];
-            $this->db->query("INSERT INTO `CHATEAR`(`NIF`, `NIF_chatear`, `mensaje`, `fecha_envío`, `hora_envio`) VALUES (:nif , :receptor, :mensaje, :fecha, :hora);");
+            $this->db->query("INSERT INTO `chatear`(`NIF`, `NIF_chatear`, `mensaje`, `fecha_envío`, `hora_envio`) VALUES (:nif , :receptor, :mensaje, :fecha, :hora);");
             $this->db->bind(':nif', $nif);
             $this->db->bind(':receptor', $receptor);
             $this->db->bind(':mensaje', $mensaje);
@@ -64,7 +64,7 @@
         public function listarmensaje($datos){
             $nif = $datos['nif'];
             $receptor = $datos['receptor'];
-            $this->db->query("SELECT * FROM `CHATEAR` 
+            $this->db->query("SELECT * FROM `chatear` 
                                                 WHERE 
                                                     (NIF = :nif AND NIF_chatear = :receptor )
                                                     OR
@@ -79,30 +79,30 @@
         }
 
         public function listaruserchat($datos){
-            $nif = $datos['nif'];
+            $id_usuario = $datos['id_usuario'];
             
 
             $this->db->query("SELECT U.*
-                                FROM USUARIO U
-                                WHERE U.NIF IN (
-                                    SELECT DISTINCT NIF_chatear
-                                    FROM CHATEAR
-                                    WHERE NIF = :nif1
+                                FROM usuario U
+                                WHERE U.id_usuario IN (
+                                    SELECT DISTINCT id_usuario1
+                                    FROM chatear
+                                    WHERE id_usuario = :nif1
                                 
                                     UNION
                                 
-                                    SELECT DISTINCT NIF
-                                    FROM CHATEAR
-                                    WHERE NIF_chatear = :nif2
+                                    SELECT DISTINCT id_usuario
+                                    FROM chatear
+                                    WHERE id_usuario1 = :nif2
                                 )
-                                AND U.NIF NOT IN (
-                                    SELECT DISTINCT NIF
-                                    FROM ADMINISTRADOR
+                                AND U.id_usuario NOT IN (
+                                    SELECT DISTINCT id_usuario
+                                     FROM `usuario_has_rol` WHERE `id_rol`=1
                                 )
                                 ");
 
-            $this->db->bind(':nif1', $nif);
-            $this->db->bind(':nif2', $nif);
+            $this->db->bind(':nif1', $id_usuario);
+            $this->db->bind(':nif2', $id_usuario);
 
             $registros = $this->db->registros();
             
@@ -112,13 +112,13 @@
         }
       
         public function listarnotificaciones($datos){
-            $nif = $datos['nif'];
+            $id_usuario = $datos['id_usuario'];
             
 
-            $this->db->query("SELECT * FROM `NOTIFICACION`
-                                            where    `NIF`=:nif;");
+            $this->db->query("SELECT * FROM `notificacion`
+                                            where  `id_usuario`=:id_usuario;");
 
-            $this->db->bind(':nif', $nif);
+            $this->db->bind(':id_usuario', $id_usuario);
 
             $registros = $this->db->registros();
             
@@ -130,7 +130,7 @@
             $nif = $datos['nif'];
             
 
-            $this->db->query("UPDATE `NOTIFICACION` SET `leido`=1 WHERE `NIF`=:nif;");
+            $this->db->query("UPDATE `notificacion` SET `leido`=1 WHERE `NIF`=:nif;");
 
             $this->db->bind(':nif', $nif);
 
