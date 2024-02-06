@@ -8,46 +8,36 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">ID Oferta</th>
             <th scope="col">Código Inmueble</th>
             <th scope="col">Metros Cuadrados</th>
             <th scope="col">Distribución</th>
-            <th scope="col">Título</th>
-            <th scope="col">Características</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Fotos</th>
-            <th scope="col">Dirección</th>
             <th scope="col">Precio</th>
-            <th scope="col">Ubicación</th>
-            <th scope="col">Tipo Alquiler</th>
-            <th scope="col">Planta</th>
-            <th scope="col">Planos</th>
-            <th scope="col">Equipamiento</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Caracteristicas</th>
+            <th scope="col">Equipamento</th>
+            <th scope="col">Latitud</th>
+            <th scope="col">Longitud</th>
+            <th scope="col">Municipio</th>
             <th scope="col">Estado</th>
-            <th scope="col">ID Municipio</th>
-            <th scope="col">Opciones</th>
+           
         </tr>
     </thead>
     <tbody>
         <?php foreach ($datos['inmuebleslistar'] as $inmueble): ?>
             <tr>
-                <td><?php echo $inmueble->id_oferta; ?></td>
-                <td><?php echo $inmueble->codigo_inmueble; ?></td>
-                <td><?php echo $inmueble->metros_cuadrados; ?></td>
-                <td><?php echo $inmueble->distribucion; ?></td>
-                <td><?php echo $inmueble->titulo; ?></td>
-                <td><?php echo $inmueble->caracteristicas; ?></td>
-                <td><?php echo $inmueble->descripcion; ?></td>
-                <td><?php echo $inmueble->fotos; ?></td>
-                <td><?php echo $inmueble->direccion; ?></td>
-                <td><?php echo $inmueble->precio; ?></td>
-                <td><?php echo $inmueble->ubicacion; ?></td>
-                <td><?php echo $inmueble->tipo_alquiler; ?></td>
-                <td><?php echo $inmueble->planta; ?></td>
-                <td><?php echo $inmueble->planos; ?></td>
-                <td><?php echo $inmueble->equipamiento; ?></td>
-                <td><?php echo $inmueble->estado; ?></td>
-                <td><?php echo $inmueble->id_municipio; ?></td>
+                <td><?php echo $inmueble->id_inmueble; ?></td>
+                <td><?php echo $inmueble->metros_caudrados_inmueble; ?></td>
+                <td><?php echo $inmueble->descripcion_inmueble; ?></td>
+                <td><?php echo $inmueble->distribucion_inmueble; ?></td>
+                <td><?php echo $inmueble->precio_inmueble; ?></td>
+                <td><?php echo $inmueble->direccion_inmueble; ?></td>
+                <td><?php echo $inmueble->cracteristicas_imueble; ?></td>
+                <td><?php echo $inmueble->equipamento_inmueble; ?></td>
+                <td><?php echo $inmueble->latitud_inmueble; ?></td>
+                <td><?php echo $inmueble->longitud_inmueble; ?></td>
+                <td><?php echo $inmueble->id_muncipio; ?></td>
+                <td><?php echo $inmueble->id_estado; ?></td>
                 <td>
     
                     <a href="#"><i class="fas fa-pencil-alt"></i></a>

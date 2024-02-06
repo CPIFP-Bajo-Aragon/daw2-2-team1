@@ -31,11 +31,20 @@
           <label for="contrasena">Contraseña</label>
           <input type="password" class="form-control" id="contrasena" name="contrasena" required onblur="validateInput(this, validateContrasena)">
         </div>
+        
+        <div class="form-group mx-sm-4 pb-3 col-12">
+        <label for="" class="form-label">Localidad</label>
+
+                <select class="col-11" id="municipio" name="municipio">
+                    <?php foreach ($this->datos['municipioslistar'] as $municipio){ ?>
+                    <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre_municipio ?></option>    
+                    <?php }?>
+                </select>
+        </div>
 
         <div class="form-group mx-sm-4 pb-3">
           <input type="submit" class="btn btn-block w-100 ingresar" value="INGRESAR">
         </div>
-
       </form>
     </div>
   </div>

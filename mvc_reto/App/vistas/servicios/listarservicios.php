@@ -16,10 +16,10 @@
     </div>
 </div>
 
+
 <?php 
 require_once RUTA_APP . '/vistas/inc/footer.php';
 ?>
-
 <script>
     var infoservicios = <?php echo json_encode($this->datos['municipioslistar']); ?>;
     console.log(infoservicios);
@@ -134,7 +134,7 @@ function onMapClick(e) {
     alert("Posición: " + e.latlng)
 }
 
-
 </script>
+
 </body>
 </html>

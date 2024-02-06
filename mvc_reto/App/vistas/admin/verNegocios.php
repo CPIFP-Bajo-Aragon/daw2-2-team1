@@ -8,30 +8,28 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Código Inmueble</th>
-            <th scope="col">Código Negocio</th>
+            <th scope="col">Id Negocio</th>
             <th scope="col">Título</th>
             <th scope="col">Motivo Traspaso</th>
             <th scope="col">Coste Traspaso</th>
             <th scope="col">Coste Mensual</th>
-            <th scope="col">Ubicación</th>
             <th scope="col">Descripción</th>
             <th scope="col">Capital Mínimo</th>
+            <th scope="col">Local perteneciente</th>
+
             <th scope="col">Opciones</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($datos['negocioslistar'] as $negocio): ?>
             <tr>
-                <td><?php echo $negocio->codigo_inmueble; ?></td>
-                <td><?php echo $negocio->codigo_negocio; ?></td>
-                <td><?php echo $negocio->titulo; ?></td>
-                <td><?php echo $negocio->motivo_traspaso; ?></td>
-                <td><?php echo $negocio->coste_traspaso; ?></td>
-                <td><?php echo $negocio->coste_mensual; ?></td>
-                <td><?php echo $negocio->ubicacion; ?></td>
-                <td><?php echo $negocio->descripcion; ?></td>
-                <td><?php echo $negocio->capital_minimo; ?></td>
+                <td><?php echo $negocio->id_negocio; ?></td>
+                <td><?php echo $negocio->titulo_negocio; ?></td>
+                <td><?php echo $negocio->motivo_traspaso_negocio; ?></td>
+                <td><?php echo $negocio->coste_traspaso_negocio; ?></td>
+                <td><?php echo $negocio->coste_mensual_negocio; ?></td>
+                <td><?php echo $negocio->descripcion_negocio; ?></td>
+                <td><?php echo $negocio->capital_minimo_negocio; ?></td>
                 <td>
                     <a href="#"><i class="fas fa-pencil-alt"></i></a>
                     <a href="#"><i class="fas fa-trash-alt"></i></a>
