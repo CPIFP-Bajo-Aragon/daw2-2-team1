@@ -8,7 +8,7 @@
         }
 
         public function listarMunicipio(){
-            $this->db->query("SELECT * FROM MUNICIPIO");
+            $this->db->query("SELECT * FROM municipio");
             return $this->db->registros();
         }
     }

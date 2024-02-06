@@ -7,28 +7,39 @@
             $this->db = new Base;
         }
 
-        public function listarpropiasofertas($nif){
-            $this->db->query( "SELECT * FROM `OFERTA`   WHERE `NIF` = :nif;");
-            $this->db->bind(':nif', $nif);
+        public function listarpropiasofertas($id_usuario){
+            $this->db->query( "SELECT oferta.*
+                                FROM `oferta`
+                                WHERE oferta.id_entidad IN (
+                                    SELECT entidad.id_entidad
+                                    FROM entidad
+                                    INNER JOIN usuario_entidad ON entidad.id_entidad = usuario_entidad.id_entidad
+                                    WHERE usuario_entidad.id_usuario = :id_usuario)"
+                                );
+            $this->db->bind(':id_usuario', $id_usuario);
             return $this->db->registros();
         }
 
-        public function listarLocalesofertas($nif){
-            $this->db->query( "SELECT * FROM `OFERTA` inner join INMUEBLE on INMUEBLE.id_oferta=OFERTA.id_oferta INNER JOIN LOCAL on LOCAL.codigo_inmueble=INMUEBLE.codigo_inmueble WHERE `NIF` = :nif;");
-            $this->db->bind(':nif', $nif);
+        public function listarLocalesofertas($id_usuario){
+            $this->db->query( "SELECT * FROM `oferta` inner join inmueble on inmueble.id_oferta=oferta.id_oferta INNER JOIN LOCAL on local.codigo_inmueble=inmueble.codigo_inmueble WHERE `id_usuario` = :id_usuario;");
+            $this->db->bind(':id_usuario', $id_usuario);
             return $this->db->registros();
         }
 
-        public function listarofertas($nif){
-            $this->db->query( "SELECT * FROM `OFERTA`
-                                         inner join INMUEBLE on INMUEBLE.id_oferta = OFERTA.id_oferta 
-                                         WHERE `NIF` != :nif;");
-            $this->db->bind(':nif', $nif);
+        public function listarofertas($id_usuario){
+            $this->db->query( "SELECT oferta.*
+                                FROM `oferta`
+                                WHERE oferta.id_entidad IN (
+                                    SELECT entidad.id_entidad
+                                    FROM entidad
+                                    INNER JOIN usuario_entidad ON entidad.id_entidad = usuario_entidad.id_entidad
+                                    WHERE usuario_entidad.id_usuario != :id_usuario);");
+            $this->db->bind(':id_usuario', $id_usuario);
             return $this->db->registros();
         }
 
         public function listarofertasimagen(){
-            $this->db->query( "SELECT * FROM `IMAGEN`");
+            $this->db->query( "SELECT * FROM `imagen`");
             return $this->db->registros();
         }
 
@@ -53,19 +64,19 @@
             $this->db->execute();
 
             // Obtener el ID de la última oferta insertada
-            $lastInsertId = $this->db->lastInsertId();
+            $lastInsertId = lastInsertId();
             return $lastInsertId;
         }
 
         public function listaroferta($id){
-            $this->db->query( "SELECT * FROM `OFERTA` WHERE `id_oferta` = :id_oferta;");
+            $this->db->query( "SELECT * FROM `oferta` WHERE `id_oferta` = :id_oferta;");
             $this->db->bind(':id_oferta', $id);
             return $this->db->registro();
         }
 
         public function editaroferta($insert){
 
-            $this->db->query( "UPDATE `OFERTA` SET `tipo_oferta`=:tipo_oferta,`fecha_inicio`=:fecha_inicio, `fecha_fin`= :fecha_fin,`condiciones`= :condiciones, `tipo`=:tipo 
+            $this->db->query( "UPDATE `oferta` SET `tipo_oferta`=:tipo_oferta,`fecha_inicio`=:fecha_inicio, `fecha_fin`= :fecha_fin,`condiciones`= :condiciones, `tipo`=:tipo 
                                  WHERE `id_oferta`= :id_oferta");
 
             // Vincular los parámetros
@@ -81,7 +92,7 @@
 
         public function eliminaroferta($id){
 
-            $this->db->query( "DELETE FROM `OFERTA` WHERE `id_oferta`=:id;");
+            $this->db->query( "DELETE FROM `oferta` WHERE `id_oferta`=:id;");
 
             // Vincular los parámetros
                 $this->db->bind(':id', $id);
@@ -90,38 +101,38 @@
         }
 
         public function verOfertaCompleta($id) {
-            $this->db->query("SELECT * FROM `OFERTA` WHERE `id_oferta` = :id_oferta;");
+            $this->db->query("SELECT * FROM `oferta` WHERE `id_oferta` = :id_oferta;");
             $this->db->bind(':id_oferta', $id);
             return $this->db->registro();
         }
 
         public function listarInmueble($id) {
-            $this->db->query("SELECT * FROM `INMUEBLE` WHERE `id_oferta` = :id_oferta;");
+            $this->db->query("SELECT * FROM `inmueble` WHERE `id_oferta` = :id_oferta;");
             $this->db->bind(':id_oferta', $id);
             return $this->db->registro();
         }
 
         public function recogerComentario($id) {
-            $this->db->query("SELECT * FROM `VAL_INMUEBLE` 
-                              INNER JOIN INMUEBLE ON VAL_INMUEBLE.codigo_inmueble = INMUEBLE.codigo_inmueble 
-                              INNER JOIN OFERTA ON INMUEBLE.id_oferta = OFERTA.id_oferta 
-                              INNER JOIN USUARIO ON VAL_INMUEBLE.NIF = USUARIO.NIF 
-                              WHERE OFERTA.id_oferta = :id");
+            $this->db->query("SELECT * FROM `val_inmueble` 
+                              INNER JOIN inmueble ON val_inmueble.codigo_inmueble = inmueble.codigo_inmueble 
+                              INNER JOIN oferta ON inmueble.id_oferta = oferta.id_oferta 
+                              INNER JOIN usuario ON val_inmueble.NIF = usuario.NIF 
+                              WHERE oferta.id_oferta = :id");
             $this->db->bind(':id', $id);
             return $this->db->registros();
         }
         
         public function insertarInscripcion($id, $nif){
-            $this->db->query("INSERT INTO `INSCRIBIR`(`NIF`, `id_oferta`) VALUES (:nif, :id)");
+            $this->db->query("INSERT INTO `inscribir`(`id_usuario`, `id_oferta`) VALUES (:nif, :id)");
             $this->db->bind(':id', $id);
             $this->db->bind(':nif', $nif);
             return $this->db->execute();
         }
         public function listarofertasInscritas($nif){
-            $this->db->query( "SELECT * FROM `INSCRIBIR` 
-                                INNER join OFERTA on INSCRIBIR.id_oferta = OFERTA.id_oferta 
-                                inner join INMUEBLE on INMUEBLE.id_oferta = OFERTA.id_oferta  
-                                        WHERE INSCRIBIR.NIF = :nif;");
+            $this->db->query( "SELECT * FROM `inscribir` 
+                                INNER join oferta on inscribir.id_oferta = oferta.id_oferta 
+                                inner join inmueble on inmueble.id_oferta = oferta.id_oferta  
+                                        WHERE inscribir.NIF = :nif;");
             $this->db->bind(':nif', $nif);
             return $this->db->registros();
         }
