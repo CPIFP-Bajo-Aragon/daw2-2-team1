@@ -10,20 +10,26 @@
         <tr>
             <th scope="col">NIF</th>
             <th scope="col">nombre</th>
-            <th scope="col">apellido</th>
-            <th scope="col"> correo</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col"> Correo</th>
             <th scope="col">Contraseña</th>
+            <th scope="col">Fecha nacimiento</th>
+            <th scope="col">telefono</th>
+
             <th scope="col">Opciones</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($datos['usuarioslistar'] as $usuario): ?>
             <tr>
-                <td><?php echo $usuario->NIF; ?></td>
-                <td><?php echo $usuario->nombre; ?></td>
-                <td><?php echo $usuario->apellido; ?></td>
-                <td><?php echo $usuario->correo; ?></td>
-                <td><?php echo $usuario->contrasena; ?></td>
+                <td><?php echo $usuario->nif; ?></td>
+                <td><?php echo $usuario->nombre_usuario; ?></td>
+                <td><?php echo $usuario->apellidos_usuario; ?></td>
+                <td><?php echo $usuario->correo_usuario; ?></td>
+                <td><?php echo $usuario->contrasena_usuario; ?></td>
+                <td><?php echo $usuario->fecha_nacimiento_usuario; ?></td>
+                <td><?php echo $usuario->telefono_usuario; ?></td>
+
                
                 <td>
                     <a href="#"><i class="fas fa-pencil-alt"></i></a>

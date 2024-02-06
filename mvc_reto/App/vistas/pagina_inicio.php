@@ -14,9 +14,9 @@
     
     </style>
   </head>
-  <body class="overflow-x-hidden">
+ 
 
-  <div class="contenedorinicio vh-100 ">
+  <div class="contenedor">
     <!--navBar-->
     <?php require_once RUTA_APP.'/vistas/inc/header_no_logueado.php'?> 
 

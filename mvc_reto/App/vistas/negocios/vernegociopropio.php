@@ -20,7 +20,7 @@
                     </div>
                 
                 <div class="card-body">
-                    <button><a href="<?php echo RUTA_URL ?>/negociosControlador<?php echo $negocio->id_negocio; ?>" class="nav-link active" aria-current="page" >Editar</a></button>
+                    <button><a href="<?php echo RUTA_URL ?>/NegocioControlador/editarnegocio/<?php echo $negocio->codigo_negocio; ?>" class="nav-link active" aria-current="page" >Editar</a></button>
                     <button>Eliminar</button>
                     <button>Ver Mas</button>
                 </div>

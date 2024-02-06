@@ -65,7 +65,7 @@
                 <div class="card-body">
                     <h5 class="card-title">SERVICIOS</h5>
                     <div>
-                        <a href="<?php echo RUTA_URL; ?>/adminControlador/listarNegocios">
+                        <a href="<?php echo RUTA_URL; ?>/adminControlador/listarServicios">
                             <i class="fas fa-search"></i> <i class="fas fa-store"></i> Ver SERVICIOS
                         </a>
                     </div>
