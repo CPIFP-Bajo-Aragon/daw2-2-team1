@@ -10,7 +10,7 @@
 
             $this->admin = $this->modelo('AdminModelo');
             $this->datos['admin'] = $this->admin->ListarAdmins();
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
 
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
             

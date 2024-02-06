@@ -80,12 +80,30 @@
                 
                 redirecionar("/NegocioControlador/listnegocio");
                 
-        }else{
-            $this->datos['negocio']['id']=$id_negocio;
-            $this->vista('/negocios/valoracion', $this->datos);
-        }  
+            }else{
+                $this->datos['negocio']['id']=$id_negocio;
+                $this->vista('/negocios/valoracion', $this->datos);
+            }  
 
         }
         
+        public function editarnegocio($id_negocio=0){
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $nuevoComentario['nif']=$_POST['NIF'];
+                $nuevoComentario['codigo_negocio']=$_POST['codigo_negocio'];
+                $nuevoComentario['puntuacion']=$_POST['puntuacion'];
+                $nuevoComentario['comentario']=$_POST['comentario'];
+                $nuevoComentario['fecha']= date('Y-m-d');
+                
+                $this->negociomodelo->crearComentarioNegocio($nuevoComentario);
+                
+                redirecionar("/NegocioControlador/listnegocio");
+                
+            }else{
+                $this->datos['negocio']['id']=$id_negocio;
+                $this->vista('/negocios/valoracion', $this->datos);
+            }  
+
+            }
         
     }
