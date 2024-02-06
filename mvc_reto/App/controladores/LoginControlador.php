@@ -8,6 +8,8 @@
         public function __construct(){
             session_start();
             $this->sesion = $this->modelo('LoginModelo');
+            $this->municipiosmodelo = $this->modelo('MunicipiosModelo');
+            $this->datos['municipioslistar']=$this->municipiosmodelo->listarMunicipio();
             
             
         }
@@ -59,9 +61,9 @@
                 
 
             // Obtén el valor de "NIF" del arreglo, o asigna un valor predeterminado si no está definido
-                $nif = $this->datos["usuarios"]["NIF"];
+                $id_usuario = $this->datos["usuarios"]["id_usuario"];
                 
-                $esAdmin = $this->comprobarsiesadmin($nif);
+                $esAdmin = $this->comprobarsiesadmin($id_usuario);
                 
             // Verificas si es admin
             if ($esAdmin) {
@@ -79,6 +81,7 @@
                Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
                 
             }
+            
             if(isset($usuarios) && !empty($usuarios)){
                 Sesion::crearSesion($usuarios);
             }else{
@@ -106,13 +109,13 @@
                     $nuevoUsuario['apellido']=$_POST['apellido'];
                     $nuevoUsuario['correo']=$_POST['correo'];
                     $nuevoUsuario['contrasena']=$_POST['contrasena'];
-                    //$this->sesion->crearUserModelo($nuevoUsuario);
+                    $nuevoUsuario['municipio']=$_POST['municipio'];
                     $this->sesion->crearUserModelo($nuevoUsuario);
                     $rutaDeseada = $_SERVER['DOCUMENT_ROOT'] . '/public/images/perfil_';
                     $nombreCarpeta = $rutaDeseada .  $nuevoUsuario['nif'];
 
                     if (!file_exists($nombreCarpeta)) {
-                        if (mkdir($nombreCarpeta, 0777, true)) {
+                        if (mkdir($nombreCarpeta, 777, true)) {
                             echo "La carpeta \"$nombreCarpeta\" ha sido creada exitosamente.";
                         } else {
                             echo "Error al intentar crear la carpeta \"$nombreCarpeta\".";
@@ -121,11 +124,13 @@
                         echo "La carpeta \"$nombreCarpeta\" ya existe.";
                     }
                     header("Location: /LoginControlador/sesion");
+
                     Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
+
                     
                     
             }else{
-                $this->vista("registrar/registrar");
+                $this->vista("registrar/registrar", $this->datos);
             }  
         }
 

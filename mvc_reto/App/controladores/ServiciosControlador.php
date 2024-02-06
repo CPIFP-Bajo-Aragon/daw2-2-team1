@@ -15,7 +15,7 @@
 
 
             $this->datos['admin'] = $this->admin->ListarAdmins();
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
             $this->datos['municipioslistar']=$this->municipiosmodelo->listarMunicipio();

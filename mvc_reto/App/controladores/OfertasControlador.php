@@ -12,7 +12,7 @@
             $this->usuario = $this->modelo('UserModelo');
             $this->admin = $this->modelo('AdminModelo');
             $this->datos['admin'] = $this->admin->ListarAdmins();
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
             
@@ -51,7 +51,7 @@
             // }  
 
             if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publicarOfertaInmueble'])){
-                $inmueble['oferta'] = $db->lastInsertId();
+                // $inmueble['oferta'] = lastInsertId();
                 $inmueble['tipoInmueble'] = $_POST['tipoInmueble'];
                 $inmueble['tipoVivienda'] = $_POST['tipoVivienda'];
                 $inmueble['nombre'] = $_POST['nombre'];
@@ -77,16 +77,16 @@
         }
 
         public function listar(){
-            $nif = $_SESSION['usuarioSesion']['NIF'];
-            $this->datos['ofertaslistar'] = $this->oferta->listarofertas($nif);
+            $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
+            $this->datos['ofertaslistar'] = $this->oferta->listarofertas($id_usuario);
             $this->datos['ofertaslistarimagenes'] = $this->oferta->listarofertasimagen();
             $this->datos['municipioslistar'] = $this->municipiosmodelo->listarMunicipio();
             $this->vista('ofertas/ofertas', $this->datos);
         }
 
         public function listarpropios(){
-            $nif = $_SESSION['usuarioSesion']['NIF'];
-            $this->datos['ofertaslistar'] = $this->oferta->listarpropiasofertas($nif);
+            $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
+            $this->datos['ofertaslistar'] = $this->oferta->listarpropiasofertas($id_usuario);
             $this->vista('ofertas/ofertaspropias', $this->datos);
         }
 
@@ -136,13 +136,13 @@
         }
 
         public function InscripccionOferta($id_oferta = 0) {
-            $this->oferta->insertarInscripcion($id_oferta, $_SESSION['usuarioSesion']['NIF']);
+            $this->oferta->insertarInscripcion($id_oferta, $_SESSION['usuarioSesion']['id_usuario']);
             redirecionar('/OfertasControlador/listar');
         }
 
         public function VerOfertaInscrito() {
-            $nif = $_SESSION['usuarioSesion']['NIF'];
-            $this->datos['ofertaslistar'] = $this->oferta->listarofertasInscritas($nif);
+            $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
+            $this->datos['ofertaslistar'] = $this->oferta->listarofertasInscritas($id_usuario);
             
             $this->datos['ofertaslistarimagenes'] = $this->oferta->listarofertasimagen();
             $this->datos['municipioslistar'] = $this->municipiosmodelo->listarMunicipio();

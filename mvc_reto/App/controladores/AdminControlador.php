@@ -9,7 +9,7 @@
             $this->admin = $this->modelo('AdminModelo');
             $this->datos['admin'] = $this->admin->ListarAdmins();
             
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
             if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"]) || $_SESSION["usuarioSesion"]["admin"]==1) {
@@ -44,16 +44,30 @@
             $this->vista('admin/verUsuarios', $this->datos);
         }
 
+        public function listarServicios(){
+            $this->datos['servicioslistar'] = $this->oferta->verServicios();
+            $this->vista('admin/verServicios', $this->datos);
+        }
+
   
 
         public function anadirInmuebles() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $nuevoInmueble['tipo_oferta'] = $_POST['tipo_oferta'];
-                $nuevoInmueble['fecha_inicio'] = $_POST['fecha_inicio'];
-                $nuevoInmueble['fecha_fin'] = $_POST['fecha_fin'];
-                $nuevoInmueble['condiciones'] = $_POST['condiciones'];
-                $nuevoInmueble['fecha_publicacion'] = $_POST['fecha_publicacion'];
-                $nuevoInmueble['tipo'] = $_POST['tipo'];
+                $nuevoInmueble['id_inmueble'] = $_POST['id_inmueble'];
+                $nuevoInmueble['metros_cuadrados_inmueble'] = $_POST['metros_cuadrados_inmueble'];
+                $nuevoInmueble['descripcion_inmueble'] = $_POST['descripcion_inmueble'];
+                $nuevoInmueble['distribucion_inmueble'] = $_POST['distribucion_inmueble'];
+                $nuevoInmueble['precio_inmueble'] = $_POST['precio_inmueble'];
+                $nuevoInmueble['dieccion_inmueble'] = $_POST['dieccion_inmueble'];
+                $nuevoInmueble['caracteristicas_inmueble'] = $_POST['caracteristicas_inmueble'];
+                $nuevoInmueble['equipamento_inmueble'] = $_POST['equipamento_inmueble'];
+                $nuevoInmueble['latitud_inmueble'] = $_POST['latitud_inmueble'];
+                $nuevoInmueble['longitud_inmueble'] = $_POST['longitud_inmueble'];
+                $nuevoInmueble['id_municipio'] = $_POST['id_municipio'];
+                $nuevoInmueble['id_estado'] = $_POST['id_estado'];
+
+
+
         
                 $this->admin->anadirInmuebleAdmin($nuevoInmueble);
             }
@@ -62,15 +76,14 @@
 
         public function anadirNegocio() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $nuevoNegocio['codigo_negocio'] = $_POST['codigo_negocio'];
+                $nuevoNegocio['id_negocio'] = $_POST['id_negocio'];
 
-                $nuevoNegocio['titulo'] = $_POST['titulo'];
-                $nuevoNegocio['motivo_traspaso'] = $_POST['motivo_traspaso'];
-                $nuevoNegocio['coste_traspaso'] = $_POST['coste_traspaso'];
-                $nuevoNegocio['coste_mensual'] = $_POST['coste_mensual'];
-                $nuevoNegocio['ubicacion'] = $_POST['ubicacion'];
-                $nuevoNegocio['descripcion'] = $_POST['descripcion'];
-                $nuevoNegocio['capital_minimo'] = $_POST['capital_minimo'];
+                $nuevoNegocio['titulo_negocio'] = $_POST['titulo_negocio'];
+                $nuevoNegocio['motivo_traspaso_negocio'] = $_POST['motivo_traspaso_negocio'];
+                $nuevoNegocio['coste_traspaso_negocio'] = $_POST['coste_traspaso_negocio'];
+                $nuevoNegocio['coste_mensual_negocio'] = $_POST['coste_mensual_negocio'];
+                $nuevoNegocio['descripcion_negocio'] = $_POST['descripcion_negocio'];
+                $nuevoNegocio['capital_minimo_negocio'] = $_POST['capital_minimo_negocio'];
 
         
                 $this->admin->anadirNegocioAdmin($nuevoNegocio);
@@ -81,12 +94,13 @@
         public function anadirUsuario() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-                $nuevoUsuario['NIF'] = $_POST['NIF'];
-                $nuevoUsuario['nombre'] = $_POST['nombre'];
-                $nuevoUsuario['apellido'] = $_POST['apellido'];
-                $nuevoUsuario['correo'] = $_POST['correo'];
-                $nuevoUsuario['contrasena'] = $_POST['contrasena'];
-                $nuevoUsuario['id_municipio'] = $_POST['id_municipio'];
+                $nuevoUsuario['nif'] = $_POST['nif'];
+                $nuevoUsuario['nombre_usuario'] = $_POST['nombre_usuario'];
+                $nuevoUsuario['apellidos_usuario'] = $_POST['apellidos_usuario'];
+                $nuevoUsuario['correo_usuario'] = $_POST['correo_usuario'];
+                $nuevoUsuario['contrasena_usuario'] = $_POST['contrasena_usuario'];
+                $nuevoUsuario['fecha_nacimiento_usuario'] = $_POST['fecha_nacimiento_usuario'];
+                $nuevoUsuario['telefono_usuario'] = $_POST['telefono_usuario'];
 
         
                 $this->admin->anadirUsuarioAdmin($nuevoUsuario);
