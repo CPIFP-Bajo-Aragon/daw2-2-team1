@@ -14,7 +14,7 @@
             
             $this->usuario = $this->modelo('UserModelo');
 
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
             if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])|| $_SESSION["usuarioSesion"]["admin"]==0) {
@@ -44,8 +44,8 @@
                 $this->negociomodelo->addnegocios($negocio);
 
             }else{
-                $nif = $_SESSION['usuarioSesion']['NIF'];
-                $this->datos['localeslistar'] = $this->modelo('OfertasModelo')->listarLocalesofertas($nif);
+                $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
+                $this->datos['localeslistar'] = $this->modelo('OfertasModelo')->listarLocalesofertas($id_usuario);
                 //print_r($this->datos['localeslistar']);
                 $this->vista('negocios/insertarnegocio', $this->datos);
             }
@@ -53,16 +53,16 @@
         }
 
         public function listnegociopropio(){
-            $nif = $_SESSION['usuarioSesion']['NIF'];
-            $this->datos['negocioslistar'] = $this->negociomodelo->listarnegociospropio($nif);
+            $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
+            $this->datos['negocioslistar'] = $this->negociomodelo->listarnegociospropio($id_usuario);
             //print_r($this->datos['negocioslistar']);
             $this->vista('negocios/vernegociopropio', $this->datos);
 
         } 
 
         public function listnegocio(){
-            $nif = $_SESSION['usuarioSesion']['NIF'];
-            $this->datos['negocioslistar'] = $this->negociomodelo->listarnegocios($nif);
+            $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
+            $this->datos['negocioslistar'] = $this->negociomodelo->listarnegocios($id_usuario);
             //print_r($this->datos['negocioslistar']);
             $this->vista('negocios/vernegocio', $this->datos);
 

@@ -9,7 +9,7 @@
             $this->inmueble = $this->modelo('InmuebleModelo');
             
             $this->usuario = $this->modelo('UserModelo');
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
 
@@ -34,7 +34,7 @@
 
         public function comentar($id_oferta=0){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $nuevoComentario['nif']=$_POST['NIF'];
+                $nuevoComentario['id_usuario']=$_POST['id_usuario'];
                 $nuevoComentario['codigo_inmueble']=$id_oferta;
                 $nuevoComentario['puntuacion']=$_POST['puntuacion'];
                 $nuevoComentario['comentario']=$_POST['comentario'];

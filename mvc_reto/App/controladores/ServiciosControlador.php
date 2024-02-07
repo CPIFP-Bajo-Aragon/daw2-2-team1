@@ -43,7 +43,7 @@
                 $municipio->servicios = $this->servicios->listarServicio();
 
                 foreach($municipio->servicios as $servicio){
-                    $servicio->empresas = $this->servicios->listarServicioempresas($municipio->id_municipio, $servicio->id_servicio);
+                    $servicio->empresas = $this->servicios->listarServicioempresas($municipio->id_municipio, $servicio->id_tipo_servicio);
                 }
 
             }
