@@ -108,6 +108,25 @@
             $this->vista('admin/añadirUsuarios', $this->datos);
         }
 
+        public function anadirServicio() {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                $nuevoServicio['nombre_servicio'] = $_POST['nombre_servicio'];
+                $nuevoServicio['descripcion_servicio'] = $_POST['descripcion_servicio'];
+                $nuevoServicio['id_tipo_servicio'] = $_POST['id_tipo_servicio'];
+                $nuevoServicio['id_municipio'] = $_POST['id_municipio'];
+                $nuevoServicio['longitud_servicio'] = $_POST['longitud_servicio'];
+                $nuevoServicio['latitud_servicio'] = $_POST['latitud_servicio'];
+                $nuevoServicio['telefono_servicio'] = $_POST['telefono_servicio'];
+                $nuevoServicio['direccion_servicio'] = $_POST['direccion_servicio'];
+
+
+        
+                $this->admin->anadirServicioAdmin($nuevoServicio);
+            }
+            $this->vista('admin/añadirServicio', $this->datos);
+        }
+
 
 
 
