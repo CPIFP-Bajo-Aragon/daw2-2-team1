@@ -20,8 +20,19 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="paso1">
                 <h1 class="mb-4">Paso 1: Datos de la oferta</h1>
+                    <div class="form-group mt-5">
+                        <h4>Nombre</h4>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
+                    </div>
+
+                    <div class="input-group mt-5 ">
+                        <h4>Precio </h4>
+                        <input type="text" class="form-control" name="precio">
+                        <span class="input-group-text">€</span>
+                    </div>
+                    
+                    <!--<h4 class="mt-5">Tipo de oferta</h4>
                     <div class="form-check">
-                        <h4>Tipo de oferta</h4>
                         <input class="form-check-input" type="radio" name="tipoOferta" id="flexRadioDefault1">
                         <label class="form-check-label" for="tipoOferta">
                         Alquiler
@@ -59,25 +70,30 @@
                           <label class="form-check-label" for="tipoVivienda">
                           Piso
                           </label>
+                    </div>-->
+                    <h4 class="mt-5">Fecha inicio</h4>
+                    <div class="form-group">
+                        <label for="fecha">Selecciona una fecha:</label>
+                        <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio">
+                    </div>
+                    <h4 class="mt-5">Fecha fin</h4>
+                    <div class="form-group">
+                        <label for="fecha">Selecciona una fecha:</label>
+                        <input type="date" class="form-control" name="fecha_fin" id="fecha_fin">
+                    </div>
+                    <div class="form-floating mt-5">
+                        <h4>Condiciones</h4>
+                        <textarea class="form-control" name="condiciones" placeholder="Otros..." id="condiciones"></textarea>
                     </div>
             </div>
             <div class="tab-pane fade" id="paso2">
                 <h1 class="mb-4">Paso 2: Datos del inmueble</h1>
-                    <!--Tipo de local-->
-                    <div class="form-group mt-5">
-                        <h4>Nombre</h4>
-                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
-                    </div>
+                    
                     <div class="form-floating mt-5">
                         <h4>Descripción</h4>
                         <textarea class="form-control" name="descripcion" placeholder="Otros..." id="descripcion"></textarea>
                     </div>
                       
-                    <div class="input-group mt-5 ">
-                        <h4>Precio </h4>
-                        <input type="text" class="form-control" name="precio">
-                        <span class="input-group-text">€</span>
-                    </div>
 
                     <h4 class="mt-5">Ubicación</h4>
                     <div class="form-group">
@@ -93,26 +109,33 @@
                         <input type="text" id="puerta" name="puerta" class="form-control" placeholder="p.e: 2ºB">
                     </div>
                     <div class="form-group">
-                        <label for="localidad">Localidad</label>
-                        <select name="localidad" id="localidad" class="form-control">
-                            <option value="null">Seleccionar localidad</option>
+                        <label for="municipio" >Localidad</label>
+                        <select name="municipio" id="municipio" class="form-control">
+                            <?php foreach ($this->datos['municipioslistar'] as $municipio){ ?>
+                                <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre_municipio ?></option>    
+                            <?php }?>
                         </select>
+                    </div>
+
+                    <div class="form-floating mt-5">
+                        <h4>Distribución</h4>
+                        <textarea class="form-control" name="distribucion" placeholder="Otros..." id="distribucion"></textarea>
                     </div>
 
                     <div class="form-check">
                         <h4 class="mt-5">Estado</h4>
-                        <input class="form-check-input" type="radio" name="estado" id="obraNueva" value="Obra nueva">
+                        <input class="form-check-input" type="radio" name="estado" id="obraNueva" value="1">
                         <label class="form-check-label" for="estado">
                         Obra nueva
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="estado" id="reformar" value="Para reformar">
+                        <input class="form-check-input" type="radio" name="estado" id="reformar" value="2">
                         <label class="form-check-label" for="estado">
                         Para reformar
                         </label>
                     </div>
-                    <!--Equipamiento, metros cuadrados y distribucion-->
+
                     <div class="input-group mt-5 ">
                         <h4>Metros cuadrados </h4>
                         <input type="text" name="metrosCuadrados" class="form-control">
@@ -176,7 +199,7 @@
                         <input class="form-control" type="file" id="formFileMultiple" multiple>
                     </div>
                     <div class="mt-5">
-                        <input type="hidden" name="nif" value="<?php echo $_SESSION['usuarioSesion']['NIF']?>">
+                        <!-- <input type="hidden" name="nif" value="<?php echo $_SESSION['usuarioSesion']['NIF']?>"> -->
                         <button class="btn btn-primary" type="submit" value="publicarOfertaInmueble" name="publicarOfertaInmueble">Publicar oferta</button>
                     </div>
             </div>

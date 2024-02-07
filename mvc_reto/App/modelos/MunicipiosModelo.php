@@ -11,4 +11,5 @@
             $this->db->query("SELECT * FROM municipio");
             return $this->db->registros();
         }
+
     }

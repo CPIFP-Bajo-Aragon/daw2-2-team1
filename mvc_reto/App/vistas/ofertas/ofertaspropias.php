@@ -4,10 +4,9 @@
 
 
 
-    <div class="row">
         <?php foreach ($this->datos['ofertaslistar'] as $oferta):?>
             
-            <div class="col-md-6">
+            <div class="col-3 h-50">
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">ID de Oferta: <?php echo $oferta->id_oferta; ?></h5>
@@ -26,8 +25,7 @@
             </div>
             </div>
         <?php endforeach; ?>
-    </div>
-
+    
 
 <?php 
 

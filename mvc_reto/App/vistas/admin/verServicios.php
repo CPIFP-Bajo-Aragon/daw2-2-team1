@@ -14,28 +14,32 @@
 
     <thead>
         <tr>
-            <th scope="col">Municipio</th>
-            <th scope="col">Servicio</th>
+
+            <th scope="col">Nombre Servicio</th>
             <th scope="col">Descripcion</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Direccion</th>
+            <th scope="col">Tipo servicio</th>
+            <th scope="col">Municipio</th>
             <th scope="col">Latitud</th>
             <th scope="col">Longitud</th>
-            <th scope="col">Nombre Servicio</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Direccion</th>
+
             <th scope="col">Opciones</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($datos['servicioslistar'] as $servicio): ?>
             <tr>
+                <td><?php echo $servicio->nombre_servicio; ?></td>
+                <td><?php echo $servicio->descripcion_servicio; ?></td>
+                <td><?php echo $servicio->id_tipo_servicio; ?></td>
                 <td><?php echo $servicio->id_municipio; ?></td>
-                <td><?php echo $servicio->id_servicio; ?></td>
-                <td><?php echo $servicio->descripcion; ?></td>
-                <td><?php echo $servicio->telefono; ?></td>
-                <td><?php echo $servicio->direccion; ?></td>
-                <td><?php echo $servicio->latitud; ?></td>
-                <td><?php echo $servicio->longitud; ?></td>
-                <td><?php echo $servicio->Nombre_da_servicio; ?></td>
+                <td><?php echo $servicio->longitud_servicio; ?></td>
+                <td><?php echo $servicio->latitud_servicio; ?></td>
+                <td><?php echo $servicio->telefono_servicio; ?></td>
+                <td><?php echo $servicio->direccion_servicio; ?></td>
+
+                
                 <td>
                     <a href="#"><i class="fas fa-pencil-alt"></i></a>
                     <a href="#"><i class="fas fa-trash-alt"></i></a>

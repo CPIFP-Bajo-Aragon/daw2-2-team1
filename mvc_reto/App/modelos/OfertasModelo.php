@@ -28,12 +28,12 @@
 
         public function listarofertas($id_usuario){
             $this->db->query( "SELECT oferta.*
-                                    FROM `oferta`
-                                    WHERE oferta.id_entidad not IN (
-                                        SELECT entidad.id_entidad
-                                        FROM entidad
-                                        INNER JOIN usuario_entidad ON entidad.id_entidad = usuario_entidad.id_entidad
-                                        WHERE usuario_entidad.id_usuario = :id_usuario);");
+                                FROM `oferta`
+                                WHERE oferta.id_entidad not IN (
+                                    SELECT entidad.id_entidad
+                                    FROM entidad
+                                    INNER JOIN usuario_entidad ON entidad.id_entidad = usuario_entidad.id_entidad
+                                    WHERE usuario_entidad.id_usuario = :id_usuario);");
             $this->db->bind(':id_usuario', $id_usuario);
             return $this->db->registros();
         }
@@ -44,28 +44,22 @@
         }
 
         public function añadiroferta($insert){
-            $nif = $insert['nif'];  
-            $tipo_pferta = $insert['tipo_oferta'];  
-            $fecha_inicio = $insert['fecha_inicio'];  
-            $fecha_fin = $insert['fecha_fin'];  
-            $condiciones = $insert['condiciones'];  
-            $fecha_publicacion = $insert['fecha_publicacion'];  
-            $tipo = $insert['tipo']; 
 
-            $this->db->query( "INSERT INTO `OFERTA`(`tipo_oferta`, `fecha_inicio`, `fecha_fin`, `condiciones`, `fecha_publicacion`, `tipo`, `NIF`) VALUES ( :tipo_ofe, :fecha_ini, :fecha_fin, :condiciones, :fecha_pu, :tipo, :nif )");
+            //Insert oferta
 
-            $this->db->bind(':tipo_ofe', $tipo_pferta);
-            $this->db->bind(':fecha_ini', $fecha_inicio);
-            $this->db->bind(':fecha_fin', $fecha_fin);
-            $this->db->bind(':condiciones', $condiciones);
-            $this->db->bind(':fecha_pu', $fecha_publicacion);
-            $this->db->bind(':tipo', $tipo);
-            $this->db->bind(':nif', $nif);
+            //$this->db->query( "INSERT INTO `oferta`(`fecha_inicio_oferta`, `fecha_fin_oferta`, `condiciones_oferta`) VALUES ( :fecha_ini, :fecha_fin, :condiciones)");
+            $this->db->query( "INSERT INTO `oferta`(`condiciones_oferta`) VALUES (:condiciones)");
+
+            //$this->db->bind(':fecha_ini', $_POST["fecha_inicio"]);
+            //$this->db->bind(':fecha_fin', $_POST["fecha_fin"]);
+            $this->db->bind(':condiciones', $insert["condiciones"]);
+            //$this->db->bind(':entidad', $_POST["entidad"]);
+
             $this->db->execute();
 
             // Obtener el ID de la última oferta insertada
-            $lastInsertId = lastInsertId();
-            return $lastInsertId;
+            //$lastInsertId = lastInsertId();
+            //return $lastInsertId;
         }
 
         public function listaroferta($id){
