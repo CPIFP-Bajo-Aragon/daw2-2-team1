@@ -15,9 +15,8 @@
 </head>
 <body class="">
    
-    <div class="container-fluid vh-100">
-        <div class="row vh-100">
-            <header class="col-12 vh-10 m-0 p-0">
+    <div class="container-fluid row p-0 m-0">
+            <header class="col-12 m-0 p-0">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
@@ -178,3 +177,5 @@
             <div id="mainModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
    
            </div>
+           
+<div class="container-fluid row min-vh-100 m-0 p-5">

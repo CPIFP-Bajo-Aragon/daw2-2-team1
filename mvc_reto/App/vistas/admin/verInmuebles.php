@@ -27,16 +27,16 @@
         <?php foreach ($datos['inmuebleslistar'] as $inmueble): ?>
             <tr>
                 <td><?php echo $inmueble->id_inmueble; ?></td>
-                <td><?php echo $inmueble->metros_caudrados_inmueble; ?></td>
+                <td><?php echo $inmueble->metros_cuadrados_inmueble; ?></td>
                 <td><?php echo $inmueble->descripcion_inmueble; ?></td>
                 <td><?php echo $inmueble->distribucion_inmueble; ?></td>
                 <td><?php echo $inmueble->precio_inmueble; ?></td>
                 <td><?php echo $inmueble->direccion_inmueble; ?></td>
-                <td><?php echo $inmueble->cracteristicas_imueble; ?></td>
-                <td><?php echo $inmueble->equipamento_inmueble; ?></td>
+                <td><?php echo $inmueble->caracteristicas_inmueble; ?></td>
+                <td><?php echo $inmueble->equipamiento_inmueble; ?></td>
                 <td><?php echo $inmueble->latitud_inmueble; ?></td>
                 <td><?php echo $inmueble->longitud_inmueble; ?></td>
-                <td><?php echo $inmueble->id_muncipio; ?></td>
+                <td><?php echo $inmueble->id_municipio; ?></td>
                 <td><?php echo $inmueble->id_estado; ?></td>
                 <td>
     

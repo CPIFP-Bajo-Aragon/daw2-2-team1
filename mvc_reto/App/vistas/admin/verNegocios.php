@@ -3,7 +3,7 @@
 ?>
 
 
-<h1>VER INMUEBLES</h1>
+<h1>VER NEGOCIOS</h1>
 
 <table class="table table-striped">
     <thead>
@@ -30,6 +30,8 @@
                 <td><?php echo $negocio->coste_mensual_negocio; ?></td>
                 <td><?php echo $negocio->descripcion_negocio; ?></td>
                 <td><?php echo $negocio->capital_minimo_negocio; ?></td>
+                <td><?php echo $negocio->local_id_inmueble; ?></td>
+
                 <td>
                     <a href="#"><i class="fas fa-pencil-alt"></i></a>
                     <a href="#"><i class="fas fa-trash-alt"></i></a>

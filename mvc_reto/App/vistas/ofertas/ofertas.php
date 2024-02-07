@@ -5,20 +5,18 @@
 
 ?>
 
-<div class="container-fluid">
-    <div class="row">
 
 <!-- Menú de Filtros a la Izquierda -->
-        <div class="col-md-3 mh-100" id="filters">
+        <div class="col-md-3  mh-100" id="filters">
             <h3 class="mt-3 mb-3">Filtros</h3>
             
             <!-- Filtro de Selección -->
 
             <div class="mb-3">
                 <label for="municipio" class="form-label">Localidad</label>
-                <select class="form-select" id="municipio">
+                <select name="municipio" id="municipio" class="form-control">
                     <?php foreach ($this->datos['municipioslistar'] as $municipio){ ?>
-                    <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre_municipio ?></option>    
+                        <option value="<?php echo $municipio->id_municipio ?>"><?php echo $municipio->nombre_municipio ?></option>    
                     <?php }?>
                 </select>
             </div>
@@ -71,8 +69,6 @@
             <!-- Puedes seguir añadiendo más tarjetas de anuncios -->
         </div>
        
-    </div>
-</div>
 
 
 <?php 
@@ -127,16 +123,14 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             }
 
             return sortedList;
-            console.log(sortedOfertasList);
     }
 
     function listarOfertas(ofertasList){
-        var container = document.getElementById('card-container'); // Corrected ID
+        var container = document.getElementById('card-container');
 
 
         for (var i = 0; i < ofertasList.length; i++) {
             var oferta = ofertasList[i];
-            console.log(ofertasList);
             
 
             var card = document.createElement('div');
@@ -157,7 +151,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
 
             var primerRegistro = true;
             var codigo_inmueble = oferta.titulo_oferta;
-            var images = <?php echo json_encode($this->datos['ofertaslistarimagenes']); ?>; // Replace with the actual function to fetch images
+            var images = <?php echo json_encode($this->datos['ofertaslistarimagenes']); ?>;
 
             if (images.length > 0) {
                 for (var j = 0; j < images.length; j++) {

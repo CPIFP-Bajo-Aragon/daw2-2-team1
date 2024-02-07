@@ -24,6 +24,11 @@
             return $this->db->registros(); 
         }
 
+        public function verServicios() {
+            $this->db->query("SELECT * FROM `servicio` ");
+            return $this->db->registros(); 
+        }
+
        
 
        
@@ -119,6 +124,35 @@
             $this->db->execute();
         }
         
+        public function anadirServicioAdmin($servicio) {
+            $nombre_servicio = $servicio['nombre_servicio'];
+            $descripcion_servicio = $servicio['descripcion_servicio'];
+            $id_tipo_servicio = $servicio['id_tipo_servicio'];
+            $id_municipio = $servicio['id_municipio'];
+            $longitud_servicio = $servicio['longitud_servicio'];
+            $latitud_servicio = $servicio['latitud_servicio'];
+            $telefono_servicio = $servicio['telefono_servicio'];
+            $direccion_servicio = $servicio['direccion_servicio'];
 
+
+        
+            $this->db->query("INSERT INTO `servicio`(`nombre_servicio`, `descripcion_servicio`, `id_tipo_servicio`, `id_municipio`, `longitud_servicio`,  `latitud_servicio`, `telefono_servicio`, `direccion_servicio`) 
+                            VALUES (:nombre_servicio, :descripcion_servicio, :id_tipo_servicio, :id_municipio, :longitud_servicio, :latitud_servicio, :telefono_servicio, :direccion_servicio)");
+        
+            $this->db->bind(':nombre_servicio', $nombre_servicio);
+            $this->db->bind(':descripcion_servicio', $descripcion_servicio);
+            $this->db->bind(':id_tipo_servicio', $id_tipo_servicio);
+            $this->db->bind(':id_municipio', $id_municipio);
+            $this->db->bind(':longitud_servicio', $longitud_servicio);
+            $this->db->bind(':latitud_servicio', $latitud_servicio);
+            $this->db->bind(':telefono_servicio', $telefono_servicio);
+            $this->db->bind(':direccion_servicio', $direccion_servicio);
+
+
+        
+            $this->db->execute();
+        }
+
+        
 
     }

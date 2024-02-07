@@ -1,3 +1,4 @@
+</div>
 
 <footer class="bg-dark text-white text-center col-12 p-2 align-self-end">
                 <div class="py-3 d-flex justify-content-center gap-3">
@@ -13,7 +14,6 @@
                 </div>
             </footer>
         </div>
-    </div>
     <script>    
         var ubicaciones = <?php echo json_encode($ubicaciones_php); ?>;
     </script>

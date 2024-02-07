@@ -2,7 +2,7 @@
     cabecera($this->datos);
 ?>
 
-<div class="container mt-4 row">
+<div class="container mt-4 row min-vh-100 min-vw-100">
     <div class="mb-3 col-1">
         <label for="municipio" class="form-label">Localidad</label>
         <select class="form-select" id="municipio" >
@@ -11,7 +11,7 @@
             <?php }?>
         </select>
     </div>
-    <div class="mb-3 col-11 d-flex flex-wrap" id="ContenedorServicios">
+    <div class="mb-3 col-11" id="ContenedorServicios">
         
     </div>
 </div>
@@ -22,7 +22,7 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
 ?>
 <script>
     var infoservicios = <?php echo json_encode($this->datos['municipioslistar']); ?>;
-    console.log(infoservicios);
+    
     var idMunicipio = 2<?php //echo json_encode($_SESSION['usuarioSesion']['id_municipio']); ?>;
     filtrar(idMunicipio);
 
@@ -45,40 +45,48 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
 
         // Añadir elementos filtrados al contenedor
         for (var i = 0; i < serviciosFiltrados.length; i++) {
+                var contenedorpueblo_mapa = document.createElement('div');
+                contenedorpueblo_mapa.setAttribute("id", "pueblo_mapa");
+                contenedorpueblo_mapa.setAttribute("class", "row col-12 h-50");
             
                 var contenedorpueblo = document.createElement('div');
-                contenedorpueblo.classList.add("col-6");
+                contenedorpueblo.classList.add("col-6", "h-25", "w-25");
                 contenedorpueblo.setAttribute("id", "pueblo" + i);
 
                 var contenedormapa = document.createElement('div');
                 contenedormapa.setAttribute("id", "mi_mapa");
-                contenedormapa.setAttribute("class", "col-6 w-50 h-50");
+                contenedormapa.setAttribute("class", "float-right h-100 w-50 ");
 
                 var NombrePueblo = document.createElement('h1');
                 NombrePueblo.textContent = serviciosFiltrados[i].nombre_municipio;
 
                 contenedorpueblo.appendChild(NombrePueblo);
-                contenedorSer.appendChild(contenedorpueblo);
-                contenedorSer.appendChild(contenedormapa);
-                let map = L.map('mi_mapa').setView([serviciosFiltrados[i].lat, serviciosFiltrados[i].log], 16)
+                contenedorpueblo_mapa.appendChild(contenedorpueblo);
+                contenedorpueblo_mapa.appendChild(contenedormapa);
+                contenedorSer.appendChild(contenedorpueblo_mapa);
+                let map = L.map('mi_mapa').setView([serviciosFiltrados[i].latitud_municipio, serviciosFiltrados[i].longitud_municipio], 16)
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
             
+                var contenedorservicios = document.createElement('div');
+                contenedorservicios.setAttribute("id", "Todosservicios");
+                contenedorservicios.setAttribute("class", "row col-12 m-5 h-50");
                 for (var j = 0; j < serviciosFiltrados[i].servicios.length; j++) {
 
                     var servi = serviciosFiltrados[i].servicios[j];
 
                     var contenedorservicio = document.createElement('div');
                     contenedorservicio.setAttribute("id", "servicio" + i+j);
-                    contenedorservicio.setAttribute("class", "col-5 border m-1");
+                    contenedorservicio.setAttribute("class", "col-5 border m-1 p-5");
 
                     var nombreservicio = document.createElement('h2');
                     nombreservicio.setAttribute("class", "text-center");
                     nombreservicio.textContent = servi.nombre_tipo_servicio;
 
                     contenedorservicio.appendChild(nombreservicio);
+                        var botonempresas = document.createElement('button');
 
                         var contenedorempresas = document.createElement('div');
                         contenedorempresas.setAttribute("class", "d-flex flex-wrap");
@@ -91,19 +99,19 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
                         var contenedorempresa = document.createElement('div');
                         contenedorempresa.setAttribute("id", "servicio" + i+j);
                         contenedorempresa.setAttribute("class", "col-5 border m-4");
-
+                        console.log(empresa);
                         var nombreempresa = document.createElement('h3');
                         nombreempresa.setAttribute("class", "text-center");
-                        nombreempresa.textContent = empresa.Nombre_servicio;
+                        nombreempresa.textContent = empresa.nombre_servicio;
 
                         var descripcionempresa = document.createElement('p');
                         descripcionempresa.textContent = "Descripción: "+empresa.descripcion_servicio;
 
                         var telefonoempresa = document.createElement('p');
-                        telefonoempresa.textContent = "Telefono: "+empresa.descripcion;
+                        telefonoempresa.textContent = "Telefono: "+ empresa.telefono_servicio;
 
                         var direccionempresa = document.createElement('p');
-                        direccionempresa.textContent = "Dirección: "+empresa.direccion;
+                        direccionempresa.textContent = "Dirección: "+empresa.direccion_servicio;
 
                         contenedorempresa.appendChild(nombreempresa);
                         contenedorempresa.appendChild(telefonoempresa);
@@ -118,9 +126,11 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
                         map.on('click', onMapClick);
 
                     }
-                    contenedorservicio.appendChild(contenedorempresas);
+                    botonempresas.appendChild(contenedorempresas);
+                    contenedorservicio.appendChild(botonempresas);
+                    contenedorservicios.appendChild(contenedorservicio);
+                    contenedorSer.appendChild(contenedorservicios);
 
-                    contenedorSer.appendChild(contenedorservicio);
 
                 }
 
