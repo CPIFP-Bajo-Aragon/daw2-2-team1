@@ -7,12 +7,12 @@
             $this->db = new Base;
         }
 
-        public function listar($nif){
+        public function listar($id_usuario){
             $this->db->query("SELECT * FROM `entidad`
-                                    INNER JOIN `pertenecer`
-                                         ON `entidad`.`id_entidad` = `pertenecer`.`id_entidad` 
-                                    WHERE pertenecer.NIF=:nif");
-            $this->db->bind(':nif', $nif);
+                                    INNER JOIN `usuario_entidad`
+                                         ON `entidad`.`id_entidad` = `usuario_entidad`.`id_entidad` 
+                                    WHERE usuario_entidad.id_usuario=:id_usuario");
+            $this->db->bind(':id_usuario', $id_usuario);
             return  $this->db->registros();
         }
 

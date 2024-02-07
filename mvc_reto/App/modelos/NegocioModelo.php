@@ -7,48 +7,35 @@
             $this->db = new Base;
         }
 
-        public function listarnegociospropio($nif){
-            $this->db->query("SELECT
-                                    *
-                                FROM
-                                    USUARIO U
-                                JOIN
-                                    PERTENECER P ON U.NIF = P.NIF
-                                JOIN
-                                    OFERTA O ON P.NIF = O.NIF AND P.id_entidad = O.id_entidad
-                                JOIN
-                                    INMUEBLE I ON O.id_oferta = I.id_oferta
-                                JOIN
-                                    LOCAL L ON I.codigo_inmueble = L.codigo_inmueble
-                                JOIN
-                                    NEGOCIO N ON L.codigo_inmueble = N.codigo_inmueble
-                                WHERE
-                                    U.NIF = :nif;
-                                ;
-                            ");
-            $this->db->bind(':nif', $nif);
+        public function listarnegociospropio($id_usuario){
+            $this->db->query("SELECT *
+                                    FROM
+                                        usuario U
+                                    JOIN
+                                        usuario_entidad P ON U.id_usuario = P.id_usuario
+                                    JOIN
+                                        oferta O ON P.id_entidad = O.id_entidad
+                                    JOIN
+                                        negocio N ON O.id_negocio = N.id_negocio
+                                        where     U.id_usuario = :id_usuario;
+                            ;");
+            $this->db->bind(':id_usuario', $id_usuario);
             return $this->db->registros();
         }
 
-        public function listarnegocios($nif){
-            $this->db->query("SELECT
-                                   *
-                                FROM
-                                    USUARIO U
-                                JOIN
-                                    PERTENECER P ON U.NIF = P.NIF
-                                JOIN
-                                    OFERTA O ON P.NIF = O.NIF AND P.id_entidad = O.id_entidad
-                                JOIN
-                                    INMUEBLE I ON O.id_oferta = I.id_oferta
-                                JOIN
-                                    LOCAL L ON I.codigo_inmueble = L.codigo_inmueble
-                                JOIN
-                                    NEGOCIO N ON L.codigo_inmueble = N.codigo_inmueble
-                                WHERE
-                                    U.NIF <> :nif;
-                                ;");
-            $this->db->bind(':nif', $nif);
+        public function listarnegocios($id_usuario){
+            $this->db->query("SELECT *
+                                    FROM
+                                        usuario U
+                                    JOIN
+                                        usuario_entidad P ON U.id_usuario = P.id_usuario
+                                    JOIN
+                                        oferta O ON P.id_entidad = O.id_entidad
+                                    JOIN
+                                        negocio N ON O.id_negocio = N.id_negocio
+                                        where     U.id_usuario != :id_usuario;
+                                    ;");
+            $this->db->bind(':id_usuario', $id_usuario);
             return $this->db->registros();
         }
 
@@ -71,8 +58,8 @@
         }
 
         public function crearComentarioNegocio($nuevoComentario){
-            $this->db->query( "INSERT INTO `VAL_NEGOCIO`(`puntuacion`, `comentario`, `fecha_valoracion`, `NIF`, `codigo_negocio`) 
-                                        VALUES (:pun, :com, :fech, :nif, :cod)");
+            $this->db->query( "INSERT INTO `valorar_inmueble`(`id_inmueble`, `fecha_valoracion_inm`, `puntuacion_inm`, `descripcion_inm`, `id_usuario`) 
+                                        VALUES (:cod, :fech, :pun, :com, :nif)");
 
             $this->db->bind(':pun', $nuevoComentario['puntuacion']);
             $this->db->bind(':com', $nuevoComentario['comentario']);

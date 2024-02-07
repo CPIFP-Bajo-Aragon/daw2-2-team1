@@ -156,7 +156,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             carouselInner.className = 'carousel-inner';
 
             var primerRegistro = true;
-            var codigo_inmueble = oferta.codigo_inmueble;
+            var codigo_inmueble = oferta.titulo_oferta;
             var images = <?php echo json_encode($this->datos['ofertaslistarimagenes']); ?>; // Replace with the actual function to fetch images
 
             if (images.length > 0) {
@@ -215,23 +215,23 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
 
             var cardTitle = document.createElement('h5');
             cardTitle.className = 'card-title';
-            cardTitle.textContent = 'ID de Oferta: ' + oferta.precio;
+            cardTitle.textContent = 'ID de Oferta: ' + oferta.id_oferta;
 
             var cardText1 = document.createElement('p');
             cardText1.className = 'card-text';
-            cardText1.textContent = 'Tipo de Oferta: ' + oferta.tipo_oferta;
+            cardText1.textContent = 'fecha inicio: ' + oferta.fecha_inicio_oferta;
 
             var cardText2 = document.createElement('p');
             cardText2.className = 'card-text';
-            cardText2.textContent = 'Fecha de Inicio: ' + oferta.fecha_inicio;
+            cardText2.textContent = 'Fecha de Inicio: ' + oferta.fecha_inicio_oferta;
 
             var cardText3 = document.createElement('p');
             cardText3.className = 'card-text';
-            cardText3.textContent = 'Fecha de Fin: ' + oferta.fecha_fin;
+            cardText3.textContent = 'Fecha de Fin: ' + oferta.fecha_fin_oferta;
 
             var cardText4 = document.createElement('p');
             cardText4.className = 'card-text';
-            cardText4.textContent = 'Fecha de Publicación: ' + oferta.fecha_publicacion;
+            cardText4.textContent = 'Fecha de Publicación: ' + oferta.fecha_publicacion_oferta;
 
             cardBody.appendChild(cardTitle);
             cardBody.appendChild(cardText1);
@@ -258,7 +258,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             insertButton.textContent = 'Solicitar';
             InsertLink.appendChild(insertButton);
 
-
+            console.log(oferta);
             var chatLink = document.createElement('a');
             chatLink.href = '<?php echo RUTA_URL ?>/UserControlador/chat/' + oferta.NIF;
             var chatButton = document.createElement('button');

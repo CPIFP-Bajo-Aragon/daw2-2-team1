@@ -8,7 +8,10 @@
         }
 
         public function listarinmueble($id){
-            $this->db->query( "SELECT * FROM `inmueble`WHERE `id_oferta` = :id");
+            $this->db->query( "SELECT * FROM `inmueble` 
+                                    INNER join oferta_inmueble 
+                                                on oferta_inmueble.d_inmueble=inmueble.id_inmueble 
+                                WHERE oferta_inmueble.id_oferta =  :id");
             $this->db->bind(':id', $id);
             return $this->db->registros();
         }

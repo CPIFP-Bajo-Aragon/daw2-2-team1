@@ -102,7 +102,7 @@
                                                     foreach ($datos['noti'] as $notificacion) {
                                             ?>
                                                          
-                                                        <a class="dropdown-item" onclick="openMainModalavisos('<?php echo($notificacion->tipo) ?>', '<?php echo($notificacion->contenido) ?>')" href="#"><?php echo($notificacion->tipo) ?></a>
+                                                        <a class="dropdown-item" onclick="openMainModalavisos('<?php echo($notificacion->id_notificacion) ?>', '<?php echo($notificacion->contenido_notificacion) ?>')" href="#"><?php echo($notificacion->contenido_notificacion) ?></a>
                                             <?php
                                                     }
                                                 } else {
@@ -157,7 +157,7 @@
                                    
                                     <div class="dropdown">
                                         <a href="#" class="me-5 dropdown-toggle" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img id="previewFoto" src="/images/perfil_<?php echo $_SESSION['usuarioSesion']['NIF'] ?>/Perfil.jpg" alt="User Photo" class="img-fluid rounded-circle mt-2" style="width: 50px; height: 50px; object-fit: cover;">                                       
+                                            <img id="previewFoto" src="/images/perfil_<?php echo $_SESSION['usuarioSesion']['id_usuario'] ?>/Perfil.jpg" alt="User Photo" class="img-fluid rounded-circle mt-2" style="width: 50px; height: 50px; object-fit: cover;">                                       
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="userDropdown">
