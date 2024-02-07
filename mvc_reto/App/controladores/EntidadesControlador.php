@@ -9,7 +9,7 @@
             $this->EntidadesModelo = $this->modelo('EntidadesModelo');
             
             $this->usuario = $this->modelo('UserModelo');
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
             
             $this->admin = $this->modelo('AdminModelo');
             $this->datos['admin'] = $this->admin->ListarAdmins();
@@ -32,10 +32,12 @@
         }
 
         public function listarentidades(){
-            $nif=$_SESSION["usuarioSesion"]['NIF'];
-            $this->datos['ent']=$this->EntidadesModelo->listar($nif);
+            $id_usuario=$_SESSION["usuarioSesion"]['id_usuario'];
+            $this->datos['ent']=$this->EntidadesModelo->listar($id_usuario);
             $this->vista('entidad/verentidades', $this->datos);
         }
+
+        
 
         public function addentidades(){
           

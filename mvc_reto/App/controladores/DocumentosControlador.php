@@ -11,7 +11,7 @@
             $this->datos['admin'] = $this->admin->ListarAdmins();
 
             $this->usuario = $this->modelo('UserModelo');
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
             
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
@@ -38,7 +38,7 @@
 
                     if (isset($_FILES['archivo'])) {
                         $archivo = $_FILES['archivo'];
-                        $id= $_SESSION['usuarioSesion']['NIF'];
+                        $id= $_SESSION['usuarioSesion']['id_usuario'];
                         $nom= $_SESSION['usuarioSesion']['nombre'];
 
 
@@ -83,7 +83,7 @@
 
                     if (isset($_FILES['archivo'])) {
                         $archivo = $_FILES['archivo'];
-                        $id= $_SESSION['usuarioSesion']['NIF'];
+                        $id= $_SESSION['usuarioSesion']['id_usuario'];
 
 
                         $nombre_temporal = $archivo['tmp_name'];
