@@ -23,7 +23,7 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
 <script>
     var infoservicios = <?php echo json_encode($this->datos['municipioslistar']); ?>;
     console.log(infoservicios);
-    var idMunicipio = <?php echo json_encode($_SESSION['usuarioSesion']['id_municipio']); ?>;
+    var idMunicipio = 2<?php //echo json_encode($_SESSION['usuarioSesion']['id_municipio']); ?>;
     filtrar(idMunicipio);
 
     // Escuchar cambios en el select y filtrar automáticamente
@@ -60,7 +60,6 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
                 contenedorpueblo.appendChild(NombrePueblo);
                 contenedorSer.appendChild(contenedorpueblo);
                 contenedorSer.appendChild(contenedormapa);
-                
                 let map = L.map('mi_mapa').setView([serviciosFiltrados[i].lat, serviciosFiltrados[i].log], 16)
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -77,7 +76,7 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
 
                     var nombreservicio = document.createElement('h2');
                     nombreservicio.setAttribute("class", "text-center");
-                    nombreservicio.textContent = servi.nombre_servicio;
+                    nombreservicio.textContent = servi.nombre_tipo_servicio;
 
                     contenedorservicio.appendChild(nombreservicio);
 
@@ -95,13 +94,13 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
 
                         var nombreempresa = document.createElement('h3');
                         nombreempresa.setAttribute("class", "text-center");
-                        nombreempresa.textContent = empresa.Nombre_da_servicio;
+                        nombreempresa.textContent = empresa.Nombre_servicio;
 
                         var descripcionempresa = document.createElement('p');
-                        descripcionempresa.textContent = "Descripción: "+empresa.descripcion;
+                        descripcionempresa.textContent = "Descripción: "+empresa.descripcion_servicio;
 
                         var telefonoempresa = document.createElement('p');
-                        telefonoempresa.textContent = "Telefono: "+empresa.telefono;
+                        telefonoempresa.textContent = "Telefono: "+empresa.descripcion;
 
                         var direccionempresa = document.createElement('p');
                         direccionempresa.textContent = "Dirección: "+empresa.direccion;
@@ -113,7 +112,7 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
 
                         contenedorempresas.appendChild(contenedorempresa);
                         
-                        L.marker([empresa.latitud, empresa.longitud]).addTo(map).bindPopup("Zócalo de la Ciudad de México");
+                        L.marker([empresa.latitud_servicio, empresa.longitud_servicio]).addTo(map).bindPopup("Zócalo de la Ciudad de México");
 
 
                         map.on('click', onMapClick);

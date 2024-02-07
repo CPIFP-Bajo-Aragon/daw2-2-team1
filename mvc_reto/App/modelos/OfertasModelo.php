@@ -28,12 +28,12 @@
 
         public function listarofertas($id_usuario){
             $this->db->query( "SELECT oferta.*
-                                FROM `oferta`
-                                WHERE oferta.id_entidad IN (
-                                    SELECT entidad.id_entidad
-                                    FROM entidad
-                                    INNER JOIN usuario_entidad ON entidad.id_entidad = usuario_entidad.id_entidad
-                                    WHERE usuario_entidad.id_usuario != :id_usuario);");
+                                    FROM `oferta`
+                                    WHERE oferta.id_entidad not IN (
+                                        SELECT entidad.id_entidad
+                                        FROM entidad
+                                        INNER JOIN usuario_entidad ON entidad.id_entidad = usuario_entidad.id_entidad
+                                        WHERE usuario_entidad.id_usuario = :id_usuario);");
             $this->db->bind(':id_usuario', $id_usuario);
             return $this->db->registros();
         }

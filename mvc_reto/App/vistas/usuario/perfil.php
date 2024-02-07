@@ -16,27 +16,27 @@
 
                         <label class="custom-file-label" for="inputFoto">Elegir archivo...</label>
                     </div>
-                    <img id="previewFoto" src="/images/perfil_<?php echo $_SESSION['usuarioSesion']['NIF'] ?>/Perfil.jpg" alt="User Photo" class="img-fluid rounded-circle mt-2" style="width: 150px; height: 150px; object-fit: cover;">
+                    <img id="previewFoto" src="/images/perfil_<?php echo $_SESSION['usuarioSesion']['id_usuario'] ?>/Perfil.jpg" alt="User Photo" class="img-fluid rounded-circle mt-2" style="width: 150px; height: 150px; object-fit: cover;">
                 </div>
 
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $_SESSION['usuarioSesion']['nombre']?>">
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $_SESSION['usuarioSesion']['nombre_usuario']?>">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $_SESSION['usuarioSesion']['apellido']?>">
+                        <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $_SESSION['usuarioSesion']['apellidos_usuario']?>">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['usuarioSesion']['correo']?>">
+                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['usuarioSesion']['correo_usuario']?>">
                     </div>
                 </div>
-                <input type="hidden" name="nif" value="<?php echo $_SESSION['usuarioSesion']['NIF']?>">
+                <input type="hidden" name="nif" value="<?php echo $_SESSION['usuarioSesion']['id_usuario']?>">
                 <button type="submit" name="Actualizarformulario" class="btn btn-primary">Guardar</button>
             </form>
         </div>

@@ -10,12 +10,12 @@
                 <h5 class="card-title"><?php echo $entidad->nombre_entidad; ?></h5>
             </div>
             <div class="card-body">
-                <p class="card-text"><strong>Sector:</strong> <?php echo $entidad->sector; ?></p>
-                <p class="card-text"><strong>Dirección:</strong> <?php echo $entidad->dirección; ?></p>
-                <p class="card-text"><strong>Número Telefónico:</strong> <?php echo $entidad->número_telefónico; ?></p>
-                <p class="card-text"><strong>Correo:</strong> <?php echo $entidad->correo; ?></p>
-                <p class="card-text"><strong>Página Web:</strong> <?php echo $entidad->página_web; ?></p>
-                <p class="card-text"><strong>NIF:</strong> <?php echo $entidad->NIF; ?></p>
+                <p class="card-text"><strong>Sector:</strong> <?php echo $entidad->sector_entidad; ?></p>
+                <p class="card-text"><strong>Dirección:</strong> <?php echo $entidad->direccion_entidad; ?></p>
+                <p class="card-text"><strong>Número Telefónico:</strong> <?php echo $entidad->numero_telefono_entidad; ?></p>
+                <p class="card-text"><strong>Correo:</strong> <?php echo $entidad->correo_entidad; ?></p>
+                <p class="card-text"><strong>Página Web:</strong> <?php echo $entidad->pagina_web_entidad; ?></p>
+                <p class="card-text"><strong>NIF:</strong> <?php echo $entidad->cif_entidad; ?></p>
             </div>
         </div>
     <?php
