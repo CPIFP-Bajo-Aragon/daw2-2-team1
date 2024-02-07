@@ -9,7 +9,7 @@
             $this->inmueble = $this->modelo('InmuebleModelo');
             
             $this->usuario = $this->modelo('UserModelo');
-            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
+            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
 
@@ -27,14 +27,29 @@
         public function index(){
         }
 
-        public function addinmueble(){
-            $this->vista('inmuebles/add');
+        // public function addinmueble(){
+        //     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publicarOfertaInmueble'])){
+        //         $inmueble['metrosCuadrados'] = $_POST["metrosCuadrados"];
+        //         $inmueble['descripcion'] = $_POST["descripcion"];
+        //         $inmueble['distribucion'] = $_POST["distribucion"];
+        //         $inmueble['precio'] = $_POST["precio"];
+        //         $inmueble['estado'] = $_POST["estado"];
+        //         $inmueble['ubicacion'] = $_POST["calle"].','.$_POST["numero"].'.'. $_POST["puerta"];
+        //         $inmueble['localidad'] = $_POST["localidad"];
+        //         $inmueble['caracteristicas'] = implode(',', $_POST['caracteristicas']);
+        //         $inmueble['equipamiento'] = $_POST['equipamiento'];
+        //         $inmueble['municipio'] = $_POST['municipio'];
+        //         $inmueble['estado'] = $_POST['estado'];
 
-        }
+        //         $this->inmueble->insertarInmueble($inmueble);       
+        //     }else{
+        //         $this->vista('ofertas/insertarofertas', $this->datos);
+        //     }
+        // }
 
         public function comentar($id_oferta=0){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $nuevoComentario['id_usuario']=$_POST['id_usuario'];
+                $nuevoComentario['nif']=$_POST['NIF'];
                 $nuevoComentario['codigo_inmueble']=$id_oferta;
                 $nuevoComentario['puntuacion']=$_POST['puntuacion'];
                 $nuevoComentario['comentario']=$_POST['comentario'];
