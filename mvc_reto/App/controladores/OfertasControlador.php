@@ -74,7 +74,10 @@
         public function listar(){
             $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['ofertaslistar'] = $this->oferta->listarofertas($id_usuario);
-            $this->datos['ofertaslistarimagenes'] = $this->oferta->listarofertasimagen();
+                foreach ($this->datos['ofertaslistar'] as $oferta) {
+                    $imagen = $this->oferta->listarofertasimagen($oferta->d_inmueble);                    
+                    $oferta->imagenes = $imagen;
+                }
             $this->vista('ofertas/ofertas', $this->datos);
         }
 
@@ -137,8 +140,7 @@
         public function VerOfertaInscrito() {
             $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['ofertaslistar'] = $this->oferta->listarofertasInscritas($id_usuario);
-            
-            $this->datos['ofertaslistarimagenes'] = $this->oferta->listarofertasimagen();
+
             $this->vista('ofertas/ofertasinscrito', $this->datos);
         }
         

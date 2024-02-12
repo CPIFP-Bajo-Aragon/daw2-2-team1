@@ -9,7 +9,7 @@
             $this->inmueble = $this->modelo('InmuebleModelo');
             
             $this->usuario = $this->modelo('UserModelo');
-            $datos['nif']=$_SESSION['usuarioSesion']['NIF'];
+            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
 
@@ -47,10 +47,10 @@
         //     }
         // }
 
-        public function comentar($id_oferta=0){
+        public function comentar($id_inmueble=0){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nuevoComentario['nif']=$_POST['NIF'];
-                $nuevoComentario['codigo_inmueble']=$id_oferta;
+                $nuevoComentario['id_inmueble']=$id_inmueble;
                 $nuevoComentario['puntuacion']=$_POST['puntuacion'];
                 $nuevoComentario['comentario']=$_POST['comentario'];
                 $nuevoComentario['fecha']= date('Y-m-d');
@@ -58,7 +58,7 @@
             $this->datos['inmueble'] = $this->inmueble->crearComentarioInmueble($nuevoComentario);  
                 redirecionar("/ofertasControlador/listar");
         }else{
-            $this->datos['inmueble']['codigo_inmueble'] = $id_oferta;
+            $this->datos['inmueble']['id_inmueble'] = $id_inmueble;
             $this->vista('inmuebles/valoracion', $this->datos);
         }  
 

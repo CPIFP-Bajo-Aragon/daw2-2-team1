@@ -99,14 +99,17 @@
             $this->vista('usuario/listar', $this->datos); 
         }
 
-        public function chat($receptor=0){
+        public function chat($receptor){
             $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
-            $datos['receptor']=$receptor;
+            $datos['entidad_receptor']=$receptor;
+            $datos['receptor']= $this->usuario->ObtenerAdminEntidad($datos);
+            //print_r($datos);
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $datos['mensaje']=$_POST['mensaje'];
                 //print_r($datos);
                 $this->usuario->enviarmensaje($datos);   
             }
+
             $this->datos['mensajes'] = $this->usuario->listarmensaje($datos);   
             //print_r($this->mensajes);
             $this->vista('usuario/chat', $this->datos); 

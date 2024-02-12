@@ -17,7 +17,7 @@
             $this->datos['chats'] = $this->usuario->listaruserchat($datos);
             
             if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])) {
-                redirecionar(RUTA_URL.'/');
+                redirecionar('/');
             }
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (isset($_POST["marcarnotificacionesleido"])) {
