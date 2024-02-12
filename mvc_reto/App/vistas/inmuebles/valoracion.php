@@ -16,11 +16,11 @@
         </div>
 
         <div class="mb-3">
-            <input type="hidden" class="form-control" id="NIF" name="NIF" value="<?php echo ($_SESSION['usuarioSesion']['NIF']) ?>" required>
+            <input type="hidden" class="form-control" id="NIF" name="NIF" value="<?php echo ($_SESSION['usuarioSesion']['id_usuario']) ?>" required>
         </div>
 
         <div class="mb-3">
-            <input type="hidden" class="form-control" id="codigo_inmueble" name="codigo_inmueble" value=" <?php  echo $this->datos['inmueble']['codigo_inmueble'];?>" >
+            <input type="hidden" class="form-control" id="codigo_inmueble" name="codigo_inmueble" value=" <?php  echo $this->datos['inmueble']['id_inmueble'];?>" >
         </div>
 
         <button type="submit" class="btn btn-primary">Enviar Valoración</button>

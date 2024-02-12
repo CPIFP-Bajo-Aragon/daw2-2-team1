@@ -2,6 +2,7 @@
     cabecera($this->datos);
 ?>
 
+<div class="container">
 
 <h1>VER INMUEBLES</h1>
 
@@ -50,6 +51,9 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+</div>
+
 
 <?php
 require_once RUTA_APP . '/vistas/inc/footer.php';

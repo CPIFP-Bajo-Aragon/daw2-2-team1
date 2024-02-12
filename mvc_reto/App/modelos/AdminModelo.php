@@ -66,6 +66,32 @@
         }
 
         public function anadirNegocioAdmin($negocio) {
+
+             // Insertar en la tabla 'oferta'
+            $titulo_oferta = $negocio['titulo_oferta'];
+            $fecha_inicio_oferta = $negocio['fecha_inicio_oferta'];
+            $fecha_fin_oferta = $negocio['fecha_fin_oferta'];
+            $condiciones_oferta = $negocio['condiciones_oferta'];
+            $descripcion_oferta = $negocio['descripcion_oferta'];
+            $fecha_publicacion_oferta = $negocio['fecha_publicacion_oferta'];
+            $activo_oferta = $negocio['activo_oferta'];
+
+            
+             $this->db->query("INSERT INTO `oferta`(`titulo_oferta`, `fecha_inicio_oferta`, `fecha_fin_oferta`, `condiciones_oferta`, `descripcion_oferta`, `fecha_publicacion_oferta`, `activo_oferta`, `id_entidad`, `id_negocio`) 
+             VALUES (:titulo_oferta, :fecha_inicio_oferta, :fecha_fin_oferta, :condiciones_oferta, :descripcion_oferta, :fecha_publicacion_oferta, :activo_oferta, :id_entidad, :id_negocio)");
+ 
+             $this->db->bind(':titulo_oferta', $titulo_oferta);
+             $this->db->bind(':fecha_inicio_oferta', $fecha_inicio_oferta);
+             $this->db->bind(':fecha_fin_oferta', $fecha_fin_oferta);
+             $this->db->bind(':condiciones_oferta', $condiciones_oferta);
+             $this->db->bind(':descripcion_oferta', $descripcion_oferta);
+             $this->db->bind(':fecha_publicacion_oferta', $fecha_publicacion_oferta);
+             $this->db->bind(':activo_oferta', $activo_oferta);
+             $this->db->bind(':id_entidad', $negocio['id_entidad']);
+ 
+             $this->db->execute();
+
+             //Insertar en la tabla 'negcio'
             $id_negocio = $negocio['id_negocio'];
             $titulo_negocio = $negocio['titulo_negocio'];
             $motivo_traspaso_negocio = $negocio['motivo_traspaso_negocio'];
@@ -87,6 +113,53 @@
             $this->db->bind(':capital_minimo_negocio', $capital_minimo_negocio);
 
         
+            $this->db->execute();
+
+           
+
+            // Insertar en la tabla 'inmueble'
+            $metros_cuadrados_inmueble = $negocio['metros_cuadrados_inmueble'];
+            $descripcion_inmueble = $negocio['descripcion_inmueble'];
+            $distribucion_inmueble = $negocio['distribucion_inmueble'];
+            $precio_inmueble = $negocio['precio_inmueble'];
+            $direccion_inmueble = $negocio['direccion_inmueble'];
+            $caracteristicas_inmueble = $negocio['caracteristicas_inmueble'];
+            $equipamiento_inmueble = $negocio['equipamiento_inmueble'];
+            $estado_inmueble = $negocio['estado_inmueble'];
+            $latitud_inmueble = $negocio['latitud_inmueble'];
+            $longitud_inmueble = $negocio['longitud_inmueble'];
+            
+
+            $this->db->query("INSERT INTO `inmueble`( `metros_cuadrados_inmueble`, `descripcion_inmueble`, `distribucion_inmueble`, `precio_inmueble`, `direccion_inmueble`, `caracteristicas_inmueble`, `equipamiento_inmueble`, `estado_inmueble`, `id_municipio`, `latitud_inmueble`, `longitud_inmueble`) 
+                VALUES (:id_oferta, :metros_cuadrados_inmueble, :descripcion_inmueble, :distribucion_inmueble, :precio_inmueble, :direccion_inmueble, :caracteristicas_inmueble, :equipamiento_inmueble, :estado_inmueble, :id_municipio, :latitud_inmueble, :longitud_inmueble)");
+
+            $this->db->bind(':metros_cuadrados_inmueble', $metros_cuadrados_inmueble);
+            $this->db->bind(':descripcion_inmueble', $descripcion_inmueble);
+            $this->db->bind(':distribucion_inmueble', $distribucion_inmueble);
+            $this->db->bind(':precio_inmueble', $precio_inmueble);
+            $this->db->bind(':direccion_inmueble', $direccion_inmueble);
+            $this->db->bind(':caracteristicas_inmueble', $caracteristicas_inmueble);
+            $this->db->bind(':equipamiento_inmueble', $equipamiento_inmueble);
+            $this->db->bind(':estado_inmueble', $estado_inmueble);
+            // $this->db->bind(':id_municipio', $negocio['id_municipio']);
+            $this->db->bind(':latitud_inmueble', $latitud_inmueble);
+            $this->db->bind(':longitud_inmueble', $longitud_inmueble);
+
+            $this->db->execute();
+
+            // Insertar en la tabla 'local'
+            $nombre_local = $negocio['nombre_local'];
+            $capacidad_local = $negocio['capacidad_local'];
+            $recursos_local = $negocio['recursos_local'];
+
+            $this->db->query("INSERT INTO `local`(`nombre_local`, `capacidad_local`, `recursos_local`, `id_oferta`) 
+                VALUES (:nombre_local, :capacidad_local, :recursos_local, :id_oferta)");
+
+            $this->db->bind(':nombre_local', $negocio['nombre_local']);
+            $this->db->bind(':capacidad_local', $negocio['capacidad_local']);
+            $this->db->bind(':recursos_local', $negocio['recursos_local']);
+            $this->db->bind(':id_oferta', $id_oferta); 
+
             $this->db->execute();
         }
         

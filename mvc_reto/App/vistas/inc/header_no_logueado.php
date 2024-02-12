@@ -12,9 +12,9 @@
     <link rel="stylesheet" type="text/css" href="/css/estilos.css">
     <title>RevitaliZona</title>
 </head>
-<body class="overflow-x-hidden vh-100">
+<body style="overflow-x: hidden;">
     
-        <header> 
+       
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="font-size: 1rem">
             <div class="container-fluid">
               <!--logo-->
@@ -45,11 +45,11 @@
                       <a href="<?php echo RUTA_URL ?>inicio" class="nav-link" aria-current="page" >Inicio</a>                    
                     </li>
                     <li class="nav-item mx-2">
-                      <a class="nav-link active" href="#">Sobre Nosotros</a>
+                      <a class="nav-link active" href="#">Servicios</a>
                     </li>
 
                     <li class="nav-item mx-2">
-                      <a class="nav-link active" href="#">Servicios</a>
+                      <a class="nav-link active" href="#">Sobre Nosotros</a>
                     </li>
 
                     <li class="nav-item mx-2">
@@ -67,12 +67,12 @@
                           <a href="<?php echo RUTA_URL ?>/loginControlador/sesion" class="nav-link" aria-current="page" >Login</a> 
                       <?php endif ?>
                   </li>
-                    <a href="<?php echo RUTA_URL ?>/LoginControlador/registro" class="text-white text-decoration-none px-3 py-1  rounded-4"  style="background-color: #f94ca4;">Registro</a>
+                    <a href="<?php echo RUTA_URL ?>/LoginControlador/registro" class="text-white text-decoration-none px-3 py-1  rounded-4"  style="background-color:  #ff4f5a;">Registro</a>
                   </div>
                 </div> 
               </div>
             </div>
           </nav>
-        </header>
+        
     
                

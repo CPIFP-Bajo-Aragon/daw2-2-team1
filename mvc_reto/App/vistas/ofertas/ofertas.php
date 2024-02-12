@@ -1,8 +1,6 @@
 <?php
     cabecera($this->datos);
 
- 
-
 ?>
 
 
@@ -35,6 +33,7 @@
                 <label for="rangoPrecios" class="form-label">Rango de Precios</label>
                 <input type="range" class="form-range" id="rangoPrecios">
             </div>
+            <p id="precioSeleccionado"></p>
 
             <!-- Otros Filtros -->
             <div class="mb-3 form-check">
@@ -59,7 +58,7 @@
                     <option value="3">Precio: De menor a mayor</option>
                 </select>
             </div>
-
+<img src="<?php echo RUTA_URL ?>/images/inmueble_1/casa2.png" alt="">
             <!-- Otra Tarjeta de Anuncio -->
 
 
@@ -77,6 +76,34 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
 
 ?>
 <script>
+
+const rangoPrecios = document.getElementById('rangoPrecios');
+    const precioSeleccionado = document.getElementById('precioSeleccionado');
+
+    // Función para actualizar el precio seleccionado
+    function actualizarPrecio() {
+        const valor = rangoPrecios.value;
+        // Aquí asigna los precios según los valores del rango
+        let precio;
+        if (valor <= 25) {
+            precio = '$10';
+        } else if (valor <= 50) {
+            precio = '$20';
+        } else if (valor <= 75) {
+            precio = '$30';
+        } else {
+            precio = '$40';
+        }
+        precioSeleccionado.textContent = `Precio seleccionado: ${precio}`;
+    }
+
+    // Agrega un event listener para el cambio en el rango de precios
+    rangoPrecios.addEventListener('change', actualizarPrecio);
+
+    // Llama a la función inicialmente para mostrar el precio inicial
+    actualizarPrecio();
+
+
     document.addEventListener('DOMContentLoaded', function() {
         
             var ofertasList = <?php echo json_encode($this->datos['ofertaslistar']); ?>;
@@ -107,17 +134,17 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             switch (selectedValue) {
                 case '1': // Ordenar por fecha
                     sortedList.sort(function (a, b) {
-                        return new Date(a.fecha_inicio) - new Date(b.fecha_inicio);
+                        return new Date(a.fecha_inicio_oferta) - new Date(b.fecha_inicio_oferta);
                     });
                     break;
                 case '2': // Precio: De mayor a menor
                     sortedList.sort(function (a, b) {
-                        return b.precio - a.precio;
+                        return b.precio_inm - a.precio_inm;
                     });
                     break;
                 case '3': // Precio: De menor a mayor
                     sortedList.sort(function (a, b) {
-                        return a.precio - b.precio;
+                        return a.precio_inm - b.precio_inm;
                     });
                     break;
             }
@@ -150,30 +177,32 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             carouselInner.className = 'carousel-inner';
 
             var primerRegistro = true;
-            var codigo_inmueble = oferta.titulo_oferta;
-            var images = <?php echo json_encode($this->datos['ofertaslistarimagenes']); ?>;
-
+            var codigo_inmueble = oferta.d_inmueble;
+            var images = oferta.imagenes;
+            console.log(images);
             if (images.length > 0) {
                 for (var j = 0; j < images.length; j++) {
                     var img = images[j];
-
-                    if(img['codigo_inmueble']==codigo_inmueble){
+                    if(img['id_inmueble']==codigo_inmueble){
                         var carouselItem = document.createElement('div');
                         carouselItem.className = 'carousel-item ' + (primerRegistro ? 'active' : '');
                         
                         var imgElement = document.createElement('img');
-                        imgElement.src = '<?php echo RUTA_URL ?>' + img['ruta'] + codigo_inmueble + '/' + img['nombre'] + '.' + img['formato'];
+                        // Aquí construyes la ruta de la imagen utilizando solo JavaScript
+                        imgElement.src = '<?= RUTA_URL ?>' + img['ruta_imagen'] + codigo_inmueble + '/' + img['nombre_imagen'] + '.' + img['formato_imagen'];
                         imgElement.className = 'd-block w-100 img-fluid';
                         imgElement.alt = 'Imagen';
-
+                        var a = document.createElement('p');
+                        a.textContent="a";
                         carouselItem.appendChild(imgElement);
                         carouselInner.appendChild(carouselItem);
 
                         primerRegistro = false;
                     }
-                    
-                   
+
+
                 }
+
             } else {
                 var noImageMessage = document.createElement('p');
                 noImageMessage.textContent = 'No hay imágenes disponibles para esta oferta.';
@@ -237,7 +266,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             cardBodyButtons.className = 'card-body';
 
             var comentLink = document.createElement('a');
-            comentLink.href = '<?= RUTA_URL ?>/InmuebleControlador/comentar/' + oferta.codigo_inmueble; 
+            comentLink.href = '<?= RUTA_URL ?>/InmuebleControlador/comentar/' + oferta.d_inmueble; 
             var commentButton = document.createElement('button');
             commentButton.className = 'btn btn-primary';
             commentButton.id = 'comentar';
@@ -245,16 +274,15 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             comentLink.appendChild(commentButton);
 
             var InsertLink = document.createElement('a');
-            InsertLink.href = '<?php echo RUTA_URL ?>/OfertasControlador/InscripccionOferta/' + oferta.codigo_inmueble; 
+            InsertLink.href = '<?php echo RUTA_URL ?>/OfertasControlador/InscripccionOferta/' + oferta.id_oferta; 
             var insertButton = document.createElement('button');
             insertButton.className = 'btn btn-info';
             insertButton.id = 'Solicitar';
             insertButton.textContent = 'Solicitar';
             InsertLink.appendChild(insertButton);
 
-            console.log(oferta);
             var chatLink = document.createElement('a');
-            chatLink.href = '<?php echo RUTA_URL ?>/UserControlador/chat/' + oferta.NIF;
+            chatLink.href = '<?php echo RUTA_URL ?>/UserControlador/chat/' + oferta.id_entidad;
             var chatButton = document.createElement('button');
             chatButton.className = 'btn btn-success';
             chatButton.textContent = 'Contactar';

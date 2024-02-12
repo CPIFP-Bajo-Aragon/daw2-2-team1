@@ -13,8 +13,8 @@
             return $this->db->registros();
         }
         public function crearComentarioInmueble($nuevoComentario){
-            $this->db->query( "INSERT INTO `VAL_INMUEBLE`(`puntuacion`, `comentario`, `fecha_valoracion`, `NIF`, `codigo_inmueble`) 
-                                        VALUES (:pun, :com, :fech, :nif, :cod)");
+            $this->db->query( "INSERT INTO `valorar_inmueble`(`id_inmueble`, `fecha_valoracion_inm`, `puntuacion_inm`, `descripcion_inm`, `id_usuario`) 
+                                        VALUES (:cod, :fech, :pun, :com,  :nif)");
 
             $this->db->bind(':pun', $nuevoComentario['puntuacion']);
             $this->db->bind(':com', $nuevoComentario['comentario']);

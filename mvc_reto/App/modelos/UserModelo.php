@@ -48,29 +48,40 @@
         public function enviarmensaje($datos){
             $fecha = date('Y-m-d');
             $hora = date('H:i:s');
-            $nif = $datos['nif'];
-            $receptor = $datos['receptor'];
+            $nif = $datos['id_usuario'];
+            $receptor = $datos['receptor']->id_usuario;
             $mensaje = $datos['mensaje'];
-            $this->db->query("INSERT INTO `chatear`(`NIF`, `NIF_chatear`, `mensaje`, `fecha_envío`, `hora_envio`) VALUES (:nif , :receptor, :mensaje, :fecha, :hora);");
+            $this->db->query("INSERT INTO `chatear`(`id_usuario`, `id_usuario1`, `mensaje_chat`, `fecha_chat`) VALUES (:nif , :receptor, :mensaje, :fecha);");
             $this->db->bind(':nif', $nif);
             $this->db->bind(':receptor', $receptor);
             $this->db->bind(':mensaje', $mensaje);
-            $this->db->bind(':fecha', $fecha);
-            $this->db->bind(':hora', $hora);
+            $this->db->bind(':fecha', $fecha . ' ' . $hora);
+            
             $this->db->execute();
-            redirecionar(RUTA_URL.'/UserControlador/chat/'.$receptor);
+        }
+
+        public function ObtenerAdminEntidad($datos){
+            $receptor = $datos['entidad_receptor'];
+            $this->db->query("SELECT * FROM `usuario_entidad` WHERE `rol`='administrador' and id_entidad = :receptor; 
+                                                ");
+            $this->db->bind(':receptor', $receptor);
+            $receptor = $this->db->registro();
+            return $receptor;
         }
 
         public function listarmensaje($datos){
-            $nif = $datos['nif'];
-            $receptor = $datos['receptor'];
+            //print_r($datos);
+            $nif = $datos['id_usuario'];
+            $receptor = $datos['receptor']->id_usuario;
+            print_r($receptor);
+
             $this->db->query("SELECT * FROM `chatear` 
                                                 WHERE 
-                                                    (NIF = :nif AND NIF_chatear = :receptor )
+                                                    (id_usuario = :nif AND id_usuario1 = :receptor )
                                                     OR
-                                                    (NIF = :receptor AND NIF_chatear = :nif)
+                                                    (id_usuario = :receptor AND id_usuario1 = :nif)
                                                 ORDER BY
-                                                    fecha_envío ASC, hora_envio ASC;
+                                                    fecha_chat ASC;
                                                 ");
             $this->db->bind(':nif', $nif);
             $this->db->bind(':receptor', $receptor);
@@ -127,12 +138,12 @@
         }
 
         public function marcarvistastodasnotificaciones($datos){
-            $nif = $datos['nif'];
+            $id_usuario = $datos['id_usuario'];
             
 
-            $this->db->query("UPDATE `notificacion` SET `leido`=1 WHERE `NIF`=:nif;");
+            $this->db->query("UPDATE `notificacion` SET `leida_notificacion`=1 WHERE `id_usuario`=:id_usuario;");
 
-            $this->db->bind(':nif', $nif);
+            $this->db->bind(':id_usuario', $id_usuario);
 
             $this->db->execute();
             

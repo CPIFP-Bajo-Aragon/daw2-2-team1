@@ -8,7 +8,7 @@
         }
 
         public function listarpropiasofertas($id_usuario){
-            $this->db->query( "SELECT oferta.*
+            $this->db->query( "SELECT *
                                 FROM `oferta`
                                 WHERE oferta.id_entidad IN (
                                     SELECT entidad.id_entidad
@@ -27,8 +27,9 @@
         }
 
         public function listarofertas($id_usuario){
-            $this->db->query( "SELECT oferta.*
+            $this->db->query( "SELECT *
                                 FROM `oferta`
+                                    INNER JOIN oferta_inmueble on oferta_inmueble.id_oferta=oferta.id_oferta
                                 WHERE oferta.id_entidad not IN (
                                     SELECT entidad.id_entidad
                                     FROM entidad
@@ -38,8 +39,8 @@
             return $this->db->registros();
         }
 
-        public function listarofertasimagen(){
-            $this->db->query( "SELECT * FROM `imagen`");
+        public function listarofertasimagen($id_inmueble){
+            $this->db->query( "SELECT * FROM `imagen` where id_inmueble = $id_inmueble");
             return $this->db->registros();
         }
 
@@ -117,7 +118,7 @@
         }
         
         public function insertarInscripcion($id, $nif){
-            $this->db->query("INSERT INTO `inscribir`(`id_usuario`, `id_oferta`) VALUES (:nif, :id)");
+            $this->db->query("INSERT INTO `usuario_oferta`(`id_usuario`, `id_oferta`) VALUES (:nif, :id)");
             $this->db->bind(':id', $id);
             $this->db->bind(':nif', $nif);
             return $this->db->execute();
