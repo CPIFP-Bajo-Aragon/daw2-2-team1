@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-02-2024 a las 13:32:56
+-- Tiempo de generación: 12-02-2024 a las 13:24:33
 -- Versión del servidor: 8.0.36-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -52,7 +52,7 @@ INSERT INTO `aviso` (`id_aviso`, `titulo_aviso`, `contenido_aviso`, `fecha_creac
 CREATE TABLE `chatear` (
   `id_usuario` int NOT NULL,
   `id_usuario1` int NOT NULL,
-  `fecha_chat` datetime DEFAULT NULL,
+  `fecha_chat` datetime NOT NULL,
   `mensaje_chat` varchar(255) DEFAULT NULL,
   `estado_chat` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -62,7 +62,21 @@ CREATE TABLE `chatear` (
 --
 
 INSERT INTO `chatear` (`id_usuario`, `id_usuario1`, `fecha_chat`, `mensaje_chat`, `estado_chat`) VALUES
-(1, 2, '2024-02-06 10:30:00', 'Hola, ¿cómo estás?', 'Enviado');
+(1, 2, '2024-02-06 10:30:00', 'Hola, ¿cómo estás?', 'Enviado'),
+(1, 2, '2024-02-12 10:23:51', 'a', NULL),
+(1, 2, '2024-02-12 10:24:03', 'b', NULL),
+(1, 2, '2024-02-12 10:25:09', 'a', NULL),
+(1, 2, '2024-02-12 10:25:13', 'b', NULL),
+(1, 2, '2024-02-12 10:25:15', 'pitos', NULL),
+(1, 2, '2024-02-12 10:25:18', 'a', NULL),
+(1, 2, '2024-02-12 10:25:20', 'a', NULL),
+(1, 2, '2024-02-12 10:25:22', 'a', NULL),
+(1, 2, '2024-02-12 10:25:24', 'a', NULL),
+(1, 2, '2024-02-12 10:25:26', 'a', NULL),
+(1, 2, '2024-02-12 10:25:27', 'a', NULL),
+(1, 2, '2024-02-12 10:25:31', 'a', NULL),
+(1, 2, '2024-02-12 10:25:36', 'a', NULL),
+(1, 2, '2024-02-12 10:25:38', 'a', NULL);
 
 -- --------------------------------------------------------
 
@@ -139,6 +153,15 @@ CREATE TABLE `imagen` (
   `descripcion_imagen` varchar(45) DEFAULT NULL,
   `id_inmueble` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Volcado de datos para la tabla `imagen`
+--
+
+INSERT INTO `imagen` (`id_imagen`, `nombre_imagen`, `formato_imagen`, `ruta_imagen`, `descripcion_imagen`, `id_inmueble`) VALUES
+(2, 'casa2', 'jpg', '/images/inmueble_', 'a', 2),
+(3, 'fondo', 'jpg', '/images/inmueble_', 'a', 2),
+(4, 'dormir', 'jpg', '/images/inmueble_', 'a', 1);
 
 -- --------------------------------------------------------
 
@@ -294,7 +317,7 @@ CREATE TABLE `notificacion` (
 --
 
 INSERT INTO `notificacion` (`id_notificacion`, `leida_notificacion`, `contenido_notificacion`, `id_usuario`) VALUES
-(1, 0, 'a', 1);
+(1, 1, 'a', 1);
 
 -- --------------------------------------------------------
 
@@ -322,12 +345,12 @@ CREATE TABLE `oferta` (
 INSERT INTO `oferta` (`id_oferta`, `titulo_oferta`, `fecha_inicio_oferta`, `fecha_fin_oferta`, `condiciones_oferta`, `descripcion_oferta`, `fecha_publicacion_oferta`, `activo_oferta`, `id_entidad`, `id_negocio`) VALUES
 (1, 'local', '2024-02-01', '2024-02-02', 'a', 'a', '2024-02-01', 1, 3, 1),
 (5, 'A', '2024-02-01', '2024-02-02', '5', '5', '2016-02-04', 1, 1, 2),
-(6, NULL, NULL, NULL, 'sad', NULL, NULL, NULL, NULL, NULL),
-(7, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, NULL, NULL),
-(8, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, NULL, NULL),
-(9, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, NULL, NULL),
-(10, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, NULL, NULL),
-(11, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, NULL, NULL);
+(6, NULL, NULL, NULL, 'sad', NULL, NULL, NULL, 3, NULL),
+(7, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, 3, NULL),
+(8, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, 3, NULL),
+(9, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, 2, NULL),
+(10, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, 1, NULL),
+(11, NULL, NULL, NULL, 'ninguna', NULL, NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -340,6 +363,19 @@ CREATE TABLE `oferta_inmueble` (
   `d_inmueble` int NOT NULL,
   `precio_inm` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Volcado de datos para la tabla `oferta_inmueble`
+--
+
+INSERT INTO `oferta_inmueble` (`id_oferta`, `d_inmueble`, `precio_inm`) VALUES
+(1, 2, '1'),
+(6, 1, '0'),
+(7, 5, '2'),
+(8, 2, '5'),
+(9, 5, '5'),
+(10, 1, '4'),
+(11, 5, '5');
 
 -- --------------------------------------------------------
 
@@ -499,6 +535,14 @@ CREATE TABLE `usuario_oferta` (
   `id_oferta` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+--
+-- Volcado de datos para la tabla `usuario_oferta`
+--
+
+INSERT INTO `usuario_oferta` (`id_usuario`, `id_oferta`) VALUES
+(1, 1),
+(1, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -557,7 +601,7 @@ ALTER TABLE `aviso`
 -- Indices de la tabla `chatear`
 --
 ALTER TABLE `chatear`
-  ADD PRIMARY KEY (`id_usuario`,`id_usuario1`),
+  ADD PRIMARY KEY (`fecha_chat`,`id_usuario1`,`id_usuario`) USING BTREE,
   ADD KEY `fk_usuario_has_usuario_usuario2_idx` (`id_usuario1`),
   ADD KEY `fk_usuario_has_usuario_usuario1_idx` (`id_usuario`);
 
@@ -643,7 +687,7 @@ ALTER TABLE `oferta`
 -- Indices de la tabla `oferta_inmueble`
 --
 ALTER TABLE `oferta_inmueble`
-  ADD PRIMARY KEY (`id_oferta`,`d_inmueble`),
+  ADD PRIMARY KEY (`id_oferta`) USING BTREE,
   ADD KEY `fk_oferta_has_inmueble_inmueble1_idx` (`d_inmueble`),
   ADD KEY `fk_oferta_has_inmueble_oferta_idx` (`id_oferta`);
 
@@ -761,7 +805,7 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `id_imagen` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_imagen` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `inmueble`
