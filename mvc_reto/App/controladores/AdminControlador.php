@@ -76,7 +76,15 @@
 
         public function anadirNegocio() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $nuevoNegocio['id_negocio'] = $_POST['id_negocio'];
+
+                $nuevoNegocio['titulo_oferta'] = $_POST['titulo_oferta'];
+                $nuevoNegocio['fecha_inicio_oferta'] = $_POST['fecha_inicio_oferta'];
+                $nuevoNegocio['fecha_fin_oferta'] = $_POST['fecha_fin_oferta'];
+                $nuevoNegocio['condiciones_oferta'] = $_POST['condiciones_oferta'];
+                $nuevoNegocio['descripcion_oferta'] = $_POST['descripcion_oferta'];
+                $nuevoNegocio['fecha_publicacion_oferta'] = $_POST['fecha_publicacion_oferta'];
+                $nuevoNegocio['activo_oferta'] = $_POST['activo_oferta'];
+
 
                 $nuevoNegocio['titulo_negocio'] = $_POST['titulo_negocio'];
                 $nuevoNegocio['motivo_traspaso_negocio'] = $_POST['motivo_traspaso_negocio'];
@@ -84,6 +92,22 @@
                 $nuevoNegocio['coste_mensual_negocio'] = $_POST['coste_mensual_negocio'];
                 $nuevoNegocio['descripcion_negocio'] = $_POST['descripcion_negocio'];
                 $nuevoNegocio['capital_minimo_negocio'] = $_POST['capital_minimo_negocio'];
+
+                $nuevoNegocio['metros_cuadrados_inmueble'] = $_POST['metros_cuadrados_inmueble'];
+                $nuevoNegocio['descripcion_inmueble'] = $_POST['descripcion_inmueble'];
+                $nuevoNegocio['distribucion_inmueble'] = $_POST['distribucion_inmueble'];
+                $nuevoNegocio['precio_inmueble'] = $_POST['precio_inmueble'];
+                $nuevoNegocio['direccion_inmueble'] = $_POST['direccion_inmueble'];
+                $nuevoNegocio['caracteristicas_inmueble'] = $_POST['caracteristicas_inmueble'];
+                $nuevoNegocio['equipamiento_inmueble'] = $_POST['equipamiento_inmueble'];
+                $nuevoNegocio['estado_inmueble'] = $_POST['estado_inmueble'];
+                $nuevoNegocio['latitud_inmueble'] = $_POST['latitud_inmueble'];
+                $nuevoNegocio['longitud_inmueble'] = $_POST['longitud_inmueble'];
+
+                $nuevoNegocio['nombre_local'] = $_POST['nombre_local'];
+                $nuevoNegocio['capacidad_local'] = $_POST['capacidad_local'];
+                $nuevoNegocio['recursos_local'] = $_POST['recursos_local'];
+
 
         
                 $this->admin->anadirNegocioAdmin($nuevoNegocio);
