@@ -3,7 +3,7 @@
 ?>
 
 
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center gap-10">
 
     <div class="col-sm-3 mb-3 mb-sm-0">
@@ -84,5 +84,6 @@
 <?php
 require_once RUTA_APP . '/vistas/inc/footer.php';
 ?>
+
 </body>
 </html>

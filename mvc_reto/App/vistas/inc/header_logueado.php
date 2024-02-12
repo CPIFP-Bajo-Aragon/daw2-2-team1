@@ -123,7 +123,7 @@
                                                     foreach ($datos['admin'] as $admin) {
                                             ?>
                                                          
-                                                         <a class="dropdown-item" href="<?php echo RUTA_URL ?>/UserControlador/chat/<?php echo $admin->NIF; ?>"><?php echo($admin->nombre.' '. $admin->apellido) ?></a>
+                                                         <a class="dropdown-item" href="<?php echo RUTA_URL ?>/UserControlador/chat/<?php echo $admin->id_usuario; ?>"><?php echo($admin->nombre_usuario.' '. $admin->apellidos_usuario) ?></a>
                                             <?php
                                                     }
                                                 } else {
@@ -144,7 +144,7 @@
                                                     foreach ($datos['chats'] as $chat) {
                                             ?>
                                                          
-                                                         <a class="dropdown-item" href="<?php echo RUTA_URL ?>/UserControlador/chat/<?php echo $chat->NIF; ?>"><?php echo($chat->nombre . ' ' . $chat->apellido) ?></a>
+                                                         <a class="dropdown-item" href="<?php echo RUTA_URL ?>/UserControlador/chat/<?php echo $chat->id_usuario; ?>"><?php echo($chat->nombre_usuario . ' ' . $chat->apellidos_usuario) ?></a>
                                             <?php
                                                     }
                                                 } else {
