@@ -40,6 +40,8 @@
         }
         public function perfil(){
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Actualizarformulario"])) {
+                $this->datos['CambioEnPerfil']=0;
+
                 $cambios['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
                 $cambios['nombre']=$_POST['nombre'];
                 $cambios['apellidio']=$_POST['apellido'];
@@ -61,13 +63,20 @@
                     // Actualizar el nombre de la imagen en la sesión y en la base de datos si es necesario
                     $_SESSION['usuarioSesion']['foto'] = '/images/perfil_' . $_SESSION['usuarioSesion']['id_usuario'] . '/' . $nombreArchivo;
                     $cambios['foto'] = '/images/perfil_' . $_SESSION['usuarioSesion']['id_usuario'] . '/' . $nombreArchivo;
+                
+                
                 }
                 $this->usuario->editarperfil($cambios);
-                $_SESSION['usuarioSesion']['nombre'] = $cambios['nombre'];
-                $_SESSION['usuarioSesion']['apellido'] = $cambios['apellidio'];
-                $_SESSION['usuarioSesion']['correo'] = $cambios['email'];
-                $this->vista('usuario/perfil', $_SESSION['usuarioSesion']); 
+                $_SESSION['usuarioSesion']['nombre_usuario'] = $cambios['nombre'];
+                $_SESSION['usuarioSesion']['apellidos_usuario'] = $cambios['apellidio'];
+                $_SESSION['usuarioSesion']['correo_usuario'] = $cambios['email'];
+                $this->datos['usuarioSesion']['nombre_usuario'] = $cambios['nombre'];
+                $this->datos['usuarioSesion']['apellidos_usuario'] = $cambios['apellidio'];
+                $this->datos['usuarioSesion']['correo_usuario'] = $cambios['email'];
 
+                $this->datos['CambioEnPerfil']=1;
+                
+                $this->vista('usuario/perfil', $this->datos, $_SESSION['usuarioSesion']); 
             
             }else{
                 $this->vista('usuario/perfil', $this->datos); 

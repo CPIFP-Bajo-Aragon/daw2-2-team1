@@ -42,8 +42,9 @@
         public function addentidades(){
           
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $datos['nif']=$_SESSION["usuarioSesion"]['NIF'];
+                    $datos['id_usuario']=$_SESSION["usuarioSesion"]['id_usuario'];
                     $datos['nombre_entidad'] = $_POST["nombre_entidad"];
+                    $datos['cif'] = $_POST["cif"];
                     $datos['sector'] = $_POST["sector"];
                     $datos['direccion'] = $_POST["dirección"];
                     $datos['numero_telefonico'] = $_POST["número_telefónico"];

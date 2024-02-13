@@ -140,7 +140,7 @@
         public function VerOfertaInscrito() {
             $id_usuario = $_SESSION['usuarioSesion']['id_usuario'];
             $this->datos['ofertaslistar'] = $this->oferta->listarofertasInscritas($id_usuario);
-
+            print_r($this->datos['ofertaslistar']);
             $this->vista('ofertas/ofertasinscrito', $this->datos);
         }
         
