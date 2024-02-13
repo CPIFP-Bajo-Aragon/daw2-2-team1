@@ -66,33 +66,28 @@
     </div>
 </section>
 
+<!-- SOBRE NOSOTROS -->
 <section class="about_section layout_padding">
-      <div class="container">
-        <div class="encabezados text-center">
-          <h3 class="encabezados pt-5 mb-5">
-            SOBRE NOSOSTROS
-          </h3>
+        <div class="container">
+            <div class="encabezados text-center">
+                <h3 class="encabezados pt-5 mb-5">SOBRE NOSOTROS</h3>
+            </div>
+            <p class="layout_padding2-top">
+                Somos una plataforma dedicada a fomentar la repoblación y apoyar el desarrollo sostenible de las comunidades. Ofrecemos servicios en tres áreas principales: inmuebles, negocios y servicios locales. 
+            </p>
+            <div class="img-box layout_padding2">
+                <img src="images/about-img.jpg" alt="">
+            </div>
+            <p class="layout_padding2-bottom">
+                Nuestra misión es construir un futuro próspero, brindando oportunidades a emprendedores locales y facilitando la conexión entre la oferta y la demanda en tu comunidad.
+            </p>
         </div>
-        <p class="layout_padding2-top">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        </p>
-        <div class="img-box layout_padding2">
-          <img src="images/about-img.jpg" alt="">
+        <div class="container">
+            <div class="btn-box">
+                
+                <hr>
+            </div>
         </div>
-        <p class="layout_padding2-bottom">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        </p>
-      </div>
-      <div class="container">
-        <div class="btn-box">
-          <a href="">
-            Read More
-          </a>
-          <hr>
-        </div>
-      </div>
     </section>
 
 

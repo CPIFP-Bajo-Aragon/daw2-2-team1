@@ -10,6 +10,10 @@
                 <input type="text" class="form-control" id="nombre_entidad" name="nombre_entidad" required>
             </div>
             <div class="mb-3">
+                <label for="cif" class="form-label">Cif</label>
+                <input type="text" class="form-control" id="cif" name="cif" required>
+            </div>
+            <div class="mb-3">
                 <label for="sector" class="form-label">Sector</label>
                 <input type="text" class="form-control" id="sector" name="sector" required>
             </div>

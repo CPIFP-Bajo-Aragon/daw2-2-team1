@@ -22,7 +22,7 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
 ?>
 <script>
     var infoservicios = <?php echo json_encode($this->datos['municipioslistar']); ?>;
-    
+    var map;
     var idMunicipio = 2<?php //echo json_encode($_SESSION['usuarioSesion']['id_municipio']); ?>;
     filtrar(idMunicipio);
 
@@ -64,7 +64,7 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
                 contenedorpueblo_mapa.appendChild(contenedorpueblo);
                 contenedorpueblo_mapa.appendChild(contenedormapa);
                 contenedorSer.appendChild(contenedorpueblo_mapa);
-                let map = L.map('mi_mapa').setView([serviciosFiltrados[i].latitud_municipio, serviciosFiltrados[i].longitud_municipio], 16)
+                map = L.map('mi_mapa').setView([infoservicios[0].latitud_municipio, infoservicios[0].longitud_municipio], 16);
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -76,7 +76,6 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
                 for (var j = 0; j < serviciosFiltrados[i].servicios.length; j++) {
 
                     var servi = serviciosFiltrados[i].servicios[j];
-
                     var contenedorservicio = document.createElement('div');
                     contenedorservicio.setAttribute("id", "servicio" + i+j);
                     contenedorservicio.setAttribute("class", "col-5 border m-1 p-5");
@@ -86,15 +85,18 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
                     nombreservicio.textContent = servi.nombre_tipo_servicio;
 
                     contenedorservicio.appendChild(nombreservicio);
-                        var botonempresas = document.createElement('button');
 
-                        var contenedorempresas = document.createElement('div');
-                        contenedorempresas.setAttribute("class", "d-flex flex-wrap");
+                    var contenedorempresas = document.createElement('div');
+                    contenedorempresas.setAttribute("class", "d-flex flex-wrap");
 
 
                     for (var h = 0; h < serviciosFiltrados[i].servicios[j].empresas.length; h++) {
 
                         var empresa = serviciosFiltrados[i].servicios[j].empresas[h];
+                        
+                        var botonempresas = document.createElement('button');
+                        botonempresas.setAttribute("id", "empresa" + empresa.id_servicio);
+                        botonempresas.setAttribute("onclick", "centrar(" + empresa.longitud_servicio + ", " + empresa.latitud_servicio + ")");
 
                         var contenedorempresa = document.createElement('div');
                         contenedorempresa.setAttribute("id", "servicio" + i+j);
@@ -118,7 +120,8 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
                         contenedorempresa.appendChild(direccionempresa);
                         contenedorempresa.appendChild(descripcionempresa);
 
-                        contenedorempresas.appendChild(contenedorempresa);
+                        botonempresas.appendChild(contenedorempresa);
+                        contenedorempresas.appendChild(botonempresas);
                         
                         L.marker([empresa.latitud_servicio, empresa.longitud_servicio]).addTo(map).bindPopup("Zócalo de la Ciudad de México");
 
@@ -126,8 +129,7 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
                         map.on('click', onMapClick);
 
                     }
-                    botonempresas.appendChild(contenedorempresas);
-                    contenedorservicio.appendChild(botonempresas);
+                    contenedorservicio.appendChild(contenedorempresas);
                     contenedorservicios.appendChild(contenedorservicio);
                     contenedorSer.appendChild(contenedorservicios);
 
@@ -141,6 +143,16 @@ require_once RUTA_APP . '/vistas/inc/footer.php';
 
 function onMapClick(e) {
     alert("Posición: " + e.latlng)
+}
+
+function centrar(longitud, latitud) {
+    //alert(longitud + ", " + latitud);
+    map.setView([latitud, longitud], 16);
+
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
 }
 
 </script>

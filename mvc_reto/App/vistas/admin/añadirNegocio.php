@@ -12,31 +12,24 @@
     <div class="mb-3">
     <label for="activo_oferta">Tipo Usuario: </label>
     <div class="form-check form-check-inline">
-        <input type="radio" id="activo_oferta_si" name="activo_oferta" class="form-check-input" value="1">
-        <label class="form-check-label" for="activo_oferta_si">Sí</label>
+    <input class="form-check-input" type="radio" name="tipo" id="entidadRadio" value="entidad" onclick="mostrarSelect('entidad')">
+        <label class="form-check-label" for="entidadRadio">Entidad</label>
     </div>
     <div class="form-check form-check-inline">
-        <input type="radio" id="activo_oferta_no" name="activo_oferta" class="form-check-input" value="0">
-        <label class="form-check-label" for="activo_oferta_no">No</label>
+    <input class="form-check-input" type="radio" name="tipo" id="usuarioRadio" value="usuario" onclick="mostrarSelect('usuario')">
+        <label class="form-check-label" for="usuarioRadio">Usuario</label>
     </div>
 
 
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="tipo" id="entidadRadio" value="entidad" onclick="mostrarSelect('entidad')">
-        <label class="form-check-label line-start d-inline" for="entidadRadio">Entidad</label>
-    </div>
-
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="tipo" id="usuarioRadio" value="usuario" onclick="mostrarSelect('usuario')">
-        <label class="form-check-label d-inline" for="usuarioRadio">Usuario</label>
-    </div>
+   
 
     <div id="selectEntidad" class="mt-3" style="display:none;">
         <label for="entidadSelect" class="form-label">Selecciona entidad:</label>
-        <select id="entidadSelect" class="form-select" name="entidad">
-            <option value="entidad1">Entidad 1</option>
-            <option value="entidad2">Entidad 2</option>
-        </select>
+        <select class="col-11" id="municipio" name="municipio">
+                    <?php foreach ($this->datos['usuarioslistar'] as $usuario){ ?>
+                    <option value="<?php echo $oferta->id_usuario ?>"><?php echo $oferta->nombre_usuario ?></option>    
+                    <?php }?>
+                </select>
     </div>
 
     <div id="selectUsuario" class="mt-3" style="display:none;">

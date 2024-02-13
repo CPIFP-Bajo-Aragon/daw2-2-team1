@@ -34,60 +34,34 @@
         <div class="mb-3">
             <input type="text" id="tipo" name="tipo" class="form-control" placeholder="tipo">
         </div>
-
-       
     </form>
 
     <form action=""  class="mb-4">
     <h3>Datos del Inmueble</h3>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="ID de Oferta">
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Código de Inmueble">
-    </div>
+
     <div class="mb-3">
         <input type="text" class="form-control" placeholder="Metros Cuadrados">
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Distribución">
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Título">
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Características">
     </div>
     <div class="mb-3">
         <textarea class="form-control" placeholder="Descripción"></textarea>
     </div>
     <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Fotos">
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Dirección">
+        <input type="text" class="form-control" placeholder="Distribución">
     </div>
     <div class="mb-3">
         <input type="text" class="form-control" placeholder="Precio">
     </div>
     <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Ubicación">
+        <input type="text" class="form-control" placeholder="Dirección">
     </div>
+    
     <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Tipo de Alquiler">
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Planta">
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Planos">
+        <input type="text" class="form-control" placeholder="Características">
     </div>
     <div class="mb-3">
         <input type="text" class="form-control" placeholder="Equipamiento">
     </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Estado">
-    </div>
+    
     <div class="mb-3">
         <input type="text" class="form-control" placeholder="ID de Municipio">
     </div>
@@ -96,6 +70,9 @@
     </div>
     <div class="mb-3">
         <input type="text" class="form-control" placeholder="Longitud">
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Estado">
     </div>
 </form>
 
@@ -129,8 +106,8 @@
 </div>
 
 
-<?php
+<!-- <?php
 require_once RUTA_APP . '/vistas/inc/footer.php';
-?>
+?> -->
 </body>
 </html>

@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" type="text/css" href="/css/estilos.css">
     <title>RevitaliZona</title>
+    
+ 
 </head>
 <body class="">
    
@@ -21,9 +23,10 @@
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
                         <!-- Logo -->
-                        <a class="navbar-brand fs-4 font-weight-bold pt-4 tetx-white" href="<?php echo RUTA_URL ?>/">
-                            <img src="../images/logol.png" width="50" class="d-inline-block align-top font-weight-bold" alt="">
-                            <strong class="pt-2">RevitaliZona</strong>
+                        <img src="../images/logol.png" width="50"  class="d-inline-block align-top font-weight-bold " alt="">
+                        <a class="navbar-brand fs-4 font-weight-bold pt-4 text-white"  style=" " href="/">
+                
+                        <strong>RevitaliZona</strong>
                         </a>
 
                         <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -39,7 +42,6 @@
                             <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 lg-0">
                                 <!-- Sidebar content -->
                                 <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                                    <li class="nav-item mx-2"> <h3 class="text-light">Has accedido como administrador</h3> </li>
                                 </ul>
 
                                 <!-- User actions -->
@@ -60,7 +62,7 @@
                                             <?php
                                                     }
                                                 } else {
-                                                    echo "No chats available"; // or handle the case where no chats are available
+                                                    echo "No chats available"; 
                                                 }
                                             ?>
                                         </div>
@@ -83,7 +85,7 @@
                                             <?php
                                                     }
                                                 } else {
-                                                    echo "No ahi admins"; // or handle the case where no chats are available
+                                                    echo "No ahi admins"; 
                                                 }
                                             ?>
                                         </div>
@@ -105,15 +107,15 @@
                                             <?php
                                                     }
                                                 } else {
-                                                    echo "No chats available"; // or handle the case where no chats are available
+                                                    echo "No chats available"; 
                                                 }
                                             ?>
                                         </div>
                                     </div>
                                    
                                     <div class="dropdown">
-                                        <a href="#" class="me-5 dropdown-toggle" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img id="previewFoto" src="/images/perfil_<?php echo $_SESSION['usuarioSesion']['NIF'] ?>/Perfil.jpg" alt="User Photo" class="img-fluid rounded-circle mt-2" style="width: 50px; height: 50px; object-fit: cover;">                                       
+                                    <a href="#" class="me-5 dropdown-toggle" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img id="previewFoto" src="/images/perfil_<?php echo $_SESSION['usuarioSesion']['id_usuario'] ?>/Perfil.jpg" alt="User Photo" class="img-fluid rounded-circle mt-2" style="width: 50px; height: 50px; object-fit: cover;">                                       
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="userDropdown">

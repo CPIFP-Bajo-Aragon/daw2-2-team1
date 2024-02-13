@@ -1,5 +1,6 @@
 <?php
     cabecera($this->datos);
+
 ?>
 
 
@@ -46,5 +47,19 @@
 
 require_once RUTA_APP.'/vistas/inc/footer.php'
 ?>
+<script>
+    var datos = <?php echo json_encode($this->datos); ?>
+
+    if(datos['CambioEnPerfil']==1){
+        Swal.fire({
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+            });
+    }
+</script>
+
+
 </body>
 </html>
