@@ -5,7 +5,7 @@
 <?php
     foreach ($this->datos['ent'] as $entidad) {
     ?>
-        <div class="card mt-4">
+        <div class="card mt-4 col-4">
             <div class="card-header">
                 <h5 class="card-title"><?php echo $entidad->nombre_entidad; ?></h5>
             </div>
@@ -21,11 +21,11 @@
     <?php
     }
     ?>
-      <a href="/EntidadesControlador/addentidades" class="btn btn-primary">
-        <div>
-            +
-        </div>
-    </a>
+     <div>
+        <a href="/EntidadesControlador/addentidades" class="btn btn-primary">
+                +
+        </a>
+    </div>
 <?php 
     require_once RUTA_APP.'/vistas/inc/footer.php'
 ?>

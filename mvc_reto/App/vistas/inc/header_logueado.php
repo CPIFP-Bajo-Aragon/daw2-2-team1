@@ -11,6 +11,8 @@
   
 
     <link rel="stylesheet" type="text/css" href="/css/estilos.css">
+    <link rel="stylesheet" href="/css/estilos.scss">
+
     <title>RevitaliZona</title>
 </head>
 <body class="">

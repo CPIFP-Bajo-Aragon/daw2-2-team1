@@ -1,7 +1,8 @@
 
 <?php
     cabecera($this->datos);
-    $ubicaciones_php = ['coord' => ['lat' =>  (float)$this->datos['inmueble']->latitud, 'lng' => (float)$this->datos['inmueble']->longitud], 'tipo' => $this->datos['inmueble']->tipo, 'info' => $this->datos['inmueble']->descripcion];
+    print_r($this->datos['inmueble']);
+    $ubicaciones_php = ['coord' => ['lat' =>  (float)$this->datos['inmueble']->latitud_inmueble, 'lng' => (float)$this->datos['inmueble']->longitud_inmueble], /*'tipo' => $this->datos['inmueble']->tipo,*/ 'info' => $this->datos['inmueble']->descripcion_inmueble];
 ?>
 
 
@@ -11,7 +12,7 @@
                                 
 
 
-    <h1><p class="card-text"><?php echo $this->datos['inmueble']->titulo; ?></p></h1>
+    <h1><p class="card-text"><?php echo $this->datos['inmueble']->titulo_oferta; ?></p></h1>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -45,7 +46,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="fs-1 fw-bold">
-                                <p class="card-text text-primary"><?php echo $this->datos['inmueble']->precio; ?>€</p>
+                                <p class="card-text text-primary"><?php echo $this->datos['inmueble']->precio_inm; ?>€</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <a href="" class="text-danger fs-1 pe-5"><i class="bi bi-heart"></i></a>
@@ -63,7 +64,7 @@
             <div class="card">
                 <div class="card-body">
                     <h1>Descripción</h1>
-                    <p class="card-text">Descripcion: <?php echo $this->datos['inmueble']->descripcion; ?></p>
+                    <p class="card-text">Descripcion: <?php echo $this->datos['inmueble']->descripcion_inmueble; ?></p>
 
                 </div>
             </div>
@@ -90,17 +91,17 @@
             <div class="card">
                 <div class="card-body">
                     <h1>Características</h1>
-                    <p class="card-text">Codigo Inmueble: <?php echo $this->datos['inmueble']->codigo_inmueble; ?></p>
-                    <p class="card-text">Metros Cuadrados: <?php echo $this->datos['inmueble']->metros_cuadrados; ?></p>
-                    <p class="card-text">Distribucion: <?php echo $this->datos['inmueble']->distribucion; ?></p>
-                    <p class="card-text">Caracteristicas: <?php echo $this->datos['inmueble']->características; ?></p>
-                    <p class="card-text">Direccion: <?php echo $this->datos['inmueble']->direccion; ?></p>
-                    <p class="card-text">Ubicacion: <?php echo $this->datos['inmueble']->ubicacion; ?></p>
-                    <p class="card-text">Tipo Alquiler: <?php echo $this->datos['inmueble']->tipo_alquiler; ?></p>
-                    <p class="card-text">Planta: <?php echo $this->datos['inmueble']->planta; ?></p>
-                    <p class="card-text">Equipamento: <?php echo $this->datos['inmueble']->equipamiento; ?></p>
-                    <p class="card-text">Etstado: <?php echo $this->datos['inmueble']->estado; ?></p>
-                    <p class="card-text">Municipio: <?php echo $this->datos['inmueble']->id_municipio; ?></p>
+                    <p class="card-text">Codigo Inmueble: <?php echo $this->datos['inmueble']->id_inmueble; ?></p>
+                    <p class="card-text">Metros Cuadrados: <?php echo $this->datos['inmueble']->metros_cuadrados_inmueble; ?></p>
+                    <p class="card-text">Distribucion: <?php echo $this->datos['inmueble']->distribucion_inmueble; ?></p>
+                    <p class="card-text">Caracteristicas: <?php echo $this->datos['inmueble']->características_inmueble; ?></p>
+                    <p class="card-text">Direccion: <?php echo $this->datos['inmueble']->direccion_inmueble; ?></p>
+                    <p class="card-text">Ubicacion: <?php echo $this->datos['inmueble']->ubicacion_inmueble; ?></p>
+                    <p class="card-text">Tipo Alquiler: <?php echo $this->datos['inmueble']->tipo_alquiler_inmueble; ?></p>
+                    <p class="card-text">Planta: <?php echo $this->datos['inmueble']->planta_inmueble; ?></p>
+                    <p class="card-text">Equipamento: <?php echo $this->datos['inmueble']->equipamiento_inmueble; ?></p>
+                    <p class="card-text">Etstado: <?php echo $this->datos['inmueble']->estado_inmueble; ?></p>
+                    <p class="card-text">Municipio: <?php echo $this->datos['inmueble']->id_municipio_inmueble; ?></p>
 
 
                   

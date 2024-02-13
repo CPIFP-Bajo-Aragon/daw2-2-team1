@@ -83,6 +83,34 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
 
 ?>
 <script>
+
+    const rangoPrecios = document.getElementById('rangoPrecios');
+    const precioSeleccionado = document.getElementById('precioSeleccionado');
+
+    // Función para actualizar el precio seleccionado
+    function actualizarPrecio() {
+        const valor = rangoPrecios.value;
+        // Aquí asigna los precios según los valores del rango
+        let precio;
+        if (valor <= 25) {
+            precio = '$10';
+        } else if (valor <= 50) {
+            precio = '$20';
+        } else if (valor <= 75) {
+            precio = '$30';
+        } else {
+            precio = '$40';
+        }
+        precioSeleccionado.textContent = `Precio seleccionado: ${precio}`;
+    }
+
+    // Agrega un event listener para el cambio en el rango de precios
+    rangoPrecios.addEventListener('change', actualizarPrecio);
+
+    // Llama a la función inicialmente para mostrar el precio inicial
+    actualizarPrecio();
+
+
     document.addEventListener('DOMContentLoaded', function() {
         
             var ofertasList = <?php echo json_encode($this->datos['ofertaslistar']); ?>;
@@ -99,6 +127,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             });
             
             listarOfertas(ofertasList);
+            
     });
 
     function clearCardContainer() {
@@ -112,32 +141,30 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             switch (selectedValue) {
                 case '1': // Ordenar por fecha
                     sortedList.sort(function (a, b) {
-                        return new Date(a.fecha_inicio) - new Date(b.fecha_inicio);
+                        return new Date(a.fecha_inicio_oferta) - new Date(b.fecha_inicio_oferta);
                     });
                     break;
                 case '2': // Precio: De mayor a menor
                     sortedList.sort(function (a, b) {
-                        return b.precio - a.precio;
+                        return b.precio_inm - a.precio_inm;
                     });
                     break;
                 case '3': // Precio: De menor a mayor
                     sortedList.sort(function (a, b) {
-                        return a.precio - b.precio;
+                        return a.precio_inm - b.precio_inm;
                     });
                     break;
             }
 
             return sortedList;
-            console.log(sortedOfertasList);
     }
 
     function listarOfertas(ofertasList){
-        var container = document.getElementById('card-container'); // Corrected ID
+        var container = document.getElementById('card-container');
 
 
         for (var i = 0; i < ofertasList.length; i++) {
             var oferta = ofertasList[i];
-            console.log(ofertasList);
             
 
             var card = document.createElement('div');
@@ -157,30 +184,32 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             carouselInner.className = 'carousel-inner';
 
             var primerRegistro = true;
-            var codigo_inmueble = oferta.codigo_inmueble;
-            var images = <?php echo json_encode($this->datos['ofertaslistarimagenes']); ?>; // Replace with the actual function to fetch images
-
+            var codigo_inmueble = oferta.d_inmueble;
+            var images = oferta.imagenes;
+            console.log(images);
             if (images.length > 0) {
                 for (var j = 0; j < images.length; j++) {
                     var img = images[j];
-
-                    if(img['codigo_inmueble']==codigo_inmueble){
+                    if(img['id_inmueble']==codigo_inmueble){
                         var carouselItem = document.createElement('div');
                         carouselItem.className = 'carousel-item ' + (primerRegistro ? 'active' : '');
                         
                         var imgElement = document.createElement('img');
-                        imgElement.src = '<?php echo RUTA_URL ?>' + img['ruta'] + codigo_inmueble + '/' + img['nombre'] + '.' + img['formato'];
+                        // Aquí construyes la ruta de la imagen utilizando solo JavaScript
+                        imgElement.src = '<?= RUTA_URL ?>' + img['ruta_imagen'] + codigo_inmueble + '/' + img['nombre_imagen'] + '.' + img['formato_imagen'];
                         imgElement.className = 'd-block w-100 img-fluid';
                         imgElement.alt = 'Imagen';
-
+                        var a = document.createElement('p');
+                        a.textContent="a";
                         carouselItem.appendChild(imgElement);
                         carouselInner.appendChild(carouselItem);
 
                         primerRegistro = false;
                     }
-                    
-                   
+
+
                 }
+
             } else {
                 var noImageMessage = document.createElement('p');
                 noImageMessage.textContent = 'No hay imágenes disponibles para esta oferta.';
@@ -216,23 +245,23 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
 
             var cardTitle = document.createElement('h5');
             cardTitle.className = 'card-title';
-            cardTitle.textContent = 'ID de Oferta: ' + oferta.precio;
+            cardTitle.textContent = 'ID de Oferta: ' + oferta.id_oferta;
 
             var cardText1 = document.createElement('p');
             cardText1.className = 'card-text';
-            cardText1.textContent = 'Tipo de Oferta: ' + oferta.tipo_oferta;
+            cardText1.textContent = 'fecha inicio: ' + oferta.fecha_inicio_oferta;
 
             var cardText2 = document.createElement('p');
             cardText2.className = 'card-text';
-            cardText2.textContent = 'Fecha de Inicio: ' + oferta.fecha_inicio;
+            cardText2.textContent = 'Fecha de Inicio: ' + oferta.fecha_inicio_oferta;
 
             var cardText3 = document.createElement('p');
             cardText3.className = 'card-text';
-            cardText3.textContent = 'Fecha de Fin: ' + oferta.fecha_fin;
+            cardText3.textContent = 'Fecha de Fin: ' + oferta.fecha_fin_oferta;
 
             var cardText4 = document.createElement('p');
             cardText4.className = 'card-text';
-            cardText4.textContent = 'Fecha de Publicación: ' + oferta.fecha_publicacion;
+            cardText4.textContent = 'Fecha de Publicación: ' + oferta.fecha_publicacion_oferta;
 
             cardBody.appendChild(cardTitle);
             cardBody.appendChild(cardText1);
@@ -244,15 +273,23 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             cardBodyButtons.className = 'card-body';
 
             var comentLink = document.createElement('a');
-            comentLink.href = '<?= RUTA_URL ?>/InmuebleControlador/comentar/' + oferta.codigo_inmueble; 
+            comentLink.href = '<?= RUTA_URL ?>/InmuebleControlador/comentar/' + oferta.d_inmueble; 
             var commentButton = document.createElement('button');
             commentButton.className = 'btn btn-primary';
             commentButton.id = 'comentar';
             commentButton.textContent = 'Comentar';
             comentLink.appendChild(commentButton);
 
+            var InsertLink = document.createElement('a');
+            InsertLink.href = '<?php echo RUTA_URL ?>/OfertasControlador/InscripccionOferta/' + oferta.id_oferta; 
+            var insertButton = document.createElement('button');
+            insertButton.className = 'btn btn-info';
+            insertButton.id = 'Solicitar';
+            insertButton.textContent = 'Solicitar';
+            InsertLink.appendChild(insertButton);
+
             var chatLink = document.createElement('a');
-            chatLink.href = '<?php echo RUTA_URL ?>/UserControlador/chat/' + oferta.NIF;
+            chatLink.href = '<?php echo RUTA_URL ?>/UserControlador/chat/' + oferta.id_entidad;
             var chatButton = document.createElement('button');
             chatButton.className = 'btn btn-success';
             chatButton.textContent = 'Contactar';
@@ -265,6 +302,7 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             verMasButton.textContent = 'Ver mas';
             verMasLink.appendChild(verMasButton);
 
+            cardBodyButtons.appendChild(InsertLink);
             cardBodyButtons.appendChild(comentLink);
             cardBodyButtons.appendChild(chatLink);
             cardBodyButtons.appendChild(verMasLink);
@@ -281,7 +319,6 @@ require_once RUTA_APP.'/vistas/inc/footer.php'
             document.getElementById('card-container').appendChild(card);
         }
     }
-
 
 </script>
 
