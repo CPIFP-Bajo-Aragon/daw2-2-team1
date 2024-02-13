@@ -17,11 +17,12 @@
         }
 
         public function crear($datos){
-            $this->db->query("INSERT INTO `entidad`(`nombre_entidad`, `sector`, `dirección`, `número_telefónico`, `correo`, `página_web`) 
-            VALUES (:nom, :sec, :dir, :num, :corr, :pag)");
+            $this->db->query("INSERT INTO `entidad`(`nombre_entidad`, `cif_entidad`, `sector_entidad`, `direccion_entidad`, `numero_telefono_entidad`, `correo_entidad`, `pagina_web_entidad`) 
+            VALUES (:nom, :cif, :sec, :dir, :num, :corr, :pag)");
 
             // Enlazar los parámetros
             $this->db->bind(':nom', $datos['nombre_entidad']);
+            $this->db->bind(':cif', $datos['cif']);
             $this->db->bind(':sec', $datos['sector']);
             $this->db->bind(':dir', $datos['direccion']);
             $this->db->bind(':num', $datos['numero_telefonico']);
@@ -36,11 +37,12 @@
 
 
             // Segunda consulta de inserción en la tabla PERTENECER
-            $this->db->query("INSERT INTO `pertenecer` (`NIF`, `id_entidad`) VALUES (:nif, :entidad)");
+            $this->db->query("INSERT INTO `usuario_entidad` (`id_usuario`, `id_entidad`, `rol`) VALUES (:nif, :entidad, :rol)");
 
             // Enlazar los parámetros para la segunda consulta
-            $this->db->bind(':nif', $datos['nif']);
+            $this->db->bind(':nif', $datos['id_usuario']);
             $this->db->bind(':entidad', $id_entidad);
+            $this->db->bind(':rol', 'Administrador');
 
             // Ejecutar la segunda consulta de inserción
             $this->db->execute();
