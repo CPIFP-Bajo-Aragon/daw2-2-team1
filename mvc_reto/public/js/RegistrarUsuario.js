@@ -30,10 +30,8 @@ function ValidateCrearUsuario() {
   
   function validateNombre(nombre) {
     if (nombre === "") {
-        alert("Por favor, ingrese su nombre");
         return false;
     } else if (/\d/.test(nombre)) {
-        alert("El nombre no puede contener números");
         return false;
     }
     return true;
@@ -41,10 +39,8 @@ function ValidateCrearUsuario() {
   
   function validateApellido(apellido) {
     if (apellido === "") {
-        alert("Por favor, ingrese su apellido");
         return false;
     } else if (/\d/.test(apellido)) {
-        alert("El apellido no puede contener números");
         return false;
     }
     return true;
@@ -52,10 +48,8 @@ function ValidateCrearUsuario() {
   
   function validateCorreo(correo) {
     if (correo === "") {
-        alert("Por favor, ingrese su correo electrónico");
         return false;
     } else if (!isValidEmail(correo)) {
-        alert("Por favor, ingrese una dirección de correo electrónico válida");
         return false;
     }
     return true;
@@ -63,7 +57,6 @@ function ValidateCrearUsuario() {
   
   function validateContrasena(contrasena) {
     if (contrasena === "") {
-        alert("Por favor, ingrese su contraseña");
         return false;
     }
     return true;
@@ -71,10 +64,8 @@ function ValidateCrearUsuario() {
   
   function validateNIF(nif) {
     if (nif === "") {
-        alert("Por favor, ingrese su NIF");
         return false;
     } else if (!isValidNIF(nif)) {
-        alert("Por favor, ingrese un NIF válido");
         return false;
     }
     return true;
