@@ -52,7 +52,10 @@
 
 
         public function obtenerDetallesInmueble($id) {
-            $this->db->query("SELECT * FROM `INMUEBLE` i JOIN `OFERTA` o ON i.id_oferta = o.id_oferta WHERE i.`id_oferta` = :id_oferta;");
+            $this->db->query("SELECT * FROM `inmueble` i 
+                                JOIN `oferta_inmueble` oi ON oi.d_inmueble = i.id_inmueble
+                                JOIN `oferta` o ON oi.id_oferta = o.id_oferta
+                                 WHERE oi.`id_oferta` = :id_oferta;");
             $this->db->bind(':id_oferta', $id);
             return $this->db->registro();
         }

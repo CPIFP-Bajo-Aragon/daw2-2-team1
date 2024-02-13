@@ -9,15 +9,21 @@
 
         public function comprobacion($u, $c){
             
-            $this->db->query("SELECT * FROM `usuario` WHERE `correo_usuario`=:u AND `contrasena_usuario`= :c;");
+            $this->db->query("SELECT * FROM `usuario` WHERE `correo_usuario`=:u;");
             $this->db->bind(':u', $u);
-            $this->db->bind(':c', $c);
             if( $this->db->rowCount()>0){
-                
-                return $this->db->registro();
 
+                $fila = $this->db->registro();
+                $hashed_password = $fila->contrasena_usuario;
+
+                if(password_verify($c, $hashed_password)){
+                    return $this->db->registro();
+                }
+                else{
+                    redirecionar("/loginControlador/sesion");
+                }
             }else{
-                redirecionar("/");
+                redirecionar("/loginControlador/sesion");
             }
             exit;
 
@@ -37,16 +43,20 @@
             $correo = $usuario['correo'];
             $contrasena = $usuario['contrasena'];
             $municipio = $usuario['municipio'];
+            $fecha = $usuario['fecha_nac'];
+            $telefono = $usuario['telefono'];
+            $contrasena=password_hash($contrasena, PASSWORD_DEFAULT);
         
-            $this->db->query("INSERT INTO `usuario`(`NIF`, `nombre`, `apellido`, `correo`, `contrasena`, `id_municipio`) 
-                            VALUES (:nif, :nom, :ape, :corre, :con, :mun)");
+            $this->db->query("INSERT INTO `usuario`(`NIF`, `nombre_usuario`, `apellidos_usuario`, `correo_usuario`, `contrasena_usuario`, `fecha_nacimiento_usuario`, `telefono_usuario` ) 
+                            VALUES (:nif, :nom, :ape, :corre, :con, :fech, :tel)");
         
             $this->db->bind(':nif', $nif);
             $this->db->bind(':nom', $nombre);
             $this->db->bind(':ape', $apellido);
             $this->db->bind(':corre', $correo);
             $this->db->bind(':con', $contrasena);
-            $this->db->bind(':mun', $municipio);
+            $this->db->bind(':fech', $fecha);
+            $this->db->bind(':tel', $telefono);
         
             $this->db->execute();
         }

@@ -8,17 +8,17 @@
         }
 
         public function editarperfil($cambios) {
-            $nif = $cambios['nif'];
+            $id_usuario = $cambios['id_usuario'];
             $nombre = $cambios['nombre'];
             $apellido = $cambios['apellidio']; // Corregí el error de tipeo en 'apellido'
             $correo = $cambios['email']; // Corregí el error de tipeo en 'email'
         
-            $this->db->query("UPDATE `USUARIO` SET `nombre` = :nombre, `apellido` = :apellido, `correo` = :correo WHERE `NIF` = :nif");
+            $this->db->query("UPDATE `usuario` SET `nombre_usuario` = :nombre, `apellidos_usuario` = :apellido, `correo_usuario` = :correo WHERE `id_usuario` = :id_usuario");
         
             $this->db->bind(':nombre', $nombre);
             $this->db->bind(':apellido', $apellido);
             $this->db->bind(':correo', $correo);
-            $this->db->bind(':nif', $nif);
+            $this->db->bind(':id_usuario', $id_usuario);
             
             $this->db->execute();
         }
@@ -30,7 +30,7 @@
             $apellido = $datos['apellido'];
             $correo = $datos['email'];
             $contrasena = $datos['contrasena'];
-            $this->db->query("  INSERT INTO `USUARIO`(`NIF`, `nombre`, `apellido`, `correo`, `contrasena`) VALUES (:nif, :nombre, :apellido, :correo, :contrasena);");
+            $this->db->query("  INSERT INTO `USUARIO`(`NIF`, `nombre_usuario`, `apellidos_usuario`, `correo_usuario`, `contrasena_usuario`) VALUES (:nif, :nombre, :apellido, :correo, :contrasena);");
             $this->db->bind(':nif', $nif);
             $this->db->bind(':nombre', $nombre);
             $this->db->bind(':apellido', $apellido);
@@ -73,7 +73,6 @@
             //print_r($datos);
             $nif = $datos['id_usuario'];
             $receptor = $datos['receptor']->id_usuario;
-            print_r($receptor);
 
             $this->db->query("SELECT * FROM `chatear` 
                                                 WHERE 

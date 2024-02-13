@@ -108,10 +108,11 @@
         }
 
         public function recogerComentario($id) {
-            $this->db->query("SELECT * FROM `val_inmueble` 
-                              INNER JOIN inmueble ON val_inmueble.codigo_inmueble = inmueble.codigo_inmueble 
-                              INNER JOIN oferta ON inmueble.id_oferta = oferta.id_oferta 
-                              INNER JOIN usuario ON val_inmueble.NIF = usuario.NIF 
+            $this->db->query("SELECT * FROM `valorar_inmueble` 
+                              INNER JOIN inmueble ON valorar_inmueble.id_inmueble = inmueble.id_inmueble 
+                              INNER JOIN oferta_inmueble ON inmueble.id_inmueble = oferta_inmueble.d_inmueble 
+                              INNER JOIN oferta ON oferta_inmueble.id_oferta = oferta.id_oferta 
+                              INNER JOIN usuario ON valorar_inmueble.id_usuario = usuario.id_usuario 
                               WHERE oferta.id_oferta = :id");
             $this->db->bind(':id', $id);
             return $this->db->registros();
@@ -124,10 +125,11 @@
             return $this->db->execute();
         }
         public function listarofertasInscritas($nif){
-            $this->db->query( "SELECT * FROM `inscribir` 
-                                INNER join oferta on inscribir.id_oferta = oferta.id_oferta 
-                                inner join inmueble on inmueble.id_oferta = oferta.id_oferta  
-                                        WHERE inscribir.NIF = :nif;");
+            $this->db->query( "SELECT * FROM `usuario_oferta` 
+                                INNER join oferta on usuario_oferta.id_oferta = oferta.id_oferta 
+                                INNER JOIN oferta_inmueble ON oferta.id_oferta = oferta_inmueble.id_oferta 
+                                inner join inmueble on inmueble.id_inmueble = oferta_inmueble.d_inmueble  
+                                        WHERE usuario_oferta.id_usuario = :nif;");
             $this->db->bind(':nif', $nif);
             return $this->db->registros();
         }
