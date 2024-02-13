@@ -110,6 +110,8 @@
                     $nuevoUsuario['correo']=$_POST['correo'];
                     $nuevoUsuario['contrasena']=$_POST['contrasena'];
                     $nuevoUsuario['municipio']=$_POST['municipio'];
+                    $nuevoUsuario['fecha_nac']=$_POST['fecha_nacimiento'];
+                    $nuevoUsuario['telefono']=$_POST['telefono'];
                     $this->sesion->crearUserModelo($nuevoUsuario);
                     $rutaDeseada = $_SERVER['DOCUMENT_ROOT'] . '/public/images/perfil_';
                     $nombreCarpeta = $rutaDeseada .  $nuevoUsuario['nif'];
@@ -124,8 +126,9 @@
                         echo "La carpeta \"$nombreCarpeta\" ya existe.";
                     }
                     header("Location: /LoginControlador/sesion");
-
                     Mailer::sendEmail($nuevoUsuario['correo'], $nuevoUsuario['nombre']);
+
+
 
                     
                     

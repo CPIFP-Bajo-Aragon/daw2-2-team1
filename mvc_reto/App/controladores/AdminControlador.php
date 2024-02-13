@@ -49,11 +49,12 @@
             $this->vista('admin/verServicios', $this->datos);
         }
 
+      
+
   
 
         public function anadirInmuebles() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $nuevoInmueble['id_inmueble'] = $_POST['id_inmueble'];
                 $nuevoInmueble['metros_cuadrados_inmueble'] = $_POST['metros_cuadrados_inmueble'];
                 $nuevoInmueble['descripcion_inmueble'] = $_POST['descripcion_inmueble'];
                 $nuevoInmueble['distribucion_inmueble'] = $_POST['distribucion_inmueble'];
