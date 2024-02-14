@@ -37,6 +37,7 @@
         }
         
         public function crearUserModelo($usuario) {
+            try {
             $nif = $usuario['nif'] . "";
             $nombre = $usuario['nombre'];
             $apellido = $usuario['apellido'];
@@ -58,6 +59,17 @@
             $this->db->bind(':fech', $fecha);
             $this->db->bind(':tel', $telefono);
         
-            $this->db->execute();
+            if ($this->db->execute()) {
+                // Devuelve el último ID insertado
+                $lastInsertId = $this->db->lastInsertId();
+                return $lastInsertId; // O puedes devolverlo como necesites
+            } else {
+                // Si hay un fallo, muestra un mensaje de error
+                $_SESSION['error_message'] = 'Error al insertar el usuario';
+            }
+        } catch (PDOException $e) {
+            // Captura la excepción de PDO y muestra un mensaje de error específico
+            $_SESSION['error_message'] = 'Error de base de datos: ';
+        }
         }
     }
