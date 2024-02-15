@@ -17,35 +17,40 @@
         }
 
         public function crear($datos){
-            $this->db->query("INSERT INTO `entidad`(`nombre_entidad`, `cif_entidad`, `sector_entidad`, `direccion_entidad`, `numero_telefono_entidad`, `correo_entidad`, `pagina_web_entidad`) 
-            VALUES (:nom, :cif, :sec, :dir, :num, :corr, :pag)");
+            try{
+                $this->db->query("INSERT INTO `entidad`(`nombre_entidad`, `cif_entidad`, `sector_entidad`, `direccion_entidad`, `numero_telefono_entidad`, `correo_entidad`, `pagina_web_entidad`) 
+                VALUES (:nom, :cif, :sec, :dir, :num, :corr, :pag)");
 
-            // Enlazar los parámetros
-            $this->db->bind(':nom', $datos['nombre_entidad']);
-            $this->db->bind(':cif', $datos['cif']);
-            $this->db->bind(':sec', $datos['sector']);
-            $this->db->bind(':dir', $datos['direccion']);
-            $this->db->bind(':num', $datos['numero_telefonico']);
-            $this->db->bind(':corr', $datos['correo']);
-            $this->db->bind(':pag', $datos['pagina_web']);
+                // Enlazar los parámetros
+                $this->db->bind(':nom', $datos['nombre_entidad']);
+                $this->db->bind(':cif', $datos['cif']);
+                $this->db->bind(':sec', $datos['sector']);
+                $this->db->bind(':dir', $datos['direccion']);
+                $this->db->bind(':num', $datos['numero_telefonico']);
+                $this->db->bind(':corr', $datos['correo']);
+                $this->db->bind(':pag', $datos['pagina_web']);
 
-            // Ejecutar la primera consulta de inserción
-            $this->db->execute();
+                // Ejecutar la primera consulta de inserción
+                $this->db->execute();
 
-            // Obtener el ID de la entidad insertada
-            $id_entidad = $this->db->lastInsertId();
+                // Obtener el ID de la entidad insertada
+                $id_entidad = $this->db->lastInsertId();
 
 
-            // Segunda consulta de inserción en la tabla PERTENECER
-            $this->db->query("INSERT INTO `usuario_entidad` (`id_usuario`, `id_entidad`, `rol`) VALUES (:nif, :entidad, :rol)");
+                // Segunda consulta de inserción en la tabla PERTENECER
+                $this->db->query("INSERT INTO `usuario_entidad` (`id_usuario`, `id_entidad`, `rol`) VALUES (:nif, :entidad, :rol)");
 
-            // Enlazar los parámetros para la segunda consulta
-            $this->db->bind(':nif', $datos['id_usuario']);
-            $this->db->bind(':entidad', $id_entidad);
-            $this->db->bind(':rol', 'Administrador');
+                // Enlazar los parámetros para la segunda consulta
+                $this->db->bind(':nif', $datos['id_usuario']);
+                $this->db->bind(':entidad', $id_entidad);
+                $this->db->bind(':rol', 'Administrador');
 
-            // Ejecutar la segunda consulta de inserción
-            $this->db->execute();
-
+                // Ejecutar la segunda consulta de inserción
+                $this->db->execute();
+                $_SESSION['correcto_message'] = 'La entidad se a creado correctamente';
+            } catch (PDOException $e) {
+                // Captura la excepción de PDO y muestra un mensaje de error específico
+                $_SESSION['error_message'] = 'Error al crear la entidad';
+            }
         }
     }

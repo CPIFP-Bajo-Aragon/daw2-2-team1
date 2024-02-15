@@ -17,12 +17,16 @@
                 $hashed_password = $fila->contrasena_usuario;
 
                 if(password_verify($c, $hashed_password)){
+                    $_SESSION['correcto_message']="Se ha logueado correctamente";
+
                     return $this->db->registro();
                 }
                 else{
+                    $_SESSION['error_message']="Usuario o contraseña incorrectos";
                     redirecionar("/loginControlador/sesion");
                 }
             }else{
+                $_SESSION['error_message']="Usuario o contraseña incorrectos";
                 redirecionar("/loginControlador/sesion");
             }
             exit;
@@ -62,6 +66,8 @@
             if ($this->db->execute()) {
                 // Devuelve el último ID insertado
                 $lastInsertId = $this->db->lastInsertId();
+                $_SESSION['correcto_message'] = 'Se ha registrado correctamente';
+
                 return $lastInsertId; // O puedes devolverlo como necesites
             } else {
                 // Si hay un fallo, muestra un mensaje de error

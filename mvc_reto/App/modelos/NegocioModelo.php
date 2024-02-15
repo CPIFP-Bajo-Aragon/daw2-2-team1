@@ -40,21 +40,26 @@
         }
 
         public function addnegocios($datos){
-            $this->db->query("INSERT INTO `NEGOCIO`(`codigo_inmueble`, `codigo_negocio`, `titulo`, `motivo_traspaso`, `coste_traspaso`, `coste_mensual`, `ubicacion`, `descripcion`, `capital_minimo`)              VALUES (:cod_in, :cod_neg, :tit, :mot_tras, :cost_tras, :cost_mensual, :ubi, :descr, :cap_min)");
+            try{
+                $this->db->query("INSERT INTO `NEGOCIO`(`codigo_inmueble`, `codigo_negocio`, `titulo`, `motivo_traspaso`, `coste_traspaso`, `coste_mensual`, `ubicacion`, `descripcion`, `capital_minimo`)              VALUES (:cod_in, :cod_neg, :tit, :mot_tras, :cost_tras, :cost_mensual, :ubi, :descr, :cap_min)");
 
-            $this->db->bind(':cod_in', $datos['codigo_inmueble']);
-            $this->db->bind(':cod_neg', $datos['codigo_negocio']);
-            $this->db->bind(':tit', $datos['titulo']);
-            $this->db->bind(':mot_tras', $datos['motivo_traspaso']);
-            $this->db->bind(':cost_tras', $datos['coste_traspaso']);
-            $this->db->bind(':cost_mensual', $datos['coste_mensual']);
-            $this->db->bind(':ubi', $datos['ubicacion']);
-            $this->db->bind(':descr', $datos['descripcion']);
-            $this->db->bind(':cap_min', $datos['capital_minimo']);
-    
-            // Ejecutar la consulta
-            $this->db->execute();
-            redirecionar("/NegocioControlador/addnegocio");
+                $this->db->bind(':cod_in', $datos['codigo_inmueble']);
+                $this->db->bind(':cod_neg', $datos['codigo_negocio']);
+                $this->db->bind(':tit', $datos['titulo']);
+                $this->db->bind(':mot_tras', $datos['motivo_traspaso']);
+                $this->db->bind(':cost_tras', $datos['coste_traspaso']);
+                $this->db->bind(':cost_mensual', $datos['coste_mensual']);
+                $this->db->bind(':ubi', $datos['ubicacion']);
+                $this->db->bind(':descr', $datos['descripcion']);
+                $this->db->bind(':cap_min', $datos['capital_minimo']);
+        
+                // Ejecutar la consulta
+                $this->db->execute();
+                redirecionar("/NegocioControlador/addnegocio");
+            } catch (PDOException $e) {
+                // Captura la excepción de PDO y muestra un mensaje de error específico
+                $_SESSION['error_message'] = 'Error crear el negocio';
+            }
         }
 
         public function crearComentarioNegocio($nuevoComentario){
