@@ -112,9 +112,9 @@
                     $nuevoUsuario['municipio']=$_POST['municipio'];
                     $nuevoUsuario['fecha_nac']=$_POST['fecha_nacimiento'];
                     $nuevoUsuario['telefono']=$_POST['telefono'];
-                    $this->sesion->crearUserModelo($nuevoUsuario);
+                    $id=$this->sesion->crearUserModelo($nuevoUsuario);
                     $rutaDeseada = $_SERVER['DOCUMENT_ROOT'] . '/public/images/perfil_';
-                    $nombreCarpeta = $rutaDeseada .  $nuevoUsuario['nif'];
+                    $nombreCarpeta = $rutaDeseada .  $id;
 
                     if (!file_exists($nombreCarpeta)) {
                         if (mkdir($nombreCarpeta, 777, true)) {
