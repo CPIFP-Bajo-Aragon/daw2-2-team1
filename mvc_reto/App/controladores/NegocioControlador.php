@@ -7,17 +7,22 @@
         public function __construct(){
             session_start();
             $this->negociomodelo = $this->modelo('NegocioModelo');
-
-            
+            $this->EntidadesModelo = $this->modelo('EntidadesModelo');
+            $this->DocumentosModelo = $this->modelo('DocumentosModelo');
+            $this->oferta = $this->modelo('OfertasModelo');
+            $this->municipiosmodelo = $this->modelo('MunicipiosModelo');
+            $this->inmueble = $this->modelo('InmuebleModelo');
+            $this->usuario = $this->modelo('UserModelo');
             $this->admin = $this->modelo('AdminModelo');
             $this->datos['admin'] = $this->admin->ListarAdmins();
-            
-            $this->usuario = $this->modelo('UserModelo');
+            $this->datos['usuarioSesion']=$_SESSION['usuarioSesion'];
+            $this->datos['usuarioSesion']['noti'] = $this->usuario->listarnotificaciones($this->datos['usuarioSesion']);
+            $this->datos['usuarioSesion']['chats'] = $this->usuario->listaruserchat($this->datos['usuarioSesion']);
+            $this->datos['municipioslistar'] = $this->municipiosmodelo->listarMunicipio();
 
-            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
-            $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
-            $this->datos['chats'] = $this->usuario->listaruserchat($datos);
-            if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])|| $_SESSION["usuarioSesion"]["admin"]==0) {
+            
+
+            if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])) {
                 redirecionar(RUTA_URL.'/');
             }
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -101,9 +106,9 @@
                 
             }else{
                 $this->datos['negocio']['id']=$id_negocio;
-                $this->vista('/negocios/valoracion', $this->datos);
+                $this->vista('/negocios/editarnegocio', $this->datos);
             }  
 
-            }
+        }
         
     }

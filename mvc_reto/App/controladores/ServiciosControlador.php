@@ -6,25 +6,26 @@
         private $servicios;
         public function __construct(){
             session_start();
+            $this->servicios = $this->modelo('ServiciosModelo');
+            $this->negociomodelo = $this->modelo('NegocioModelo');
+            $this->EntidadesModelo = $this->modelo('EntidadesModelo');
+            $this->DocumentosModelo = $this->modelo('DocumentosModelo');
             $this->oferta = $this->modelo('OfertasModelo');
             $this->municipiosmodelo = $this->modelo('MunicipiosModelo');
             $this->inmueble = $this->modelo('InmuebleModelo');
             $this->usuario = $this->modelo('UserModelo');
             $this->admin = $this->modelo('AdminModelo');
-            $this->servicios = $this->modelo('ServiciosModelo');
-
-
             $this->datos['admin'] = $this->admin->ListarAdmins();
-            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
-            $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
-            $this->datos['chats'] = $this->usuario->listaruserchat($datos);
-            $this->datos['municipioslistar']=$this->municipiosmodelo->listarMunicipio();
+            $this->datos['usuarioSesion']=$_SESSION['usuarioSesion'];
+            $this->datos['usuarioSesion']['noti'] = $this->usuario->listarnotificaciones($this->datos['usuarioSesion']);
+            $this->datos['usuarioSesion']['chats'] = $this->usuario->listaruserchat($this->datos['usuarioSesion']);
+            $this->datos['municipioslistar'] = $this->municipiosmodelo->listarMunicipio();
+
+            
 
             if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])) {
                 redirecionar(RUTA_URL.'/');
             }
-
-            
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (isset($_POST["marcarnotificacionesleido"])) {
                     $this->usuario->marcarvistastodasnotificaciones($datos);
