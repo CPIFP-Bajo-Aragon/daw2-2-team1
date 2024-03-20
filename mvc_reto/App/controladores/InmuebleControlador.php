@@ -6,15 +6,21 @@
 
         public function __construct(){
             session_start();
+            $this->EntidadesModelo = $this->modelo('EntidadesModelo');
+            $this->DocumentosModelo = $this->modelo('DocumentosModelo');
+            $this->oferta = $this->modelo('OfertasModelo');
+            $this->municipiosmodelo = $this->modelo('MunicipiosModelo');
             $this->inmueble = $this->modelo('InmuebleModelo');
-            
             $this->usuario = $this->modelo('UserModelo');
-            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
-            $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
-            $this->datos['chats'] = $this->usuario->listaruserchat($datos);
-
             $this->admin = $this->modelo('AdminModelo');
             $this->datos['admin'] = $this->admin->ListarAdmins();
+            $this->datos['usuarioSesion']=$_SESSION['usuarioSesion'];
+            $this->datos['usuarioSesion']['noti'] = $this->usuario->listarnotificaciones($this->datos['usuarioSesion']);
+            $this->datos['usuarioSesion']['chats'] = $this->usuario->listaruserchat($this->datos['usuarioSesion']);
+            $this->datos['municipioslistar'] = $this->municipiosmodelo->listarMunicipio();
+
+            
+
             if (!isset($_SESSION["usuarioSesion"]) || empty($_SESSION["usuarioSesion"])) {
                 redirecionar(RUTA_URL.'/');
             }

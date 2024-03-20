@@ -7,15 +7,18 @@
         private $inmueble;
         public function __construct(){
             session_start();
+            $this->negociomodelo = $this->modelo('NegocioModelo');
+            $this->EntidadesModelo = $this->modelo('EntidadesModelo');
+            $this->DocumentosModelo = $this->modelo('DocumentosModelo');
             $this->oferta = $this->modelo('OfertasModelo');
             $this->municipiosmodelo = $this->modelo('MunicipiosModelo');
             $this->inmueble = $this->modelo('InmuebleModelo');
             $this->usuario = $this->modelo('UserModelo');
             $this->admin = $this->modelo('AdminModelo');
             $this->datos['admin'] = $this->admin->ListarAdmins();
-            $datos['id_usuario']=$_SESSION['usuarioSesion']['id_usuario'];
-            $this->datos['noti'] = $this->usuario->listarnotificaciones($datos);
-            $this->datos['chats'] = $this->usuario->listaruserchat($datos);
+            $this->datos['usuarioSesion']=$_SESSION['usuarioSesion'];
+            $this->datos['usuarioSesion']['noti'] = $this->usuario->listarnotificaciones($this->datos['usuarioSesion']);
+            $this->datos['usuarioSesion']['chats'] = $this->usuario->listaruserchat($this->datos['usuarioSesion']);
             $this->datos['municipioslistar'] = $this->municipiosmodelo->listarMunicipio();
 
             
@@ -79,6 +82,7 @@
                     $oferta->imagenes = $imagen;
                 }
             $this->vista('ofertas/ofertas', $this->datos);
+            //$this->vistaAPI($this->datos['ofertaslistar']);
         }
 
         public function listarpropios(){
@@ -89,14 +93,13 @@
 
         public function editoferta($id=0){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $insert['id_oferta']= $_POST['id_oferta'];  
-                $insert['tipo_oferta']= $_POST['tipo_oferta'];  
-                $insert['fecha_inicio']= $_POST['fecha_inicio'];  
-                $insert['fecha_fin']= $_POST['fecha_fin'];  
-                $insert['condiciones']= $_POST['condiciones'];   
-                $insert['tipo']= $_POST['tipo'];
-
-                print_r($insert);
+                $insert['id_oferta'] = $_POST['id_oferta'];
+                $insert['titulo_oferta'] = $_POST['titulo_oferta'];
+                $insert['fecha_inicio'] = $_POST['fecha_inicio'];
+                $insert['fecha_fin'] = $_POST['fecha_fin'];
+                $insert['condiciones'] = $_POST['condiciones'];
+                $insert['descripcion'] = $_POST['descripcion'];
+                $insert['entidad'] = $_POST['entidad'];
 
                 $a=$this->oferta->editaroferta($insert);
                 redirecionar("/OfertasControlador/listarpropios");

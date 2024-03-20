@@ -44,6 +44,17 @@
             $this->vista('admin/verUsuarios', $this->datos);
         }
 
+        public function listarEntidades(){
+            $this->datos['entidadlistar'] = $this->oferta->verEntidades();
+            $this->vista('admin/añadirNegocio', $this->datos);
+        }
+
+        public function listarMunicipios(){
+            $this->datos['municipioslistar'] = $this->oferta->listarMunicipio();            
+            $this->vista('admin/añadirNegocio', $this->datos);
+        }
+
+
         public function listarServicios(){
             $this->datos['servicioslistar'] = $this->oferta->verServicios();
             $this->vista('admin/verServicios', $this->datos);
@@ -77,14 +88,7 @@
 
         public function anadirNegocio() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-                $nuevoNegocio['titulo_oferta'] = $_POST['titulo_oferta'];
-                $nuevoNegocio['fecha_inicio_oferta'] = $_POST['fecha_inicio_oferta'];
-                $nuevoNegocio['fecha_fin_oferta'] = $_POST['fecha_fin_oferta'];
-                $nuevoNegocio['condiciones_oferta'] = $_POST['condiciones_oferta'];
-                $nuevoNegocio['descripcion_oferta'] = $_POST['descripcion_oferta'];
-                $nuevoNegocio['fecha_publicacion_oferta'] = $_POST['fecha_publicacion_oferta'];
-                $nuevoNegocio['activo_oferta'] = $_POST['activo_oferta'];
+                
 
 
                 $nuevoNegocio['titulo_negocio'] = $_POST['titulo_negocio'];
@@ -93,6 +97,21 @@
                 $nuevoNegocio['coste_mensual_negocio'] = $_POST['coste_mensual_negocio'];
                 $nuevoNegocio['descripcion_negocio'] = $_POST['descripcion_negocio'];
                 $nuevoNegocio['capital_minimo_negocio'] = $_POST['capital_minimo_negocio'];
+                $nuevoNegocio['local_id_inmueble'] = $_POST['local_id_inmueble'];
+
+                $nuevoNegocio['id_entidad'] = $_POST['id_entidad'];
+
+
+                $nuevoNegocio['titulo_oferta'] = $_POST['titulo_oferta'];
+                $nuevoNegocio['fecha_inicio_oferta'] = $_POST['fecha_inicio_oferta'];
+                $nuevoNegocio['fecha_fin_oferta'] = $_POST['fecha_fin_oferta'];
+                $nuevoNegocio['condiciones_oferta'] = $_POST['condiciones_oferta'];
+                $nuevoNegocio['descripcion_oferta'] = $_POST['descripcion_oferta'];
+                $nuevoNegocio['fecha_publicacion_oferta'] = $_POST['fecha_publicacion_oferta'];
+                $nuevoNegocio['activo_oferta'] = $_POST['activo_oferta'];
+                $nuevoNegocio['id_entidad'] = $_POST['id_entidad'];
+
+
 
                 $nuevoNegocio['metros_cuadrados_inmueble'] = $_POST['metros_cuadrados_inmueble'];
                 $nuevoNegocio['descripcion_inmueble'] = $_POST['descripcion_inmueble'];
@@ -113,6 +132,10 @@
         
                 $this->admin->anadirNegocioAdmin($nuevoNegocio);
             }
+            $this->datos['entidadlistar'] = $this->oferta->verEntidades();
+            $this->datos['municipioslistar'] = $this->oferta->listarMunicipio();            
+
+
             $this->vista('admin/añadirNegocio', $this->datos);
         }
 
