@@ -70,29 +70,43 @@
         }
 
         public function editaroferta($insert){
+            try{
+                $this->db->query( "UPDATE `oferta` SET `titulo_oferta`=:titulo_oferta , `fecha_inicio_oferta`=:fecha_inicio , `fecha_fin_oferta`=:fecha_fin ,`condiciones_oferta`=:condiciones ,
+                                                        `descripcion_oferta`=:descripcion ,`id_entidad`=:entidad
+                                                    WHERE `id_oferta`= :id_oferta");
 
-            $this->db->query( "UPDATE `oferta` SET `tipo_oferta`=:tipo_oferta,`fecha_inicio`=:fecha_inicio, `fecha_fin`= :fecha_fin,`condiciones`= :condiciones, `tipo`=:tipo 
-                                 WHERE `id_oferta`= :id_oferta");
+                // Vincular los parámetros
+                    $this->db->bind(':id_oferta', $insert['id_oferta']);
+                    $this->db->bind(':titulo_oferta', $insert['titulo_oferta']);
+                    $this->db->bind(':fecha_inicio', $insert['fecha_inicio']);
+                    $this->db->bind(':fecha_fin', $insert['fecha_fin']);
+                    $this->db->bind(':condiciones', $insert['condiciones']);
+                    $this->db->bind(':descripcion', $insert['descripcion']);
+                    $this->db->bind(':entidad', $insert['entidad']);
+                
+                $this->db->execute();
+                $_SESSION['correcto_message'] = 'La oferta se a editado correctamente';
 
-            // Vincular los parámetros
-                $this->db->bind(':id_oferta', $insert['id_oferta']);
-                $this->db->bind(':tipo_oferta', $insert['tipo_oferta']);
-                $this->db->bind(':fecha_inicio', $insert['fecha_inicio']);
-                $this->db->bind(':fecha_fin', $insert['fecha_fin']);
-                $this->db->bind(':condiciones', $insert['condiciones']);
-                $this->db->bind(':tipo', $insert['tipo']);
-            
-            $this->db->execute();
+             } catch (PDOException $e) {
+                // Captura la excepción de PDO y muestra un mensaje de error específico
+                $_SESSION['error_message'] = 'Error al editar oferta vuelve a intentarlo ';
+            }
         }
 
         public function eliminaroferta($id){
 
-            $this->db->query( "DELETE FROM `oferta` WHERE `id_oferta`=:id;");
+            try{
+                $this->db->query( "DELETE FROM `oferta` WHERE `id_oferta`=:id;");
 
-            // Vincular los parámetros
                 $this->db->bind(':id', $id);
             
-            $this->db->execute();
+                $this->db->execute();
+                $_SESSION['correcto_message'] = 'La oferta se a eliminado correctamente';
+
+            } catch (PDOException $e) {
+                // Captura la excepción de PDO y muestra un mensaje de error específico
+                $_SESSION['error_message'] = 'No se a podido eliminar la oferta';
+            }
         }
 
         public function verOfertaCompleta($id) {
