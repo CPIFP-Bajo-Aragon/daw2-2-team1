@@ -1,0 +1,106 @@
+version: '3'
+
+networks:
+  redteam0:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.1.0/28
+
+services:
+    php:
+        build:
+            context: ./php
+        ports:
+            - 9000:9000
+        volumes:
+            - ./web:/srv/www/api
+            - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+        environment:
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        links:
+            - db
+        networks:
+          redteam0:
+            ipv4_address: 172.28.1.2
+
+    proxy:
+        container_name: proxy
+        image: nginx:latest     #Imagen de nginx que vamos a utilizar (:latest -> Última versión)
+        ports:
+            - 443:443   #Mapeo del puerto para https
+            - 80:80     #Mapeo del puerto de http
+        volumes:
+            - ./proxy/default.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx1/certificados:/etc/nginx/conf.d
+        depends_on:
+            - php   #Contenedor del que depende
+        networks:
+          redteam0:
+            ipv4_address: 172.28.1.3
+
+    nginx1:
+        container_name: nginx
+        image: nginx:latest
+        volumes:
+            - ./nginx1/default.conf:/etc/nginx/conf.d/default.conf
+            - ./web:/srv/www/api
+            - ./nginx1/certificados:/etc/nginx/conf.d
+        depends_on:
+            - php
+        networks:
+          redteam0:
+            ipv4_address: 172.28.1.4
+
+    apache1:
+        container_name: apache
+        image: httpd:latest
+        volumes:
+            - ./apache1/apache1.conf:/usr/local/apache2/conf/httpd.conf
+            - ./web:/usr/local/apache2/htdocs/
+            - ./apache1/certificados:/etc/apache2/certificados/
+        depends_on:
+            - php
+        networks:
+          redteam0:
+            ipv4_address: 172.28.1.5
+
+    phpadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin/phpmyadmin:latest
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+        depends_on:
+            - db
+        links:
+            - db:db
+        networks:
+          redteam0:
+            ipv4_address: 172.28.1.6
+
+    db:     #Configuración del contenedor mysql
+        image: mysql:latest     #Imagen de mysql que vamos a utilizar (:latest -> Última versión)
+        ports:
+            - ${IP}:3306:3306   #Mapeo del puerto de mysql
+        command: "mysqld --init-file /data/application/init.sql"    #Comando para la creacion de la base de datos guardada en el archivo indicado
+        volumes:
+            - ./data/init.sql:/data/application/init.sql    #Volumen para la base de datos guardada
+            - db_data:/var/lib/mysql                        #Volumen para una futura persistencia de datos
+        environment:    #Variables de entorno para el uso de la base de datos
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: "${DB_NAME}"
+            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+        networks:   #Red a la que pertenece
+          redteam0:
+            ipv4_address: 172.28.1.7 # Dirección IP estática del contenedor MySQL
+
+volumes:
+    db_data:
+
+
+            
+
+
